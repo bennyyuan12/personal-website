@@ -1,0 +1,253 @@
+// Bake the grass photo into ~168k blades.
+//
+//   npm run bake                      (photo.jpg → public/grass/blades.bin + meta.json)
+//   tsx tools/bake-blades.ts <photo> <outDir>
+//
+// All directions are in y-up image space (angle measured counter-clockwise from +x),
+// which matches how WebGL samples a texture loaded with flipY.
+
+import sharp from 'sharp';
+import { mkdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { BLADE_STRIDE, LEN_MAX, WIDTH_MAX, type BladeMeta } from '../src/bladeFormat';
+
+const [input = 'public/grass/photo.jpg', outDir = 'public/grass'] = process.argv.slice(2);
+
+const SPACING = 2; // one blade per 2×2 px → 320×525 = 168,000 for the 640×1050 photo
+const PRIOR_DEG = 54; // measured dominant fur direction (up and to the right)
+const LEN_DARK = 10; // image px, length of the darkest blades
+const LEN_BRIGHT = 24; // image px, length of the brightest blades
+const WIDTH_MIN = 1.8;
+const WIDTH_MAX_PX = 2.6;
+const SEED = 20261103;
+
+// ---------- helpers ----------
+
+function mulberry32(seed: number) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
+const q16 = (v: number) => Math.round(clamp01(v) * 65535);
+
+/** Separable Gaussian blur with clamp-to-edge. */
+function blur(src: Float32Array, w: number, h: number, sigma: number): Float32Array {
+  const r = Math.ceil(sigma * 3);
+  const k = new Float32Array(2 * r + 1);
+  let sum = 0;
+  for (let i = -r; i <= r; i++) sum += k[i + r] = Math.exp(-(i * i) / (2 * sigma * sigma));
+  for (let i = 0; i < k.length; i++) k[i] /= sum;
+
+  const tmp = new Float32Array(w * h);
+  const out = new Float32Array(w * h);
+  for (let y = 0; y < h; y++) {
+    const row = y * w;
+    for (let x = 0; x < w; x++) {
+      let acc = 0;
+      for (let i = -r; i <= r; i++) {
+        const xx = x + i < 0 ? 0 : x + i >= w ? w - 1 : x + i;
+        acc += src[row + xx] * k[i + r];
+      }
+      tmp[row + x] = acc;
+    }
+  }
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      let acc = 0;
+      for (let i = -r; i <= r; i++) {
+        const yy = y + i < 0 ? 0 : y + i >= h ? h - 1 : y + i;
+        acc += tmp[yy * w + x] * k[i + r];
+      }
+      out[y * w + x] = acc;
+    }
+  }
+  return out;
+}
+
+// ---------- load ----------
+
+const { data, info } = await sharp(input).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+const W = info.width;
+const H = info.height;
+const C = info.channels;
+const N_PX = W * H;
+console.log(`photo ${W}×${H}`);
+
+// Luminance on the sRGB-encoded values (row 0 = top of the photo).
+const lum = new Float32Array(N_PX);
+for (let i = 0; i < N_PX; i++) {
+  lum[i] = (0.2126 * data[i * C] + 0.7152 * data[i * C + 1] + 0.0722 * data[i * C + 2]) / 255;
+}
+
+// Histogram → CDF, used to equalize brightness (the photo is mostly dark: median ≈ 0.27).
+const hist = new Float64Array(256);
+for (let i = 0; i < N_PX; i++) hist[Math.min(255, Math.floor(lum[i] * 256))]++;
+const lumCdf: number[] = [];
+let acc = 0;
+for (let i = 0; i < 256; i++) {
+  acc += hist[i];
+  lumCdf.push(+(acc / N_PX).toFixed(5));
+}
+const equalize = (l: number) => lumCdf[Math.min(255, Math.floor(l * 256))];
+
+const lumSmooth = blur(lum, W, H, 1);
+const ridgeRaw = blur(lum, W, H, 25);
+let rMin = Infinity;
+let rMax = -Infinity;
+for (let i = 0; i < N_PX; i++) {
+  rMin = Math.min(rMin, ridgeRaw[i]);
+  rMax = Math.max(rMax, ridgeRaw[i]);
+}
+
+// ---------- structure tensor (fur orientation) ----------
+
+const gx = new Float32Array(N_PX);
+const gy = new Float32Array(N_PX); // y-up: positive when brighter above
+const at = (x: number, y: number) =>
+  lum[(y < 0 ? 0 : y >= H ? H - 1 : y) * W + (x < 0 ? 0 : x >= W ? W - 1 : x)];
+for (let y = 0; y < H; y++) {
+  for (let x = 0; x < W; x++) {
+    const i = y * W + x;
+    gx[i] =
+      at(x + 1, y - 1) + 2 * at(x + 1, y) + at(x + 1, y + 1) -
+      (at(x - 1, y - 1) + 2 * at(x - 1, y) + at(x - 1, y + 1));
+    gy[i] =
+      at(x - 1, y - 1) + 2 * at(x, y - 1) + at(x + 1, y - 1) -
+      (at(x - 1, y + 1) + 2 * at(x, y + 1) + at(x + 1, y + 1));
+  }
+}
+const jxx0 = new Float32Array(N_PX);
+const jyy0 = new Float32Array(N_PX);
+const jxy0 = new Float32Array(N_PX);
+for (let i = 0; i < N_PX; i++) {
+  jxx0[i] = gx[i] * gx[i];
+  jyy0[i] = gy[i] * gy[i];
+  jxy0[i] = gx[i] * gy[i];
+}
+// Fine scale carries the local strand detail; the coarse scale fills in where the fine
+// tensor is weak (flat shadows), so dark areas don't turn into random scribble.
+const jxxF = blur(jxx0, W, H, 2);
+const jyyF = blur(jyy0, W, H, 2);
+const jxyF = blur(jxy0, W, H, 2);
+const jxxC = blur(jxx0, W, H, 8);
+const jyyC = blur(jyy0, W, H, 8);
+const jxyC = blur(jxy0, W, H, 8);
+
+const prior = [Math.cos((PRIOR_DEG * Math.PI) / 180), Math.sin((PRIOR_DEG * Math.PI) / 180)];
+
+// ---------- blades ----------
+
+const rand = mulberry32(SEED);
+const nx = Math.floor(W / SPACING);
+const ny = Math.floor(H / SPACING);
+const count = nx * ny;
+
+interface Blade {
+  u: number;
+  v: number;
+  angle: number;
+  len: number;
+  width: number;
+  lumEq: number;
+  coh: number;
+  ridge: number;
+  seed: number;
+  seed2: number;
+}
+const blades: Blade[] = new Array(count);
+let cohSum = 0;
+let k = 0;
+for (let j = 0; j < ny; j++) {
+  for (let i = 0; i < nx; i++) {
+    const x = (i + rand()) * SPACING; // continuous px, row-down
+    const yRow = (j + rand()) * SPACING;
+    const px = Math.min(W - 1, Math.floor(x));
+    const py = Math.min(H - 1, Math.floor(yRow));
+    const p = py * W + px;
+
+    const jxx = jxxF[p] + 0.35 * jxxC[p];
+    const jyy = jyyF[p] + 0.35 * jyyC[p];
+    const jxy = jxyF[p] + 0.35 * jxyC[p];
+    const gradAngle = 0.5 * Math.atan2(2 * jxy, jxx - jyy);
+    let angle = gradAngle + Math.PI / 2; // strands run perpendicular to the gradient
+    if (Math.cos(angle) * prior[0] + Math.sin(angle) * prior[1] < 0) angle += Math.PI;
+    angle = ((angle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+
+    const tr = jxxF[p] + jyyF[p];
+    const coh = tr > 1e-8 ? Math.sqrt((jxxF[p] - jyyF[p]) ** 2 + 4 * jxyF[p] ** 2) / tr : 0;
+    cohSum += coh;
+
+    const lumEq = equalize(lumSmooth[p]);
+    const len = (LEN_DARK + (LEN_BRIGHT - LEN_DARK) * lumEq) * (0.8 + 0.4 * rand());
+    const width = WIDTH_MIN + (WIDTH_MAX_PX - WIDTH_MIN) * rand();
+
+    blades[k++] = {
+      u: x / W,
+      v: 1 - yRow / H,
+      angle,
+      len,
+      width,
+      lumEq,
+      coh,
+      ridge: (ridgeRaw[p] - rMin) / (rMax - rMin),
+      seed: rand(),
+      seed2: rand(),
+    };
+  }
+}
+
+// Dark first, bright last: instanced draws blend in order, so bright tips land on top.
+blades.sort((a, b) => a.lumEq - b.lumEq);
+
+const out = new Uint16Array(count * BLADE_STRIDE);
+for (let b = 0; b < count; b++) {
+  const s = blades[b];
+  const o = b * BLADE_STRIDE;
+  out[o + 0] = q16(s.u);
+  out[o + 1] = q16(s.v);
+  out[o + 2] = q16(s.angle / (2 * Math.PI));
+  out[o + 3] = q16(s.len / LEN_MAX);
+  out[o + 4] = q16(s.width / WIDTH_MAX);
+  out[o + 5] = q16(s.lumEq);
+  out[o + 6] = q16(s.coh);
+  out[o + 7] = q16(s.ridge);
+  out[o + 8] = q16(s.seed);
+  out[o + 9] = q16(s.seed2);
+}
+
+const meta: BladeMeta = {
+  version: 1,
+  count,
+  stride: BLADE_STRIDE,
+  imageWidth: W,
+  imageHeight: H,
+  spacing: SPACING,
+  lenMax: LEN_MAX,
+  widthMax: WIDTH_MAX,
+  priorAngleDeg: PRIOR_DEG,
+  lumCdf,
+};
+
+await mkdir(outDir, { recursive: true });
+await writeFile(path.join(outDir, 'blades.bin'), Buffer.from(out.buffer));
+await writeFile(path.join(outDir, 'meta.json'), JSON.stringify(meta));
+
+// Circular mean of the baked directions, as a sanity check against the measured −54° (y-down).
+let cx = 0;
+let cy = 0;
+for (const s of blades) {
+  cx += Math.cos(s.angle);
+  cy += Math.sin(s.angle);
+}
+console.log(
+  `${count} blades → ${path.join(outDir, 'blades.bin')} (${(out.byteLength / 1e6).toFixed(2)} MB)\n` +
+    `mean direction ${((Math.atan2(cy, cx) * 180) / Math.PI).toFixed(1)}° (y-up), ` +
+    `mean coherence ${(cohSum / count).toFixed(2)}`,
+);
