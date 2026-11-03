@@ -76,11 +76,11 @@ function capturePlugin(): Plugin {
               const count = (await readdir(frames)).filter((f) => f.endsWith('.png')).length;
               const gop = ['-g', String(count), '-keyint_min', String(count)];
               await run('ffmpeg', [
-                ...input, '-c:v', 'libx264', '-preset', 'slow', '-crf', '24', '-pix_fmt', 'yuv420p',
+                ...input, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-pix_fmt', 'yuv420p',
                 ...gop, '-sc_threshold', '0', '-movflags', '+faststart', mp4,
               ]);
               await run('ffmpeg', [
-                ...input, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '36', '-row-mt', '1',
+                ...input, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '44', '-row-mt', '1',
                 '-deadline', 'good', '-cpu-used', '2', '-pix_fmt', 'yuv420p', ...gop, webm,
               ]);
               if (url.searchParams.get('keep') !== '1') await rm(frames, { recursive: true, force: true });

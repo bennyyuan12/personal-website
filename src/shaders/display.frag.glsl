@@ -11,7 +11,8 @@ uniform sampler2D uCellDir;    // per cell: screen-space direction, coherence
 uniform sampler2D uAtlas;      // glyph SDFs, one square tile per glyph, upright
 uniform sampler2D uCdf;        // photo luminance CDF (equalization)
 uniform mat3 uClipToUV;
-uniform int uView;             // 0 ascii, 1 blades, 2 photo, 3 split, 4 direction, 5 field
+uniform sampler2D uLight;      // brightness from the wind surface
+uniform int uView;             // 0 ascii, 1 blades, 2 photo, 3 split, 4 direction, 5 field, 6 light
 uniform float uSplit;
 uniform vec2 uResolution;      // device px
 uniform vec2 uViewportCss;     // CSS px
@@ -24,11 +25,13 @@ uniform float uThin;           // SDF edge for the darkest cells (higher = thinn
 uniform float uBold;           // SDF edge for the brightest cells (lower = bolder)
 uniform float uDither;
 uniform float uBlend;
-uniform float uGain;
-uniform float uLift;
-uniform float uUnderlay;
+uniform float uGain;           // ink brightness relative to the grass
+uniform float uUnderlay;       // grass brightness under the ink
 uniform float uGlow;
-uniform vec3 uBg;
+uniform float uExposure;
+uniform float uContrast;
+uniform float uSaturation;
+uniform vec3 uTint;
 
 in vec2 vUv;
 in vec2 vClip;
@@ -38,6 +41,17 @@ const float PI = 3.14159265359;
 
 vec3 hue(float h) {
   return clamp(abs(mod(h * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
+}
+
+const vec3 LUMA = vec3(0.2126, 0.7152, 0.0722);
+
+// Color grade: tint and exposure, contrast around a mid pivot, then saturation.
+vec3 grade(vec3 c) {
+  c *= uTint * uExposure;
+  float l = max(dot(c, LUMA), 1e-4);
+  float graded = 0.42 * pow(l / 0.42, uContrast);
+  c *= graded / l;
+  return max(mix(vec3(graded), c, uSaturation), vec3(0.0));
 }
 
 float hash12(vec2 p) {
@@ -79,11 +93,9 @@ vec3 ascii(vec2 uv, vec3 grass) {
   float cover = mix(smoothstep(edge - uAA, edge + uAA, s0), smoothstep(edge - uAA, edge + uAA, s1), k);
   float sdf = mix(s0, s1, k);
 
-  // Ink takes its hue from the cell and its brightness from the equalized luminance, so the
-  // mostly-dark photo still spreads across the full range of ink brightness.
-  vec3 chroma = clamp(cc.rgb / max(cc.a, 1e-3), 0.0, 2.0);
-  vec3 ink = chroma * mix(0.12, uGain, pow(lumEq, uLift));
-  vec3 col = mix(mix(uBg, grass, uUnderlay), ink, cover);
+  // The grass stays bright underneath and the glyphs are a brighter weave on top of it.
+  vec3 ink = grade(cc.rgb) * uGain;
+  vec3 col = mix(grade(grass) * uUnderlay, ink, cover);
   float halo = smoothstep(edge - 0.3, edge, sdf) * (1.0 - cover) * uGlow * lumEq * lumEq;
   return col + ink * halo;
 }
@@ -95,17 +107,20 @@ void main() {
   if (uView == 0) {
     c = ascii(vUv, grass);
   } else if (uView == 1) {
-    c = grass;
+    c = grade(grass);
   } else if (uView == 2) {
     c = texture(uPhoto, photoUV).rgb;
   } else if (uView == 3) {
-    c = vUv.x < uSplit ? grass : ascii(vUv, grass);
+    c = vUv.x < uSplit ? grade(grass) : ascii(vUv, grass);
     float px = abs(vUv.x - uSplit) * uResolution.x;
     c = mix(vec3(1.0), c, smoothstep(0.75, 1.5, px));
   } else if (uView == 4) {
     vec4 d = texture(uDir, vUv);
     vec2 v = d.xy / max(d.w, 1e-4);
     c = hue(atan(v.y, v.x) / (2.0 * PI) + 0.5) * clamp(length(v), 0.0, 1.0);
+  } else if (uView == 6) {
+    // Wind lighting: grey is unchanged, brighter and darker are the lit and shadowed slopes.
+    c = vec3(texture(uLight, photoUV).r * 0.5);
   } else {
     // Field heading as hue, strength as brightness, over a faint copy of the photo.
     vec2 v = texture(uField, photoUV).rg;

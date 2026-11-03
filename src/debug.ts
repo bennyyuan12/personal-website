@@ -32,10 +32,34 @@ export function createGui(
   ascii.add(p, 'bold', 0.1, 0.8, 0.01).name('bright stroke edge');
   ascii.add(p, 'dither', 0, 2, 0.01);
   ascii.add(p, 'blend', 0, 1, 0.01).name('glyph blend');
-  ascii.add(p, 'gain', 0.3, 2, 0.01).name('ink brightness');
-  ascii.add(p, 'lift', 0.3, 3, 0.01).name('ink gamma');
-  ascii.add(p, 'underlay', 0, 1, 0.01).name('grass underlay');
+  ascii.add(p, 'gain', 0.3, 2.5, 0.01).name('ink brightness');
+  ascii.add(p, 'underlay', 0, 1.2, 0.01).name('grass underlay');
   ascii.add(p, 'glow', 0, 1.5, 0.01);
+
+  const color = gui.addFolder('Color');
+  color.add(p, 'exposure', 0.5, 2.5, 0.01);
+  color.add(p, 'contrast', 0.6, 2.2, 0.01);
+  color.add(p, 'saturation', 0, 2.5, 0.01);
+
+  const wind = gui.addFolder('Wind');
+  wind.add(p, 'windHeading', 0, 360, 1).name('heading');
+  wind.add(p, 'breeze', 0, 1, 0.01);
+  wind.add(p, 'gust', 0, 2, 0.01);
+  wind.add(p, 'ripple', 0, 1.5, 0.01);
+  wind.add(p, 'relief', 0, 6, 0.01).name('light relief');
+  wind.add(p, 'crestGlow', 0, 1, 0.01).name('crest glow');
+
+  const touch = gui.addFolder('Mouse wind');
+  touch.add(p, 'touch').name('enabled');
+  touch.add(p, 'touchForce', 0, 80, 1).name('force');
+  touch.add(p, 'touchRadius', 0.02, 0.4, 0.005).name('radius');
+  touch.add(p, 'touchGain', 0, 3, 0.01).name('push on blades');
+  touch.add(p, 'touchDent', 0, 2, 0.01).name('dent depth');
+  touch.add(p, 'touchSheen', 0, 1.5, 0.01).name('light from lean');
+  touch.add(p, 'touchFlat', 0, 1, 0.01).name('flattened glow');
+  touch.add(p, 'touchStiffness', 1, 40, 0.5).name('spring');
+  touch.add(p, 'touchCoupling', 200, 6000, 50).name('ripple speed');
+  touch.add(p, 'touchDamping', 0.2, 10, 0.1).name('damping');
 
   const loop = gui.addFolder('Loop');
   loop.add(p, 'paused');
@@ -43,7 +67,8 @@ export function createGui(
   loop.add(p, 'loopSeconds', 4, 60, 1).name('loop seconds');
 
   const school = gui.addFolder('School field');
-  school.add(p, 'follow', 0, 1.5, 0.01).name('follow');
+  school.add(p, 'schoolAmount', 0, 1.5, 0.01).name('amount');
+  school.add(p, 'follow', 0, 2.5, 0.01).name('wind response');
   school.add(p, 'rootTurn', 0, 1, 0.01).name('root turn');
   school.add(p, 'drift', 0, 8, 0.1).name('drift (px)');
   school.add(p, 'lag', 0, 0.1, 0.001).name('straggler lag');

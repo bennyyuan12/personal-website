@@ -1,10 +1,10 @@
 import type { Quality } from './quality';
 
-export type ViewMode = 'ascii' | 'blades' | 'photo' | 'split' | 'direction' | 'field';
+export type ViewMode = 'ascii' | 'blades' | 'photo' | 'split' | 'direction' | 'field' | 'light';
 export type RotateMode = 'auto' | '0' | '90' | '-90';
 
 // Order matches uView in display.frag.glsl.
-export const VIEW_MODES: ViewMode[] = ['ascii', 'blades', 'photo', 'split', 'direction', 'field'];
+export const VIEW_MODES: ViewMode[] = ['ascii', 'blades', 'photo', 'split', 'direction', 'field', 'light'];
 
 /** Dark → bright, ordered by measured ink coverage in JetBrains Mono. Leading space = empty. */
 export const DEFAULT_RAMP = " .':;!|lI";
@@ -15,7 +15,7 @@ export interface Params {
   rotate: RotateMode;
   zoom: number;
   quality: Quality;
-  /** Blade pass resolution in CSS px multiples. 1 is plenty under the ASCII layer. */
+  /** Multiplies the quality tier's blade pass resolution. */
   renderScale: number;
   lenScale: number;
   widthScale: number;
@@ -26,6 +26,25 @@ export interface Params {
   lightAngle: number;
   bgLod: number;
   bgDim: number;
+  // wind
+  windHeading: number;
+  breeze: number;
+  gust: number;
+  ripple: number;
+  schoolAmount: number;
+  relief: number;
+  crestGlow: number;
+  // mouse wind
+  touch: boolean;
+  touchForce: number;
+  touchRadius: number;
+  touchGain: number;
+  touchDent: number;
+  touchSheen: number;
+  touchFlat: number;
+  touchStiffness: number;
+  touchCoupling: number;
+  touchDamping: number;
   // school field
   follow: number;
   rootTurn: number;
@@ -50,9 +69,12 @@ export interface Params {
   dither: number;
   blend: number;
   gain: number;
-  lift: number;
   underlay: number;
   glow: number;
+  // color
+  exposure: number;
+  contrast: number;
+  saturation: number;
   loopSeconds: number;
   paused: boolean;
   phase: number;
@@ -64,8 +86,8 @@ export function defaultParams(): Params {
   return {
     view: 'ascii',
     split: 0.5,
-    rotate: 'auto',
-    zoom: 1.04,
+    rotate: '0',
+    zoom: 1.02,
     quality: 'auto',
     renderScale: 1,
     lenScale: 1,
@@ -77,7 +99,24 @@ export function defaultParams(): Params {
     lightAngle: 120,
     bgLod: 2.5,
     bgDim: 0.6,
-    follow: 1,
+    windHeading: 155,
+    breeze: 0.12,
+    gust: 0.8,
+    ripple: 0.3,
+    schoolAmount: 0.45,
+    relief: 1.6,
+    crestGlow: 0.14,
+    touch: !reducedMotion,
+    touchForce: 18,
+    touchRadius: 0.15,
+    touchGain: 1.7,
+    touchDent: 1.8,
+    touchSheen: 0.22,
+    touchFlat: 0.55,
+    touchStiffness: 7,
+    touchCoupling: 2400,
+    touchDamping: 1.8,
+    follow: 1.15,
     rootTurn: 0.55,
     drift: 2,
     lag: 0.025,
@@ -93,15 +132,17 @@ export function defaultParams(): Params {
     curlScale: 2.5,
     curlPeriod: 2,
     ramp: DEFAULT_RAMP,
-    cellSize: 12,
-    thin: 0.68,
-    bold: 0.3,
+    cellSize: 5,
+    thin: 0.7,
+    bold: 0.38,
     dither: 0.6,
     blend: 0.25,
-    gain: 1.15,
-    lift: 0.95,
-    underlay: 0.2,
-    glow: 0.35,
+    gain: 1.36,
+    underlay: 0.84,
+    glow: 0.12,
+    exposure: 1.45,
+    contrast: 0.9,
+    saturation: 1.4,
     loopSeconds: 24,
     paused: reducedMotion,
     phase: 0,
@@ -121,7 +162,10 @@ export function applyUrlParams(p: Params) {
     'split', 'zoom', 'renderScale', 'lenScale', 'widthScale', 'jitter', 'density', 'rootShade', 'sheen',
     'phase', 'loopSeconds', 'follow', 'rootTurn', 'drift', 'lag', 'schools', 'schoolSeed', 'headingSpread',
     'radiusScale', 'sharpness', 'waveSpeed', 'swing', 'restWeight', 'curl', 'curlScale', 'curlPeriod',
-    'cellSize', 'thin', 'bold', 'dither', 'blend', 'gain', 'lift', 'underlay', 'glow',
+    'cellSize', 'thin', 'bold', 'dither', 'blend', 'gain', 'underlay', 'glow', 'exposure', 'contrast', 'saturation',
+    'windHeading', 'breeze', 'gust', 'ripple', 'schoolAmount', 'relief', 'crestGlow',
+    'touchForce', 'touchRadius', 'touchGain', 'touchDent', 'touchSheen', 'touchFlat', 'touchStiffness',
+    'touchCoupling', 'touchDamping',
   ] as const;
   for (const k of numeric) {
     const v = num(k);

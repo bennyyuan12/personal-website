@@ -1,12 +1,12 @@
 import * as THREE from 'three';
-import { BLADE_STRIDE } from './bladeFormat';
+import { ATTR_COMPONENTS, ROOT_COMPONENTS } from './bladeFormat';
 import bladeVert from './shaders/blade.vert.glsl?raw';
 import bladeFrag from './shaders/blade.frag.glsl?raw';
 import bgVert from './shaders/background.vert.glsl?raw';
 import bgFrag from './shaders/background.frag.glsl?raw';
 
 /** One tapered strip per blade: (segments + 1) rows × 2 vertices. */
-export function createBladeGeometry(data: Uint16Array, count: number, segments = 4) {
+export function createBladeGeometry(roots: Uint16Array, attrs: Uint8Array, count: number, segments = 4) {
   const geo = new THREE.InstancedBufferGeometry();
   const pos: number[] = [];
   for (let i = 0; i <= segments; i++) {
@@ -21,10 +21,10 @@ export function createBladeGeometry(data: Uint16Array, count: number, segments =
   geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
   geo.setIndex(idx);
 
-  const buf = new THREE.InstancedInterleavedBuffer(data, BLADE_STRIDE, 1);
+  geo.setAttribute('aRoot', new THREE.InstancedBufferAttribute(roots, ROOT_COMPONENTS, true));
+  const buf = new THREE.InstancedInterleavedBuffer(attrs, ATTR_COMPONENTS, 1);
   geo.setAttribute('aA', new THREE.InterleavedBufferAttribute(buf, 4, 0, true));
   geo.setAttribute('aB', new THREE.InterleavedBufferAttribute(buf, 4, 4, true));
-  geo.setAttribute('aC', new THREE.InterleavedBufferAttribute(buf, 2, 8, true));
   geo.instanceCount = count;
   return geo;
 }
@@ -32,6 +32,7 @@ export function createBladeGeometry(data: Uint16Array, count: number, segments =
 export function createBladeMaterial(
   photo: THREE.Texture,
   field: THREE.Texture,
+  light: THREE.Texture,
   imageSize: THREE.Vector2,
   lenMax: number,
   widthMax: number,
@@ -55,6 +56,7 @@ export function createBladeMaterial(
       uSheen: { value: 0 },
       uLightDir: { value: new THREE.Vector2(0, 1) },
       uField: { value: field },
+      uLight: { value: light },
       uFollow: { value: 1 },
       uRootTurn: { value: 0.5 },
       uDrift: { value: 0 },

@@ -1,4 +1,4 @@
-import { createApp } from './app';
+import { createApp, type App } from './app';
 import { createGui, type Stats } from './debug';
 import { showFallback } from './fallback';
 import { applyUrlParams, defaultParams } from './params';
@@ -33,7 +33,7 @@ async function main() {
   }
   const startTier: Tier = params.quality === 'auto' ? 'high' : params.quality;
 
-  let app;
+  let app: App;
   try {
     app = await createApp(canvas, params, { tier: startTier, preserveDrawingBuffer: !!capture });
   } catch (err) {
@@ -70,6 +70,14 @@ async function main() {
     if (visible) invalidate();
   }).observe(canvas);
 
+  // ---- the mouse is wind ----
+  window.addEventListener('pointermove', (e) => app.pointer(e.clientX, e.clientY), { passive: true });
+  window.addEventListener('pointerup', (e) => {
+    if (e.pointerType !== 'mouse') app.pointer(null);
+  });
+  document.documentElement.addEventListener('pointerleave', () => app.pointer(null));
+  window.addEventListener('blur', () => app.pointer(null));
+
   // ---- quality: start high, step down while frames are slow ----
   const stats: Stats = { fps: 0, frameMs: 0, tier: app.tier };
   const onTier = (tier: Tier) => {
@@ -101,25 +109,31 @@ async function main() {
     gui.onChange(invalidate);
   }
 
-  renderer.setAnimationLoop((now: number) => {
-    const dt = Math.min(now - last, 250);
-    last = now;
+  /** One frame of the app, given the time since the last one. */
+  function tick(dt: number) {
     const loopMs = params.loopSeconds * 1000;
     if (!params.paused) {
       elapsedMs = (elapsedMs + dt) % loopMs;
       params.phase = elapsedMs / loopMs;
     }
-    if (!visible || (params.paused && !dirty)) return;
+    const touching = visible && app.stepTouch(dt / 1000);
+    if (!visible || (params.paused && !dirty && !touching)) return;
     dirty = false;
     app.draw();
 
     stats.frameMs = stats.frameMs * 0.95 + dt * 0.05;
     stats.fps = 1000 / Math.max(stats.frameMs, 1e-3);
     if (auto && !params.paused) auto.sample(dt);
+  }
+
+  renderer.setAnimationLoop((now: number) => {
+    const dt = Math.min(now - last, 250);
+    last = now;
+    tick(dt);
   });
 
   if (import.meta.env.DEV) {
-    Object.assign(window, { __grass: { params, stats, app, renderer, draw: app.draw, ...app.debug } });
+    Object.assign(window, { __grass: { params, stats, app, renderer, draw: app.draw, tick, ...app.debug } });
   }
 }
 

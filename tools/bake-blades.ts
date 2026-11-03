@@ -1,7 +1,7 @@
-// Bake the grass photo into ~168k blades.
+// Bake the grass world into ~400k blades.
 //
-//   npm run bake                      (photo.jpg → public/grass/blades.bin + meta.json)
-//   tsx tools/bake-blades.ts <photo> <outDir>
+//   npm run bake                      (world.jpg → public/grass/blades.bin + meta.json)
+//   tsx tools/bake-blades.ts <image> <outDir>
 //
 // All directions are in y-up image space (angle measured counter-clockwise from +x),
 // which matches how WebGL samples a texture loaded with flipY.
@@ -9,11 +9,11 @@
 import sharp from 'sharp';
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { BLADE_STRIDE, LEN_MAX, WIDTH_MAX, type BladeMeta } from '../src/bladeFormat';
+import { ATTR_COMPONENTS, LEN_MAX, ROOT_COMPONENTS, WIDTH_MAX, type BladeMeta } from '../src/bladeFormat';
 
-const [input = 'public/grass/photo.jpg', outDir = 'public/grass'] = process.argv.slice(2);
+const [input = 'public/grass/world.jpg', outDir = 'public/grass'] = process.argv.slice(2);
 
-const SPACING = 2; // one blade per 2×2 px → 320×525 = 168,000 for the 640×1050 photo
+const SPACING = 2.5; // one blade per 2.5×2.5 px → 840×480 = 403,200 for the 2100×1200 world
 const PRIOR_DEG = 54; // measured dominant fur direction (up and to the right)
 const LEN_DARK = 10; // image px, length of the darkest blades
 const LEN_BRIGHT = 24; // image px, length of the brightest blades
@@ -36,6 +36,7 @@ function mulberry32(seed: number) {
 
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const q16 = (v: number) => Math.round(clamp01(v) * 65535);
+const q8 = (v: number) => Math.round(clamp01(v) * 255);
 
 /** Separable Gaussian blur with clamp-to-edge. */
 function blur(src: Float32Array, w: number, h: number, sigma: number): Float32Array {
@@ -206,26 +207,26 @@ for (let j = 0; j < ny; j++) {
 // Dark first, bright last: instanced draws blend in order, so bright tips land on top.
 blades.sort((a, b) => a.lumEq - b.lumEq);
 
-const out = new Uint16Array(count * BLADE_STRIDE);
+const roots = new Uint16Array(count * ROOT_COMPONENTS);
+const attrs = new Uint8Array(count * ATTR_COMPONENTS);
 for (let b = 0; b < count; b++) {
   const s = blades[b];
-  const o = b * BLADE_STRIDE;
-  out[o + 0] = q16(s.u);
-  out[o + 1] = q16(s.v);
-  out[o + 2] = q16(s.angle / (2 * Math.PI));
-  out[o + 3] = q16(s.len / LEN_MAX);
-  out[o + 4] = q16(s.width / WIDTH_MAX);
-  out[o + 5] = q16(s.lumEq);
-  out[o + 6] = q16(s.coh);
-  out[o + 7] = q16(s.ridge);
-  out[o + 8] = q16(s.seed);
-  out[o + 9] = q16(s.seed2);
+  roots[b * 2] = q16(s.u);
+  roots[b * 2 + 1] = q16(s.v);
+  const o = b * ATTR_COMPONENTS;
+  attrs[o + 0] = q8(s.angle / (2 * Math.PI));
+  attrs[o + 1] = q8(s.len / LEN_MAX);
+  attrs[o + 2] = q8(s.width / WIDTH_MAX);
+  attrs[o + 3] = q8(s.lumEq);
+  attrs[o + 4] = q8(s.coh);
+  attrs[o + 5] = q8(s.ridge);
+  attrs[o + 6] = q8(s.seed);
+  attrs[o + 7] = q8(s.seed2);
 }
 
 const meta: BladeMeta = {
-  version: 1,
+  version: 2,
   count,
-  stride: BLADE_STRIDE,
   imageWidth: W,
   imageHeight: H,
   spacing: SPACING,
@@ -236,7 +237,7 @@ const meta: BladeMeta = {
 };
 
 await mkdir(outDir, { recursive: true });
-await writeFile(path.join(outDir, 'blades.bin'), Buffer.from(out.buffer));
+await writeFile(path.join(outDir, 'blades.bin'), Buffer.concat([Buffer.from(roots.buffer), Buffer.from(attrs.buffer)]));
 await writeFile(path.join(outDir, 'meta.json'), JSON.stringify(meta));
 
 // Circular mean of the baked directions, as a sanity check against the measured −54° (y-down).
@@ -247,7 +248,7 @@ for (const s of blades) {
   cy += Math.sin(s.angle);
 }
 console.log(
-  `${count} blades → ${path.join(outDir, 'blades.bin')} (${(out.byteLength / 1e6).toFixed(2)} MB)\n` +
+  `${count} blades → ${path.join(outDir, 'blades.bin')} (${((roots.byteLength + attrs.byteLength) / 1e6).toFixed(2)} MB)\n` +
     `mean direction ${((Math.atan2(cy, cx) * 180) / Math.PI).toFixed(1)}° (y-up), ` +
     `mean coherence ${(cohSum / count).toFixed(2)}`,
 );

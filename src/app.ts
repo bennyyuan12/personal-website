@@ -2,10 +2,12 @@ import * as THREE from 'three';
 import { CellPass, createCdfTexture } from './ascii';
 import type { BladeMeta } from './bladeFormat';
 import { createBackground, createBladeGeometry, createBladeMaterial } from './blades';
-import { FieldPass } from './field';
+import { ATTR_COMPONENTS, ROOT_COMPONENTS } from './bladeFormat';
+import { FieldPass, SurfacePass } from './field';
 import { buildGlyphAtlas, SDF_RADIUS, type GlyphAtlas } from './glyphs';
 import { VIEW_MODES, type Params } from './params';
 import { TIERS, type Tier } from './quality';
+import { TouchPass } from './touch';
 import { computeView, type Rotation } from './view';
 import fullscreenVert from './shaders/fullscreen.vert.glsl?raw';
 import displayFrag from './shaders/display.frag.glsl?raw';
@@ -20,8 +22,12 @@ export interface Viewport {
 
 export interface App {
   renderer: THREE.WebGLRenderer;
-  /** Render one frame at params.phase. Deterministic: same phase → same pixels. */
+  /** Render one frame at params.phase. With no mouse wind, same phase → same pixels. */
   draw(): void;
+  /** Pointer position in CSS px, or null when it leaves. */
+  pointer(x: number | null, y?: number): void;
+  /** Advance the mouse wind. Returns true if it needs a frame drawn. */
+  stepTouch(seconds: number): boolean;
   /** Re-read the window size (or keep a fixed viewport, e.g. for capture). */
   resize(): void;
   setFixedViewport(viewport: Viewport | null): void;
@@ -42,13 +48,14 @@ export async function createApp(
   const [meta, bin, photo, firstAtlas] = await Promise.all([
     fetch(asset('meta.json')).then((r) => r.json() as Promise<BladeMeta>),
     fetch(asset('blades.bin')).then((r) => r.arrayBuffer()),
-    new THREE.TextureLoader().loadAsync(asset('photo.jpg')),
+    new THREE.TextureLoader().loadAsync(asset('world.jpg')),
     buildGlyphAtlas(params.ramp),
   ]);
   let atlas: GlyphAtlas = firstAtlas;
   let tier = options.tier;
   let fixedViewport: Viewport | null = null;
-  const bladeData = new Uint16Array(bin);
+  const roots = new Uint16Array(bin, 0, meta.count * ROOT_COMPONENTS);
+  const attrs = new Uint8Array(bin, meta.count * ROOT_COMPONENTS * 2, meta.count * ATTR_COMPONENTS);
 
   // Keep the photo's raw sRGB values: "at rest" should reproduce the photo exactly.
   photo.colorSpace = THREE.NoColorSpace;
@@ -65,9 +72,12 @@ export async function createApp(
   const imageSize = new THREE.Vector2(meta.imageWidth, meta.imageHeight);
   const camera = new THREE.Camera(); // unused: shaders do their own projection
 
-  // ---- school field pass (small texture over the photo) ----
-  const field = new FieldPass(meta.imageWidth / meta.imageHeight, (meta.priorAngleDeg * Math.PI) / 180);
+  // ---- wind: looping field + mouse wind → final push and lighting ----
+  const aspect = meta.imageWidth / meta.imageHeight;
+  const field = new FieldPass(aspect, (meta.priorAngleDeg * Math.PI) / 180);
   field.setSchools(params);
+  const surface = new SurfacePass(field);
+  const touch = new TouchPass(field.size.x, field.size.y, aspect);
 
   // ---- blade pass → MRT (color, direction) ----
   const target = new THREE.WebGLRenderTarget(1, 1, {
@@ -80,8 +90,15 @@ export async function createApp(
   });
   const background = createBackground(photo, imageSize, meta.priorAngleDeg);
   background.renderOrder = 0;
-  const bladeMat = createBladeMaterial(photo, field.texture, imageSize, meta.lenMax, meta.widthMax);
-  const blades = new THREE.Mesh(createBladeGeometry(bladeData, meta.count, TIERS[tier].segments), bladeMat);
+  const bladeMat = createBladeMaterial(
+    photo,
+    surface.fieldTexture,
+    surface.lightTexture,
+    imageSize,
+    meta.lenMax,
+    meta.widthMax,
+  );
+  const blades = new THREE.Mesh(createBladeGeometry(roots, attrs, meta.count, TIERS[tier].segments), bladeMat);
   blades.frustumCulled = false;
   blades.renderOrder = 1;
   const bladeScene = new THREE.Scene();
@@ -101,7 +118,8 @@ export async function createApp(
       uColor: { value: target.textures[0] },
       uDir: { value: target.textures[1] },
       uPhoto: { value: photo },
-      uField: { value: field.texture },
+      uField: { value: surface.fieldTexture },
+      uLight: { value: surface.lightTexture },
       uCellColor: { value: cells.colorTexture },
       uCellDir: { value: cells.dirTexture },
       uAtlas: { value: atlas.texture },
@@ -120,10 +138,12 @@ export async function createApp(
       uDither: { value: 0 },
       uBlend: { value: 0 },
       uGain: { value: 1 },
-      uLift: { value: 1 },
       uUnderlay: { value: 0 },
       uGlow: { value: 0 },
-      uBg: { value: new THREE.Color(0x060a05) },
+      uExposure: { value: 1 },
+      uContrast: { value: 1 },
+      uSaturation: { value: 1 },
+      uTint: { value: new THREE.Vector3(0.94, 1, 0.82) },
     },
     depthTest: false,
     depthWrite: false,
@@ -133,13 +153,18 @@ export async function createApp(
   const displayScene = new THREE.Scene();
   displayScene.add(display);
 
+  const viewport = new THREE.Vector2(1, 1);
+  const clipToUV = new THREE.Matrix3();
+
   function resize() {
     const w = fixedViewport?.width ?? window.innerWidth;
     const h = fixedViewport?.height ?? window.innerHeight;
     const dpr = fixedViewport?.dpr ?? Math.min(window.devicePixelRatio, TIERS[tier].dprCap);
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
-    target.setSize(Math.max(1, Math.floor(w * params.renderScale)), Math.max(1, Math.floor(h * params.renderScale)));
+    const scale = Math.min(dpr, TIERS[tier].bladeScale) * params.renderScale;
+    target.setSize(Math.max(1, Math.floor(w * scale)), Math.max(1, Math.floor(h * scale)));
+    viewport.set(w, h);
     const du = displayMat.uniforms;
     du.uResolution.value.set(w * dpr, h * dpr);
     du.uViewportCss.value.set(w, h);
@@ -150,11 +175,14 @@ export async function createApp(
     (background.material as THREE.RawShaderMaterial).uniforms.uImageToClip.value.copy(view.imageToClip);
     du.uClipToUV.value.copy(view.clipToUV);
 
-    // ASCII grid: square cells in CSS px. The atlas is sampled at the mip level that matches
-    // the cell's device size, and the edge ramp is sized to ~1 device px.
-    const cell = Math.max(4, Math.round(params.cellSize));
+    clipToUV.copy(view.clipToUV);
+
+    // ASCII grid: square cells, a whole number of device px so glyphs stay crisp. The atlas is
+    // sampled at the mip level that matches, and the edge ramp is sized to ~1 device px.
+    const cellDevice = Math.max(3, Math.round(params.cellSize * dpr));
+    const cell = cellDevice / dpr;
     cells.resize(w, h, cell, (rotation * Math.PI) / 180);
-    const tilePerDevicePx = atlas.tile / (cell * dpr);
+    const tilePerDevicePx = atlas.tile / cellDevice;
     du.uCell.value = cell;
     du.uAtlasLod.value = Math.max(0, Math.log2(tilePerDevicePx) - 0.5);
     du.uAA.value = (0.5 * tilePerDevicePx) / SDF_RADIUS;
@@ -185,11 +213,14 @@ export async function createApp(
     du.uDither.value = params.dither;
     du.uBlend.value = params.blend;
     du.uGain.value = params.gain;
-    du.uLift.value = params.lift;
     du.uUnderlay.value = params.underlay;
     du.uGlow.value = params.glow;
+    du.uExposure.value = params.exposure;
+    du.uContrast.value = params.contrast;
+    du.uSaturation.value = params.saturation;
 
     field.render(renderer, camera, params);
+    surface.render(renderer, camera, params, touch.texture);
     renderer.setRenderTarget(target);
     renderer.render(bladeScene, camera);
     cells.render(renderer, camera);
@@ -203,6 +234,17 @@ export async function createApp(
     renderer,
     draw,
     resize,
+    pointer(x, y = 0) {
+      if (x === null) {
+        touch.lift();
+        return;
+      }
+      const uv = new THREE.Vector3((2 * x) / viewport.x - 1, 1 - (2 * y) / viewport.y, 1).applyMatrix3(clipToUV);
+      touch.move(uv.x, uv.y);
+    },
+    stepTouch(seconds) {
+      return touch.update(renderer, camera, seconds, params);
+    },
     setFixedViewport(viewport) {
       fixedViewport = viewport;
       resize();
@@ -216,7 +258,7 @@ export async function createApp(
       tier = next;
       if (segmentsChanged) {
         const old = blades.geometry;
-        blades.geometry = createBladeGeometry(bladeData, meta.count, TIERS[tier].segments);
+        blades.geometry = createBladeGeometry(roots, attrs, meta.count, TIERS[tier].segments);
         old.dispose();
       }
       resize();
@@ -237,6 +279,6 @@ export async function createApp(
       await renderer.compileAsync(bladeScene, camera);
       await renderer.compileAsync(displayScene, camera);
     },
-    debug: { cells, target, field },
+    debug: { cells, target, field, surface, touch },
   };
 }

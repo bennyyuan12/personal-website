@@ -3,6 +3,7 @@ import type { Params } from './params';
 import fullscreenVert from './shaders/fullscreen.vert.glsl?raw';
 import noiseGlsl from './shaders/noise.glsl?raw';
 import fieldFragSrc from './shaders/field.frag.glsl?raw';
+import surfaceFrag from './shaders/surface.frag.glsl?raw';
 
 export const MAX_SCHOOLS = 8;
 const TAU = Math.PI * 2;
@@ -20,9 +21,31 @@ function mulberry32(seed: number) {
   };
 }
 
+function fullscreenMesh(material: THREE.RawShaderMaterial) {
+  const tri = new THREE.BufferGeometry();
+  tri.setAttribute('position', new THREE.Float32BufferAttribute([-1, -1, 0, 3, -1, 0, -1, 3, 0], 3));
+  const mesh = new THREE.Mesh(tri, material);
+  mesh.frustumCulled = false;
+  return mesh;
+}
+
+function fieldTarget(width: number, height: number, count: number) {
+  return new THREE.WebGLRenderTarget(width, height, {
+    count,
+    type: THREE.HalfFloatType,
+    depthBuffer: false,
+    minFilter: THREE.LinearFilter,
+    magFilter: THREE.LinearFilter,
+    generateMipmaps: false,
+  });
+}
+
+/** Texels along the world's height; fine enough for the wind ripples. */
+const FIELD_HEIGHT = 224;
+
 /**
- * The direction field the blades follow. Rendered every frame into a small texture laid
- * over the photo (image UV, y-up), so it rotates with the photo on landscape screens.
+ * The stateless, looping wind. Rendered every frame into a small texture laid over the world
+ * (image UV, y-up): only a function of the loop phase, so frame N always equals frame 0.
  */
 export class FieldPass {
   readonly target: THREE.WebGLRenderTarget;
@@ -37,14 +60,7 @@ export class FieldPass {
     private readonly aspect: number,
     private readonly priorRad: number,
   ) {
-    // ~4 image px per texel for the 640×1050 photo; bilinear filtering smooths the rest.
-    this.target = new THREE.WebGLRenderTarget(160, Math.round(160 / aspect), {
-      type: THREE.HalfFloatType,
-      depthBuffer: false,
-      minFilter: THREE.LinearFilter,
-      magFilter: THREE.LinearFilter,
-      generateMipmaps: false,
-    });
+    this.target = fieldTarget(Math.round(FIELD_HEIGHT * aspect), FIELD_HEIGHT, 2);
     this.material = new THREE.RawShaderMaterial({
       glslVersion: THREE.GLSL3,
       vertexShader: fullscreenVert,
@@ -66,19 +82,28 @@ export class FieldPass {
         uCurl: { value: 0 },
         uCurlScale: { value: 1 },
         uCurlPeriod: { value: 2 },
+        uSchoolAmount: { value: 1 },
+        uWindDir: { value: new THREE.Vector2(1, 0) },
+        uBreeze: { value: 0 },
+        uGust: { value: 0 },
+        uRipple: { value: 0 },
       },
       depthTest: false,
       depthWrite: false,
     });
-    const tri = new THREE.BufferGeometry();
-    tri.setAttribute('position', new THREE.Float32BufferAttribute([-1, -1, 0, 3, -1, 0, -1, 3, 0], 3));
-    const mesh = new THREE.Mesh(tri, this.material);
-    mesh.frustumCulled = false;
-    this.scene.add(mesh);
+    this.scene.add(fullscreenMesh(this.material));
   }
 
-  get texture() {
-    return this.target.texture;
+  get fieldTexture() {
+    return this.target.textures[0];
+  }
+
+  get gustTexture() {
+    return this.target.textures[1];
+  }
+
+  get size() {
+    return new THREE.Vector2(this.target.width, this.target.height);
   }
 
   /** Lay out the schools. Deterministic for a given seed and count. */
@@ -86,9 +111,9 @@ export class FieldPass {
     const rand = mulberry32(p.schoolSeed);
     const count = Math.max(1, Math.min(MAX_SCHOOLS, Math.round(p.schools)));
     for (let k = 0; k < MAX_SCHOOLS; k++) {
-      // Stratify along the tall axis so every part of the photo has a school nearby.
-      const cy = (k + 0.2 + 0.6 * rand()) / count;
-      const cx = (0.15 + 0.7 * rand()) * this.aspect;
+      // Stratify along the long axis so every part of the world has a school nearby.
+      const cx = ((k + 0.2 + 0.6 * rand()) / count) * this.aspect;
+      const cy = 0.15 + 0.7 * rand();
       this.s0[k].set(cx, cy, 0.05 + 0.15 * rand(), 0.05 + 0.2 * rand());
       this.s1[k].set(1 + Math.floor(rand() * 2), 1 + Math.floor(rand() * 2), rand() * TAU, rand() * TAU);
       this.s2[k].set(
@@ -116,6 +141,68 @@ export class FieldPass {
     u.uCurl.value = p.curl;
     u.uCurlScale.value = p.curlScale;
     u.uCurlPeriod.value = Math.max(1, Math.round(p.curlPeriod));
+    u.uSchoolAmount.value = p.schoolAmount;
+    const heading = (p.windHeading * Math.PI) / 180;
+    u.uWindDir.value.set(Math.cos(heading), Math.sin(heading));
+    u.uBreeze.value = p.breeze;
+    u.uGust.value = p.gust;
+    u.uRipple.value = p.ripple;
+    renderer.setRenderTarget(this.target);
+    renderer.render(this.scene, camera);
+  }
+}
+
+/** Adds the mouse wind to the looping wind, and derives the lighting from the result. */
+export class SurfacePass {
+  readonly target: THREE.WebGLRenderTarget;
+  private readonly material: THREE.RawShaderMaterial;
+  private readonly scene = new THREE.Scene();
+
+  constructor(field: FieldPass) {
+    const size = field.size;
+    this.target = fieldTarget(size.x, size.y, 2);
+    this.material = new THREE.RawShaderMaterial({
+      glslVersion: THREE.GLSL3,
+      vertexShader: fullscreenVert,
+      fragmentShader: surfaceFrag,
+      uniforms: {
+        uField: { value: field.fieldTexture },
+        uGust: { value: field.gustTexture },
+        uTouch: { value: null },
+        uTexel: { value: new THREE.Vector2(1 / size.x, 1 / size.y) },
+        uLightDir: { value: new THREE.Vector2(0, 1) },
+        uRelief: { value: 1 },
+        uCrestGlow: { value: 0 },
+        uTouchGain: { value: 1 },
+        uTouchDent: { value: 0 },
+        uTouchSheen: { value: 0 },
+        uTouchFlat: { value: 0 },
+      },
+      depthTest: false,
+      depthWrite: false,
+    });
+    this.scene.add(fullscreenMesh(this.material));
+  }
+
+  get fieldTexture() {
+    return this.target.textures[0];
+  }
+
+  get lightTexture() {
+    return this.target.textures[1];
+  }
+
+  render(renderer: THREE.WebGLRenderer, camera: THREE.Camera, p: Params, touch: THREE.Texture) {
+    const u = this.material.uniforms;
+    u.uTouch.value = touch;
+    const la = (p.lightAngle * Math.PI) / 180;
+    u.uLightDir.value.set(Math.cos(la), Math.sin(la));
+    u.uRelief.value = p.relief;
+    u.uCrestGlow.value = p.crestGlow;
+    u.uTouchGain.value = p.touchGain;
+    u.uTouchDent.value = p.touchDent;
+    u.uTouchSheen.value = p.touchSheen;
+    u.uTouchFlat.value = p.touchFlat;
     renderer.setRenderTarget(this.target);
     renderer.render(this.scene, camera);
   }

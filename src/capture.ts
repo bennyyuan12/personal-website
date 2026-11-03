@@ -66,6 +66,7 @@ export async function runCapture(app: App, params: Params, opts: CaptureOptions)
 
   try {
     app.setFixedViewport({ width: opts.width, height: opts.height, dpr: 1 });
+    app.stepTouch(0); // initializes the mouse-wind sheet, as the normal frame loop would
     const canvas = app.renderer.domElement;
     const loopFrames = Math.round(params.loopSeconds * opts.fps);
     const frames = Math.min(loopFrames, opts.frames ?? loopFrames);

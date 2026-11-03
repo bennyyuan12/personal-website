@@ -1,11 +1,11 @@
 // Shown when WebGL2 is missing or the GPU context is lost: the pre-rendered loop video
-// (made with ?capture), or its poster for reduced-motion users, or the photo as a last resort.
+// (made with ?capture), or its poster for reduced-motion users, or the grass image as a last resort.
 
 const base = `${import.meta.env.BASE_URL}grass/`;
 
-function photoImage() {
+function stillImage() {
   const img = new Image();
-  img.src = `${base}photo.jpg`;
+  img.src = `${base}world.jpg`;
   img.alt = '';
   img.className = 'fallback';
   return img;
@@ -25,7 +25,7 @@ export function showFallback(reason: string) {
     const img = new Image();
     img.src = `${base}${name}.jpg`;
     img.alt = '';
-    img.addEventListener('error', () => img.replaceWith(photoImage()), { once: true });
+    img.addEventListener('error', () => img.replaceWith(stillImage()), { once: true });
     el = img;
   } else {
     const video = document.createElement('video');
@@ -42,7 +42,7 @@ export function showFallback(reason: string) {
       video.append(source);
     }
     // The last <source> erroring means none of them could play.
-    video.lastElementChild!.addEventListener('error', () => video.replaceWith(photoImage()), { once: true });
+    video.lastElementChild!.addEventListener('error', () => video.replaceWith(stillImage()), { once: true });
     el = video;
   }
   el.classList.add('fallback');
