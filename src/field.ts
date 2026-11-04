@@ -60,14 +60,13 @@ export class FieldPass {
     private readonly aspect: number,
     private readonly priorRad: number,
   ) {
-    this.target = fieldTarget(Math.round(FIELD_HEIGHT * aspect), FIELD_HEIGHT, 2);
+    this.target = fieldTarget(Math.round(FIELD_HEIGHT * aspect), FIELD_HEIGHT, 1);
     this.material = new THREE.RawShaderMaterial({
       glslVersion: THREE.GLSL3,
       vertexShader: fullscreenVert,
       fragmentShader: fieldFrag,
       uniforms: {
         uPhase: { value: 0 },
-        uLag: { value: 0 },
         uAspect: { value: aspect },
         uCount: { value: 0 },
         uS0: { value: this.s0 },
@@ -79,13 +78,19 @@ export class FieldPass {
         uWaveSpeed: { value: 1 },
         uRestWeight: { value: 0.1 },
         uAmpScale: { value: 1 },
-        uCurl: { value: 0 },
         uCurlScale: { value: 1 },
         uCurlPeriod: { value: 2 },
         uSchoolAmount: { value: 1 },
         uWindDir: { value: new THREE.Vector2(1, 0) },
         uBreeze: { value: 0 },
         uGust: { value: 0 },
+        uGustCells: { value: 2 },
+        uGustCross: { value: 1 },
+        uGustTrips: { value: 1 },
+        uGustDetail: { value: 0 },
+        uGustEdge: { value: 0.4 },
+        uGustTurn: { value: 0 },
+        uPressAt: { value: 0.5 },
         uRipple: { value: 0 },
       },
       depthTest: false,
@@ -94,12 +99,8 @@ export class FieldPass {
     this.scene.add(fullscreenMesh(this.material));
   }
 
-  get fieldTexture() {
+  get texture() {
     return this.target.textures[0];
-  }
-
-  get gustTexture() {
-    return this.target.textures[1];
   }
 
   get size() {
@@ -132,13 +133,11 @@ export class FieldPass {
   render(renderer: THREE.WebGLRenderer, camera: THREE.Camera, p: Params) {
     const u = this.material.uniforms;
     u.uPhase.value = p.phase;
-    u.uLag.value = p.lag;
     u.uRadiusScale.value = p.radiusScale;
     u.uSharpness.value = p.sharpness;
     u.uWaveSpeed.value = p.waveSpeed;
     u.uRestWeight.value = p.restWeight;
     u.uAmpScale.value = p.swing;
-    u.uCurl.value = p.curl;
     u.uCurlScale.value = p.curlScale;
     u.uCurlPeriod.value = Math.max(1, Math.round(p.curlPeriod));
     u.uSchoolAmount.value = p.schoolAmount;
@@ -146,13 +145,20 @@ export class FieldPass {
     u.uWindDir.value.set(Math.cos(heading), Math.sin(heading));
     u.uBreeze.value = p.breeze;
     u.uGust.value = p.gust;
+    u.uGustCells.value = p.gustCells;
+    u.uGustCross.value = p.gustCross;
+    u.uGustTrips.value = Math.max(1, Math.round(p.gustTrips));
+    u.uGustDetail.value = p.gustDetail;
+    u.uGustEdge.value = p.gustEdge;
+    u.uGustTurn.value = p.gustTurn;
+    u.uPressAt.value = p.pressAt;
     u.uRipple.value = p.ripple;
     renderer.setRenderTarget(this.target);
     renderer.render(this.scene, camera);
   }
 }
 
-/** Adds the mouse wind to the looping wind, and derives the lighting from the result. */
+/** Turns the bend of the grass into the final field and its lighting. */
 export class SurfacePass {
   readonly target: THREE.WebGLRenderTarget;
   private readonly material: THREE.RawShaderMaterial;
@@ -166,17 +172,13 @@ export class SurfacePass {
       vertexShader: fullscreenVert,
       fragmentShader: surfaceFrag,
       uniforms: {
-        uField: { value: field.fieldTexture },
-        uGust: { value: field.gustTexture },
-        uTouch: { value: null },
+        uSheet: { value: null },
+        uMemory: { value: null },
         uTexel: { value: new THREE.Vector2(1 / size.x, 1 / size.y) },
         uLightDir: { value: new THREE.Vector2(0, 1) },
-        uRelief: { value: 1 },
-        uCrestGlow: { value: 0 },
-        uTouchGain: { value: 1 },
-        uTouchDent: { value: 0 },
-        uTouchSheen: { value: 0 },
-        uTouchFlat: { value: 0 },
+        uTilt: { value: 0 },
+        uRelief: { value: 0 },
+        uShimmer: { value: 0 },
       },
       depthTest: false,
       depthWrite: false,
@@ -192,17 +194,15 @@ export class SurfacePass {
     return this.target.textures[1];
   }
 
-  render(renderer: THREE.WebGLRenderer, camera: THREE.Camera, p: Params, touch: THREE.Texture) {
+  render(renderer: THREE.WebGLRenderer, camera: THREE.Camera, p: Params, sheet: THREE.Texture, memory: THREE.Texture) {
     const u = this.material.uniforms;
-    u.uTouch.value = touch;
+    u.uSheet.value = sheet;
+    u.uMemory.value = memory;
     const la = (p.lightAngle * Math.PI) / 180;
     u.uLightDir.value.set(Math.cos(la), Math.sin(la));
+    u.uTilt.value = p.tilt;
     u.uRelief.value = p.relief;
-    u.uCrestGlow.value = p.crestGlow;
-    u.uTouchGain.value = p.touchGain;
-    u.uTouchDent.value = p.touchDent;
-    u.uTouchSheen.value = p.touchSheen;
-    u.uTouchFlat.value = p.touchFlat;
+    u.uShimmer.value = p.shimmer;
     renderer.setRenderTarget(this.target);
     renderer.render(this.scene, camera);
   }

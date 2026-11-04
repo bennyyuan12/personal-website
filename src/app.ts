@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { CellPass, createCdfTexture } from './ascii';
+import { CellPass, createCdfTexture, createRampTexture } from './ascii';
 import type { BladeMeta } from './bladeFormat';
 import { createBackground, createBladeGeometry, createBladeMaterial } from './blades';
 import { ATTR_COMPONENTS, ROOT_COMPONENTS } from './bladeFormat';
@@ -7,7 +7,7 @@ import { FieldPass, SurfacePass } from './field';
 import { buildGlyphAtlas, SDF_RADIUS, type GlyphAtlas } from './glyphs';
 import { VIEW_MODES, type Params } from './params';
 import { TIERS, type Tier } from './quality';
-import { TouchPass } from './touch';
+import { GrassSheet } from './sheet';
 import { computeView, type Rotation } from './view';
 import fullscreenVert from './shaders/fullscreen.vert.glsl?raw';
 import displayFrag from './shaders/display.frag.glsl?raw';
@@ -22,12 +22,16 @@ export interface Viewport {
 
 export interface App {
   renderer: THREE.WebGLRenderer;
-  /** Render one frame at params.phase. With no mouse wind, same phase → same pixels. */
+  /** Move the grass on by `seconds`, feeling the wind at params.phase. */
+  advance(seconds: number): void;
+  /** Run the grass for `seconds` up to params.phase, so it arrives on its repeating cycle. */
+  settle(seconds: number): void;
+  /** Render the grass as it stands. */
   draw(): void;
   /** Pointer position in CSS px, or null when it leaves. */
   pointer(x: number | null, y?: number): void;
-  /** Advance the mouse wind. Returns true if it needs a frame drawn. */
-  stepTouch(seconds: number): boolean;
+  /** True while something the pointer did may still be moving. */
+  readonly pointerActive: boolean;
   /** Re-read the window size (or keep a fixed viewport, e.g. for capture). */
   resize(): void;
   setFixedViewport(viewport: Viewport | null): void;
@@ -77,7 +81,7 @@ export async function createApp(
   const field = new FieldPass(aspect, (meta.priorAngleDeg * Math.PI) / 180);
   field.setSchools(params);
   const surface = new SurfacePass(field);
-  const touch = new TouchPass(field.size.x, field.size.y, aspect);
+  const sheet = new GrassSheet(field.size.x, field.size.y, aspect, field.texture);
 
   // ---- blade pass → MRT (color, direction) ----
   const target = new THREE.WebGLRenderTarget(1, 1, {
@@ -88,15 +92,18 @@ export async function createApp(
     magFilter: THREE.LinearFilter,
     generateMipmaps: false,
   });
-  const background = createBackground(photo, imageSize, meta.priorAngleDeg);
+  const ramp = createRampTexture(meta.lumRamp);
+  const background = createBackground(photo, surface.lightTexture, ramp, imageSize, meta.priorAngleDeg);
   background.renderOrder = 0;
   const bladeMat = createBladeMaterial(
     photo,
     surface.fieldTexture,
     surface.lightTexture,
+    ramp,
     imageSize,
     meta.lenMax,
     meta.widthMax,
+    meta.tuftReach,
   );
   const blades = new THREE.Mesh(createBladeGeometry(roots, attrs, meta.count, TIERS[tier].segments), bladeMat);
   blades.frustumCulled = false;
@@ -143,7 +150,7 @@ export async function createApp(
       uExposure: { value: 1 },
       uContrast: { value: 1 },
       uSaturation: { value: 1 },
-      uTint: { value: new THREE.Vector3(0.94, 1, 0.82) },
+      uTint: { value: new THREE.Vector3(0.98, 1, 0.86) },
     },
     depthTest: false,
     depthWrite: false,
@@ -159,6 +166,7 @@ export async function createApp(
   function resize() {
     const w = fixedViewport?.width ?? window.innerWidth;
     const h = fixedViewport?.height ?? window.innerHeight;
+    if (w <= 0 || h <= 0) return; // hidden or collapsed: keep the last good view until it returns
     const dpr = fixedViewport?.dpr ?? Math.min(window.devicePixelRatio, TIERS[tier].dprCap);
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
@@ -172,6 +180,8 @@ export async function createApp(
     const rotation: Rotation = params.rotate === 'auto' ? (w > h ? 90 : 0) : (Number(params.rotate) as Rotation);
     const view = computeView(w, h, meta.imageWidth, meta.imageHeight, rotation, params.zoom);
     bladeMat.uniforms.uImageToClip.value.copy(view.imageToClip);
+    // Keep blades at least ~1.7 render px wide at their base, whatever the zoom.
+    bladeMat.uniforms.uMinWidth.value = 1.7 / (view.scale * scale);
     (background.material as THREE.RawShaderMaterial).uniforms.uImageToClip.value.copy(view.imageToClip);
     du.uClipToUV.value.copy(view.clipToUV);
 
@@ -201,9 +211,18 @@ export async function createApp(
     u.uLightDir.value.set(Math.cos(la), Math.sin(la));
     u.uFollow.value = params.follow;
     u.uRootTurn.value = params.rootTurn;
-    u.uDrift.value = params.drift;
+    u.uTuftMix.value = params.tuftMix;
+    u.uTuftGain.value = params.tuftGain;
+    u.uTuftLag.value = params.tuftLag;
+    u.uClumpGain.value = params.clumpGain;
+    u.uClumpLag.value = params.clumpLag;
+    u.uFlutter.value = params.flutter;
+    u.uTuftSpread.value = params.tuftSpread;
+    u.uBaked.value = params.baked;
+    u.uTuftDepth.value = params.tuftDepth;
+    u.uBladeTone.value = params.bladeTone;
     const bu = (background.material as THREE.RawShaderMaterial).uniforms;
-    bu.uLod.value = params.bgLod;
+    bu.uBaked.value = params.baked;
     bu.uDim.value = params.bgDim;
     const du = displayMat.uniforms;
     du.uView.value = VIEW_MODES.indexOf(params.view);
@@ -219,8 +238,7 @@ export async function createApp(
     du.uContrast.value = params.contrast;
     du.uSaturation.value = params.saturation;
 
-    field.render(renderer, camera, params);
-    surface.render(renderer, camera, params, touch.texture);
+    surface.render(renderer, camera, params, sheet.stateTexture, sheet.memoryTexture);
     renderer.setRenderTarget(target);
     renderer.render(bladeScene, camera);
     cells.render(renderer, camera);
@@ -229,6 +247,7 @@ export async function createApp(
   }
 
   resize();
+  sheet.clear(renderer);
 
   return {
     renderer,
@@ -236,14 +255,31 @@ export async function createApp(
     resize,
     pointer(x, y = 0) {
       if (x === null) {
-        touch.lift();
+        sheet.lift();
         return;
       }
+      if (viewport.x <= 1 || viewport.y <= 1) return;
       const uv = new THREE.Vector3((2 * x) / viewport.x - 1, 1 - (2 * y) / viewport.y, 1).applyMatrix3(clipToUV);
-      touch.move(uv.x, uv.y);
+      sheet.move(uv.x, uv.y);
     },
-    stepTouch(seconds) {
-      return touch.update(renderer, camera, seconds, params);
+    get pointerActive() {
+      return sheet.pointerActive;
+    },
+    advance(seconds) {
+      field.render(renderer, camera, params);
+      sheet.advance(renderer, camera, seconds, params);
+    },
+    settle(seconds) {
+      const end = params.phase;
+      const hop = 1 / 15;
+      const hops = Math.ceil(seconds / hop);
+      // Stops one hop short: the caller's first advance() is the step that lands on `end`.
+      for (let i = hops; i >= 1; i--) {
+        params.phase = (end - (i * hop) / params.loopSeconds + 8) % 1;
+        field.render(renderer, camera, params);
+        sheet.advance(renderer, camera, hop, params);
+      }
+      params.phase = end;
     },
     setFixedViewport(viewport) {
       fixedViewport = viewport;
@@ -279,6 +315,6 @@ export async function createApp(
       await renderer.compileAsync(bladeScene, camera);
       await renderer.compileAsync(displayScene, camera);
     },
-    debug: { cells, target, field, surface, touch },
+    debug: { cells, target, field, surface, sheet },
   };
 }

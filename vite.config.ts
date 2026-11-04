@@ -2,6 +2,7 @@ import { spawn } from 'node:child_process';
 import { mkdir, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import type { IncomingMessage } from 'node:http';
 import path from 'node:path';
+import sharp from 'sharp';
 import { defineConfig, type Plugin } from 'vite';
 
 const OUT_DIR = path.resolve('public/grass');
@@ -59,7 +60,15 @@ function capturePlugin(): Plugin {
             case '/frame': {
               const i = Number(url.searchParams.get('i'));
               if (!Number.isInteger(i) || i < 0 || i > 99999) throw new HttpError(400, 'bad frame index');
-              await writeFile(path.join(frames, `frame-${String(i).padStart(5, '0')}.png`), body);
+              const width = Number(url.searchParams.get('w'));
+              const height = Number(url.searchParams.get('h'));
+              if (body.length !== width * height * 4) throw new HttpError(400, 'bad frame size');
+              // Raw RGBA from readPixels, which is bottom-up.
+              await sharp(body, { raw: { width, height, channels: 4 } })
+                .flip()
+                .removeAlpha()
+                .png({ compressionLevel: 1 })
+                .toFile(path.join(frames, `frame-${String(i).padStart(5, '0')}.png`));
               break;
             }
             case '/poster':
@@ -75,21 +84,31 @@ function capturePlugin(): Plugin {
               // glyph detail, which shows as a shimmer; with a single one it lands on the loop seam.
               const count = (await readdir(frames)).filter((f) => f.endsWith('.png')).length;
               const gop = ['-g', String(count), '-keyint_min', String(count)];
-              await run('ffmpeg', [
-                ...input, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-pix_fmt', 'yuv420p',
-                ...gop, '-sc_threshold', '0', '-movflags', '+faststart', mp4,
-              ]);
-              await run('ffmpeg', [
-                ...input, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '44', '-row-mt', '1',
-                '-deadline', 'good', '-cpu-used', '2', '-pix_fmt', 'yuv420p', ...gop, webm,
-              ]);
+              const formats = (url.searchParams.get('formats') ?? 'mp4,webm').split(',');
+              const quality = (key: string, fallback: number) => {
+                const value = Number(url.searchParams.get(key) ?? fallback);
+                if (!Number.isInteger(value) || value < 10 || value > 63) throw new HttpError(400, `bad ${key}`);
+                return String(value);
+              };
+              if (formats.includes('mp4')) {
+                await run('ffmpeg', [
+                  ...input, '-c:v', 'libx264', '-preset', 'slow', '-crf', quality('crf', 30), '-pix_fmt', 'yuv420p',
+                  ...gop, '-sc_threshold', '0', '-movflags', '+faststart', mp4,
+                ]);
+              }
+              if (formats.includes('webm')) {
+                await run('ffmpeg', [
+                  ...input, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', quality('vp9crf', 44), '-row-mt', '1',
+                  '-deadline', 'good', '-cpu-used', '2', '-pix_fmt', 'yuv420p', ...gop, webm,
+                ]);
+              }
               if (url.searchParams.get('keep') !== '1') await rm(frames, { recursive: true, force: true });
               const size = async (f: string) => `${((await stat(f)).size / 1e6).toFixed(2)} MB`;
-              reply = {
-                [path.basename(mp4)]: await size(mp4),
-                [path.basename(webm)]: await size(webm),
-                [`${name}.jpg`]: await size(path.join(OUT_DIR, `${name}.jpg`)),
-              };
+              reply = Object.fromEntries(
+                await Promise.all(
+                  [...formats.map((f) => `${name}.${f}`), `${name}.jpg`].map(async (f) => [f, await size(path.join(OUT_DIR, f))]),
+                ),
+              );
               break;
             }
             default:

@@ -14,6 +14,20 @@ export function createCdfTexture(cdf: number[]) {
   return tex;
 }
 
+/** The image's color at each brightness, as a 1D texture. */
+export function createRampTexture(ramp: number[]) {
+  const data = new Uint8Array(256 * 4);
+  for (let i = 0; i < 256; i++) {
+    for (let c = 0; c < 3; c++) data[i * 4 + c] = Math.round((ramp[i * 3 + c] ?? 0) * 255);
+    data[i * 4 + 3] = 255;
+  }
+  const tex = new THREE.DataTexture(data, 256, 1, THREE.RGBAFormat, THREE.UnsignedByteType);
+  tex.minFilter = THREE.LinearFilter;
+  tex.magFilter = THREE.LinearFilter;
+  tex.needsUpdate = true;
+  return tex;
+}
+
 /** Averages the blade render into one texel per ASCII cell (color + direction). */
 export class CellPass {
   readonly target: THREE.WebGLRenderTarget;

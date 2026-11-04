@@ -25,6 +25,7 @@ export function createBladeGeometry(roots: Uint16Array, attrs: Uint8Array, count
   const buf = new THREE.InstancedInterleavedBuffer(attrs, ATTR_COMPONENTS, 1);
   geo.setAttribute('aA', new THREE.InterleavedBufferAttribute(buf, 4, 0, true));
   geo.setAttribute('aB', new THREE.InterleavedBufferAttribute(buf, 4, 4, true));
+  geo.setAttribute('aC', new THREE.InterleavedBufferAttribute(buf, 4, 8, true));
   geo.instanceCount = count;
   return geo;
 }
@@ -33,9 +34,11 @@ export function createBladeMaterial(
   photo: THREE.Texture,
   field: THREE.Texture,
   light: THREE.Texture,
+  ramp: THREE.Texture,
   imageSize: THREE.Vector2,
   lenMax: number,
   widthMax: number,
+  tuftReach: number,
 ) {
   return new THREE.RawShaderMaterial({
     glslVersion: THREE.GLSL3,
@@ -57,9 +60,21 @@ export function createBladeMaterial(
       uLightDir: { value: new THREE.Vector2(0, 1) },
       uField: { value: field },
       uLight: { value: light },
+      uRamp: { value: ramp },
+      uBaked: { value: 0.3 },
+      uTuftSpread: { value: 0 },
+      uMinWidth: { value: 1 },
+      uTuftDepth: { value: 0 },
+      uBladeTone: { value: 0 },
       uFollow: { value: 1 },
       uRootTurn: { value: 0.5 },
-      uDrift: { value: 0 },
+      uTuftReach: { value: tuftReach },
+      uTuftMix: { value: 1 },
+      uTuftGain: { value: 0 },
+      uTuftLag: { value: 0 },
+      uClumpGain: { value: 0 },
+      uClumpLag: { value: 0 },
+      uFlutter: { value: 0 },
     },
     // Premultiplied "over"; instances blend in buffer order (dark → bright).
     blending: THREE.CustomBlending,
@@ -75,7 +90,13 @@ export function createBladeMaterial(
   });
 }
 
-export function createBackground(photo: THREE.Texture, imageSize: THREE.Vector2, priorDeg: number) {
+export function createBackground(
+  photo: THREE.Texture,
+  light: THREE.Texture,
+  ramp: THREE.Texture,
+  imageSize: THREE.Vector2,
+  priorDeg: number,
+) {
   const geo = new THREE.PlaneGeometry(1, 1).translate(0.5, 0.5, 0);
   const a = (priorDeg * Math.PI) / 180;
   const mat = new THREE.RawShaderMaterial({
@@ -86,8 +107,10 @@ export function createBackground(photo: THREE.Texture, imageSize: THREE.Vector2,
       uPhoto: { value: photo },
       uImageToClip: { value: new THREE.Matrix3() },
       uImageSize: { value: imageSize },
-      uLod: { value: 2.5 },
-      uDim: { value: 0.6 },
+      uLight: { value: light },
+      uRamp: { value: ramp },
+      uBaked: { value: 0 },
+      uDim: { value: 0.75 },
       uPriorDir: { value: new THREE.Vector2(Math.cos(a), Math.sin(a)) },
     },
     blending: THREE.NoBlending,

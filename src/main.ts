@@ -2,6 +2,7 @@ import { createApp, type App } from './app';
 import { createGui, type Stats } from './debug';
 import { showFallback } from './fallback';
 import { applyUrlParams, defaultParams } from './params';
+import { createPresetBar } from './presets';
 import { AutoQuality, type Tier } from './quality';
 
 function webgl2Available() {
@@ -55,10 +56,14 @@ async function main() {
     return;
   }
 
+  // Let the wind work on the field first, so it opens already blown about.
+  app.settle(24);
+
   // ---- render only when needed: the loop is playing, or something changed ----
-  let dirty = true;
+  // After a change the grass needs a moment to settle into its new shape.
+  let awakeSeconds = 5;
   const invalidate = () => {
-    dirty = true;
+    awakeSeconds = 5;
   };
   window.addEventListener('resize', () => {
     app.resize();
@@ -91,8 +96,9 @@ async function main() {
   let elapsedMs = params.phase * params.loopSeconds * 1000;
   let last = performance.now();
 
+  let gui: ReturnType<typeof createGui> | null = null;
   if (params.gui) {
-    const gui = createGui(params, stats, {
+    gui = createGui(params, stats, {
       resize: () => app.resize(),
       scrub: () => (elapsedMs = params.phase * params.loopSeconds * 1000),
       schools: () => app.setSchools(),
@@ -107,6 +113,10 @@ async function main() {
       },
     });
     gui.onChange(invalidate);
+    createPresetBar(params, () => {
+      invalidate();
+      gui?.controllersRecursive().forEach((c) => c.updateDisplay());
+    });
   }
 
   /** One frame of the app, given the time since the last one. */
@@ -116,9 +126,9 @@ async function main() {
       elapsedMs = (elapsedMs + dt) % loopMs;
       params.phase = elapsedMs / loopMs;
     }
-    const touching = visible && app.stepTouch(dt / 1000);
-    if (!visible || (params.paused && !dirty && !touching)) return;
-    dirty = false;
+    if (!visible || (params.paused && awakeSeconds <= 0 && !app.pointerActive)) return;
+    awakeSeconds -= dt / 1000;
+    app.advance(dt / 1000);
     app.draw();
 
     stats.frameMs = stats.frameMs * 0.95 + dt * 0.05;

@@ -1,4 +1,4 @@
-// Bake the grass world into ~400k blades.
+// Bake the grass world into ~245k long blades, grouped into tufts and clumps.
 //
 //   npm run bake                      (world.jpg → public/grass/blades.bin + meta.json)
 //   tsx tools/bake-blades.ts <image> <outDir>
@@ -9,14 +9,17 @@
 import sharp from 'sharp';
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { ATTR_COMPONENTS, LEN_MAX, ROOT_COMPONENTS, WIDTH_MAX, type BladeMeta } from '../src/bladeFormat';
+import { ATTR_COMPONENTS, LEN_MAX, ROOT_COMPONENTS, TUFT_REACH, WIDTH_MAX, type BladeMeta } from '../src/bladeFormat';
 
 const [input = 'public/grass/world.jpg', outDir = 'public/grass'] = process.argv.slice(2);
 
-const SPACING = 2.5; // one blade per 2.5×2.5 px → 840×480 = 403,200 for the 2100×1200 world
+const SPACING = 3.2; // one blade per 3.2×3.2 px → 656×375 = 246,000 for the 2100×1200 world
 const PRIOR_DEG = 54; // measured dominant fur direction (up and to the right)
-const LEN_DARK = 10; // image px, length of the darkest blades
-const LEN_BRIGHT = 24; // image px, length of the brightest blades
+const LEN_DARK = 26; // image px, length of the darkest blades
+const LEN_BRIGHT = 60; // image px, length of the brightest blades
+const TUFT_SIZE = 32; // image px across a tuft, measured across the fur
+const CLUMP_SIZE = 170; // image px across a clump of tufts
+const GROUP_STRETCH = 1.9; // groups are elongated along the fur, like leaning grass
 const WIDTH_MIN = 1.8;
 const WIDTH_MAX_PX = 2.6;
 const SEED = 20261103;
@@ -72,6 +75,53 @@ function blur(src: Float32Array, w: number, h: number, sigma: number): Float32Ar
   return out;
 }
 
+function hash2(i: number, j: number, salt: number) {
+  let h = Math.imul(i, 0x27d4eb2d) ^ Math.imul(j, 0x165667b1) ^ Math.imul(salt, 0x9e3779b1);
+  h = Math.imul(h ^ (h >>> 15), 0x85ebca6b);
+  h = Math.imul(h ^ (h >>> 13), 0xc2b2ae35);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+}
+
+const furAngle = (PRIOR_DEG * Math.PI) / 180;
+const furX = Math.cos(furAngle);
+const furY = Math.sin(furAngle);
+
+/**
+ * Nearest cell of a jittered grid laid along the fur (a Voronoi diagram), so plants fall into
+ * irregular groups stretched the way the grass leans. Coordinates are y-up image px.
+ */
+function nearestGroup(x: number, y: number, size: number, salt: number) {
+  const a = (x * furX + y * furY) / GROUP_STRETCH;
+  const b = -x * furY + y * furX;
+  const ca = Math.floor(a / size);
+  const cb = Math.floor(b / size);
+  let best = Infinity;
+  let cellA = ca;
+  let cellB = cb;
+  let centerA = 0;
+  let centerB = 0;
+  for (let i = ca - 1; i <= ca + 1; i++) {
+    for (let j = cb - 1; j <= cb + 1; j++) {
+      const pa = (i + 0.15 + 0.7 * hash2(i, j, salt)) * size;
+      const pb = (j + 0.15 + 0.7 * hash2(i, j, salt + 1)) * size;
+      const d = (pa - a) ** 2 + (pb - b) ** 2;
+      if (d < best) {
+        best = d;
+        cellA = i;
+        cellB = j;
+        centerA = pa;
+        centerB = pb;
+      }
+    }
+  }
+  const stretched = centerA * GROUP_STRETCH;
+  return {
+    seed: hash2(cellA, cellB, salt + 2),
+    x: stretched * furX - centerB * furY,
+    y: stretched * furY + centerB * furX,
+  };
+}
+
 // ---------- load ----------
 
 const { data, info } = await sharp(input).removeAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -97,6 +147,26 @@ for (let i = 0; i < 256; i++) {
   lumCdf.push(+(acc / N_PX).toFixed(5));
 }
 const equalize = (l: number) => lumCdf[Math.min(255, Math.floor(l * 256))];
+
+// The photo's average color at each brightness. Relit blades take their color from this, so
+// shadows and highlights keep the photo's real palette.
+const rampSum = new Float64Array(256 * 3);
+for (let i = 0; i < N_PX; i++) {
+  const bin = Math.min(255, Math.floor(lum[i] * 256));
+  for (let c = 0; c < 3; c++) rampSum[bin * 3 + c] += data[i * C + c] / 255;
+}
+const lumRamp: number[] = [];
+let lastColor = [0.02, 0.04, 0.02];
+for (let bin = 0; bin < 256; bin++) {
+  // Bins the photo never reaches continue from the last color, scaled to the target brightness.
+  const n = hist[bin];
+  const luma = (bin + 0.5) / 256;
+  const raw = n >= 8 ? [0, 1, 2].map((c) => rampSum[bin * 3 + c] / n) : lastColor;
+  const rawLuma = Math.max(1e-4, 0.2126 * raw[0] + 0.7152 * raw[1] + 0.0722 * raw[2]);
+  const color = raw.map((v) => Math.min(1, (v * luma) / rawLuma));
+  lastColor = color;
+  lumRamp.push(...color.map((v) => +v.toFixed(4)));
+}
 
 const lumSmooth = blur(lum, W, H, 1);
 const ridgeRaw = blur(lum, W, H, 25);
@@ -161,6 +231,10 @@ interface Blade {
   ridge: number;
   seed: number;
   seed2: number;
+  tuftSeed: number;
+  clumpSeed: number;
+  tuftDx: number;
+  tuftDy: number;
 }
 const blades: Blade[] = new Array(count);
 let cohSum = 0;
@@ -186,7 +260,12 @@ for (let j = 0; j < ny; j++) {
     cohSum += coh;
 
     const lumEq = equalize(lumSmooth[p]);
-    const len = (LEN_DARK + (LEN_BRIGHT - LEN_DARK) * lumEq) * (0.8 + 0.4 * rand());
+    const yUp = H - yRow;
+    const tuft = nearestGroup(x, yUp, TUFT_SIZE, 101);
+    const clump = nearestGroup(x, yUp, CLUMP_SIZE, 202);
+    // Plants keep persistent differences: tufts have their own height, blades vary around it.
+    const tuftHeight = 0.82 + 0.36 * tuft.seed;
+    const len = (LEN_DARK + (LEN_BRIGHT - LEN_DARK) * lumEq) * tuftHeight * (0.85 + 0.3 * rand());
     const width = WIDTH_MIN + (WIDTH_MAX_PX - WIDTH_MIN) * rand();
 
     blades[k++] = {
@@ -200,6 +279,10 @@ for (let j = 0; j < ny; j++) {
       ridge: (ridgeRaw[p] - rMin) / (rMax - rMin),
       seed: rand(),
       seed2: rand(),
+      tuftSeed: tuft.seed,
+      clumpSeed: clump.seed,
+      tuftDx: tuft.x - x,
+      tuftDy: tuft.y - yUp,
     };
   }
 }
@@ -217,23 +300,28 @@ for (let b = 0; b < count; b++) {
   attrs[o + 0] = q8(s.angle / (2 * Math.PI));
   attrs[o + 1] = q8(s.len / LEN_MAX);
   attrs[o + 2] = q8(s.width / WIDTH_MAX);
-  attrs[o + 3] = q8(s.lumEq);
+  attrs[o + 3] = q8(s.tuftSeed);
   attrs[o + 4] = q8(s.coh);
   attrs[o + 5] = q8(s.ridge);
   attrs[o + 6] = q8(s.seed);
   attrs[o + 7] = q8(s.seed2);
+  attrs[o + 8] = q8((s.tuftDx / TUFT_REACH + 1) / 2);
+  attrs[o + 9] = q8((s.tuftDy / TUFT_REACH + 1) / 2);
+  attrs[o + 10] = q8(s.clumpSeed);
 }
 
 const meta: BladeMeta = {
-  version: 2,
+  version: 3,
   count,
   imageWidth: W,
   imageHeight: H,
   spacing: SPACING,
   lenMax: LEN_MAX,
   widthMax: WIDTH_MAX,
+  tuftReach: TUFT_REACH,
   priorAngleDeg: PRIOR_DEG,
   lumCdf,
+  lumRamp,
 };
 
 await mkdir(outDir, { recursive: true });
