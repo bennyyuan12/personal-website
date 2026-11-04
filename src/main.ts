@@ -4,6 +4,7 @@ import { showFallback } from './fallback';
 import { applyUrlParams, defaultParams } from './params';
 import { createPresetBar } from './presets';
 import { AutoQuality, type Tier } from './quality';
+import { Scene } from './scene';
 
 function webgl2Available() {
   try {
@@ -18,9 +19,37 @@ async function main() {
   const params = defaultParams();
   applyUrlParams(params);
 
+  const scene = new Scene(document.querySelector<HTMLElement>('#ground')!, document.querySelector<HTMLElement>('#notes')!);
+  window.addEventListener(
+    'pointermove',
+    (e) => scene.pointer(e.clientX, e.clientY, e.pointerType !== 'mouse'),
+    { passive: true },
+  );
+  const pointerGone = (touch = false) => scene.pointer(null, 0, touch);
+  window.addEventListener('pointerup', (e) => {
+    if (e.pointerType !== 'mouse') pointerGone(true);
+  });
+  document.documentElement.addEventListener('pointerleave', () => pointerGone());
+  window.addEventListener('blur', () => pointerGone());
+
+  /** No grass to render: the video stands in for it, and the ground can't stay covered. */
+  function fallBack(reason: string) {
+    showFallback(reason, () => scene.holes());
+    scene.uncoverAll();
+    window.addEventListener('resize', () => scene.layout());
+    document.body.classList.add('ready');
+    let last = performance.now();
+    const loop = (now: number) => {
+      scene.tick(Math.min(now - last, 250) / 1000);
+      last = now;
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  }
+
   const forceFallback = new URLSearchParams(location.search).has('fallback');
   if (forceFallback || !webgl2Available()) {
-    showFallback(forceFallback ? 'forced by ?fallback' : 'WebGL2 is not available');
+    fallBack(forceFallback ? 'forced by ?fallback' : 'WebGL2 is not available');
     return;
   }
 
@@ -39,14 +68,14 @@ async function main() {
     app = await createApp(canvas, params, { tier: startTier, preserveDrawingBuffer: !!capture });
   } catch (err) {
     console.error(err);
-    showFallback('the renderer failed to start');
+    fallBack('the renderer failed to start');
     return;
   }
   const renderer = app.renderer;
   canvas.addEventListener('webglcontextlost', (event) => {
     event.preventDefault();
     renderer.setAnimationLoop(null);
-    showFallback('the WebGL context was lost');
+    fallBack('the WebGL context was lost');
   });
 
   await app.compile();
@@ -56,7 +85,17 @@ async function main() {
     return;
   }
 
-  // Let the wind work on the field first, so it opens already blown about.
+  // Lay things in the grass, then let the wind work on the field, so it opens already blown about.
+  scene.connect({
+    hold: (slot, hold) => {
+      app.setHold(slot, hold);
+      invalidate();
+    },
+    place: (objects, paint) => app.place(objects, paint),
+    get reach() {
+      return params.touchRadius * app.worldHeightCss;
+    },
+  });
   app.settle(24);
 
   // ---- render only when needed: the loop is playing, or something changed ----
@@ -67,6 +106,7 @@ async function main() {
   };
   window.addEventListener('resize', () => {
     app.resize();
+    scene.layout();
     invalidate();
   });
   let visible = true;
@@ -121,6 +161,7 @@ async function main() {
 
   /** One frame of the app, given the time since the last one. */
   function tick(dt: number) {
+    scene.tick(dt / 1000);
     const loopMs = params.loopSeconds * 1000;
     if (!params.paused) {
       elapsedMs = (elapsedMs + dt) % loopMs;
@@ -140,10 +181,11 @@ async function main() {
     const dt = Math.min(now - last, 250);
     last = now;
     tick(dt);
+    document.body.classList.add('ready'); // the grass is up, so the ground can't be seen uncovered
   });
 
   if (import.meta.env.DEV) {
-    Object.assign(window, { __grass: { params, stats, app, renderer, draw: app.draw, tick, ...app.debug } });
+    Object.assign(window, { __grass: { params, stats, app, renderer, scene, draw: app.draw, tick, ...app.debug } });
   }
 }
 

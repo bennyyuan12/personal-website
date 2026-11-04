@@ -1,0 +1,8 @@
+<svg class="art" viewBox="0 0 160 160" aria-hidden="true">
+  <path class="w" d="M78 136 C20 98 8 66 20 44 C32 25 62 26 78 50 C94 25 124 25 136 44 C148 66 136 98 78 136 Z"/>
+  <path d="M24 72 L54 72 L62 56 L74 96 L86 42 L96 72 L132 72"/>
+  <path class="w" d="M112 128 L102 156 L118 148 L126 157 L136 130 Z"/>
+  <circle class="w" cx="124" cy="112" r="22"/>
+  <circle class="t" cx="124" cy="112" r="16"/>
+  <path d="M117 106 C118 100 130 100 130 107 C130 113 118 116 117 120 L132 120"/>
+</svg>

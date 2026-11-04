@@ -1,0 +1,195 @@
+:root {
+  --paper: #f4f0df;
+  --ink: #1d1b17;
+}
+
+/* People will press and drag here, and that shouldn't select anything. */
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* ---- layers, bottom to top: what's lying in the grass, the grass, notes above the grass ---- */
+#ground {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+.ready #ground { visibility: visible; }
+
+#stage, .fallback {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
+#notes {
+  position: fixed;
+  z-index: 2;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+  color: var(--ink);
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- drawings ---- */
+.art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.art .w { fill: var(--paper); }
+.art .k { fill: var(--ink); stroke-width: 1.5; }
+.art .t { stroke-width: 3; }
+.art .thick { stroke-width: 9; }
+.art .lens { fill: #f4f0dfa8; stroke-width: 4; }
+.art .tube { stroke-width: 27; }
+.art .tube-in { stroke: var(--paper); stroke-width: 20; }
+.art .tube.thin { stroke-width: 21; }
+.art .tube-in.thin { stroke-width: 14; }
+.art .bubble-skin { fill: #f4f0dfb0; stroke-width: 5; }
+.art .pop-word {
+  fill: var(--paper);
+  stroke: none;
+  font: 40px 'Patrick Hand', 'Comic Sans MS', cursive;
+}
+.me { stroke-width: 3.4; }
+.me .t { stroke-width: 2.6; }
+
+.spot {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+}
+.spot:focus-visible .art { filter: drop-shadow(0 0 3px #1d1b17); }
+
+#ground ul { margin: 0; padding: 0; }
+
+/* ---- me ---- */
+.me { position: absolute; }
+.me .face-awake { display: none; }
+.me .shades { transition: transform 0.25s ease-out; }
+.me.up .shades { transform: translateY(-20px); }
+.me.up .face-asleep { display: none; }
+.me.up .face-awake { display: block; }
+.me.up .wave { transform-box: view-box; transform-origin: 228px 100px; animation: wave 0.8s ease-in-out 0.9s 4; }
+@keyframes wave {
+  25% { transform: rotate(-16deg); }
+  75% { transform: rotate(9deg); }
+}
+
+/* The bubble rises through the grass, so it can be seen before I can. */
+.snore-holder { position: absolute; transition: opacity 0.2s; }
+.snore-layer .pop { display: none; }
+.snore { transform-box: view-box; transform-origin: 10px 110px; animation: snore 3.6s ease-in-out infinite; }
+@keyframes snore {
+  0%, 100% { transform: scale(0.3); }
+  50% { transform: scale(0.8); }
+}
+.snore-holder.swell .snore { animation: swell 0.75s cubic-bezier(0.3, 0, 0.7, 0.2) forwards; }
+@keyframes swell {
+  0% { transform: scale(0.6); }
+  70% { transform: scale(1.2) rotate(-3deg); }
+  85% { transform: scale(1.14) rotate(3deg); }
+  100% { transform: scale(1.5); }
+}
+.snore-holder.up .snore { display: none; }
+.snore-holder.popped .pop {
+  display: block;
+  transform-box: view-box;
+  transform-origin: 44px 76px;
+  animation: burst 0.5s ease-out forwards;
+}
+.snore-holder .pop path { stroke: var(--paper); }
+.snore-holder .pop .k { fill: var(--paper); stroke: var(--paper); }
+@keyframes burst {
+  0% { transform: scale(0.7); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+/* ---- a few letters drifting up from where someone is asleep ---- */
+.zzz { position: absolute; font-size: 24px; color: #f4f0df; text-shadow: 0 1px 3px #0009; opacity: 0.9; transition: opacity 0.4s; }
+.zzz span { position: absolute; opacity: 0; animation: drift 5.4s ease-in-out infinite; }
+.zzz span:nth-child(1) { font-size: 0.75em; }
+.zzz span:nth-child(2) { font-size: 1em; animation-delay: 1.1s; }
+.zzz span:nth-child(3) { font-size: 1.3em; animation-delay: 2.2s; }
+.zzz.gone { opacity: 0; }
+@keyframes drift {
+  0% { transform: translate(0, 0); opacity: 0; }
+  18% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translate(34px, -74px); opacity: 0; }
+}
+
+/* ---- speech and notes: sketchy paper over the grass ---- */
+.bubble, .card {
+  position: absolute;
+  box-sizing: border-box;
+  background: var(--paper);
+  border: 2.5px solid var(--ink);
+  border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  opacity: 0;
+  transform: translateY(6px) scale(0.97);
+  transition: opacity 0.18s, transform 0.18s;
+}
+.bubble.on, .card.on { opacity: 1; transform: none; }
+.bubble.aside { opacity: 0; }
+
+.bubble {
+  padding: 13px 18px 15px;
+  font-size: 20px;
+  line-height: 1.25;
+  transform-origin: 20% 100%;
+}
+.bubble .unsaid { visibility: hidden; }
+.bubble::after {
+  content: '';
+  position: absolute;
+  left: var(--tail, 40px);
+  bottom: -18px;
+  width: 22px;
+  height: 22px;
+  background: var(--paper);
+  border-right: 2.5px solid var(--ink);
+  border-bottom: 2.5px solid var(--ink);
+  transform: skew(28deg, 34deg);
+}
+
+.card {
+  padding: 11px 16px 13px;
+  font-size: 17px;
+  line-height: 1.22;
+}
+.card h2 { margin: 0; font-size: 21px; font-weight: 400; line-height: 1.1; }
+.card .role { margin: 4px 0 0; }
+.card .when { margin: 2px 0 0; opacity: 0.62; }
+.card .note { margin: 7px 0 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .snore, .snore-holder.swell .snore, .me.up .wave, .zzz span { animation: none; }
+  .snore { transform: scale(0.6); }
+  .snore-holder.popped .pop { animation: none; display: none; }
+}

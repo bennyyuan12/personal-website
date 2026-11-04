@@ -1,4 +1,6 @@
-// Final pass: the ASCII layer over the grass, plus debug views.
+// Final pass: the ASCII layer over the grass, plus debug views. The result is premultiplied and
+// its alpha is the grass itself, so anything lying in the grass (on the page, below this canvas)
+// shows between the blades crossing over it, and sits in the shadow they cast.
 
 precision highp float;
 
@@ -27,6 +29,9 @@ uniform float uDither;
 uniform float uBlend;
 uniform float uGain;           // ink brightness relative to the grass
 uniform float uUnderlay;       // grass brightness under the ink
+uniform float uGrain;          // under the ink: 0 one flat color per cell, 1 every blade
+uniform float uGroundShade;    // shadow the blades cast on whatever is lying under them
+uniform vec2 uLightDir;
 uniform float uGlow;
 uniform float uExposure;
 uniform float uContrast;
@@ -66,7 +71,7 @@ float glyphSdf(float index, vec2 local) {
   return textureLod(uAtlas, uv, uAtlasLod).r;
 }
 
-vec3 ascii(vec2 uv, vec3 grass) {
+vec4 ascii(vec2 uv, vec4 grass) {
   vec2 px = uv * uViewportCss;
   vec2 cell = floor(px / uCell);
   vec2 local = fract(px / uCell) - 0.5;
@@ -93,25 +98,46 @@ vec3 ascii(vec2 uv, vec3 grass) {
   float cover = mix(smoothstep(edge - uAA, edge + uAA, s0), smoothstep(edge - uAA, edge + uAA, s1), k);
   float sdf = mix(s0, s1, k);
 
-  // The grass stays bright underneath and the glyphs are a brighter weave on top of it.
+  // The grass stays bright underneath and the glyphs are a brighter weave on top of it. Blades
+  // have true edges, so one crossing a drawing crosses it blade by blade. Letters need most of a
+  // cell to be grass, or they would float over what's underneath.
+  vec3 blades = grass.rgb / max(grass.a, 1e-3);
+  float under = grass.a;
+  float inked = cover * smoothstep(0.45, 0.85, cd.a) * grass.a;
   vec3 ink = grade(cc.rgb) * uGain;
-  vec3 col = mix(grade(grass) * uUnderlay, ink, cover);
+  vec3 col = grade(mix(cc.rgb, blades, uGrain)) * uUnderlay * under;
   float halo = smoothstep(edge - 0.3, edge, sdf) * (1.0 - cover) * uGlow * lumEq * lumEq;
-  return col + ink * halo;
+  return vec4(mix(col, ink, inked) + ink * halo * under, mix(under, 1.0, inked));
+}
+
+// Shadow on what lies under the grass: how much grass stands between this spot and the light. It
+// is read from the cells, so it moves with the blades.
+float grassShadow(vec2 uv) {
+  vec2 cell = uCell / uViewportCss;
+  vec2 at = uv + uLightDir * cell * 1.6;
+  float sum = 0.0;
+  for (int i = 0; i < 8; i++) {
+    float a = float(i) * 0.7853982;
+    sum += texture(uCellDir, at + vec2(cos(a), sin(a)) * cell * 3.0).a;
+  }
+  return sum / 8.0;
 }
 
 void main() {
-  vec3 grass = texture(uColor, vUv).rgb;
+  vec4 scene = texture(uColor, vUv);
+  vec3 grass = scene.rgb / max(scene.a, 1e-3);
   vec2 photoUV = (uClipToUV * vec3(vClip, 1.0)).xy;
+  vec4 layer = vec4(0.0);
   vec3 c;
   if (uView == 0) {
-    c = ascii(vUv, grass);
+    layer = ascii(vUv, scene);
   } else if (uView == 1) {
-    c = grade(grass);
+    layer = vec4(grade(grass) * scene.a, scene.a);
   } else if (uView == 2) {
     c = texture(uPhoto, photoUV).rgb;
   } else if (uView == 3) {
-    c = vUv.x < uSplit ? grade(grass) : ascii(vUv, grass);
+    vec4 a = ascii(vUv, scene);
+    c = vUv.x < uSplit ? grade(grass) : a.rgb + (1.0 - a.a) * vec3(0.5);
     float px = abs(vUv.x - uSplit) * uResolution.x;
     c = mix(vec3(1.0), c, smoothstep(0.75, 1.5, px));
   } else if (uView == 4) {
@@ -127,5 +153,10 @@ void main() {
     float s = clamp(length(v), 0.0, 1.0);
     c = mix(texture(uPhoto, photoUV).rgb * 0.25, hue(atan(v.y, v.x) / (2.0 * PI) + 0.5), s);
   }
-  outColor = vec4(c, 1.0);
+  if (uView > 1) {
+    outColor = vec4(c, 1.0);
+    return;
+  }
+  float shade = layer.a > 0.995 ? 0.0 : uGroundShade * grassShadow(vUv);
+  outColor = vec4(layer.rgb, layer.a + (1.0 - layer.a) * shade);
 }

@@ -56,6 +56,7 @@ export interface Params {
   clumpLag: number;
   flutter: number;
   tuftSpread: number;
+  tuftPull: number;
   // light from how the grass is lying
   baked: number;
   tuftDepth: number;
@@ -67,9 +68,26 @@ export interface Params {
   touch: boolean;
   touchForce: number;
   touchRadius: number;
+  /** Air seconds: how long the pointer's air keeps moving. */
+  airFade: number;
+  /** Lean per unit of air speed. */
+  airLean: number;
+  /** Air speed (heights per second) that has the grass entirely in its grip. */
+  airFull: number;
+  airStiffness: number;
+  /** Per second: how quickly grass rises back toward its lay on its own. */
+  regrow: number;
+  // the steady rhythm of the wind
+  sway: number;
+  rhythmCells: number;
+  rhythmA: number;
+  rhythmB: number;
+  // the lay of the grass
+  layScale: number;
+  layDrift: number;
+  nestSpread: number;
+  nestTwist: number;
   // school field
-  follow: number;
-  rootTurn: number;
   schools: number;
   schoolSeed: number;
   headingSpread: number;
@@ -89,6 +107,9 @@ export interface Params {
   blend: number;
   gain: number;
   underlay: number;
+  /** Under the letters: 0 one flat color per cell, 1 every blade. */
+  grain: number;
+  groundShade: number;
   glow: number;
   // color
   exposure: number;
@@ -114,10 +135,10 @@ export function defaultParams(): Params {
     widthScale: 1,
     jitter: 0.03,
     density: 1,
-    rootShade: 0.5,
+    rootShade: 0.42,
     sheen: 0.12,
     lightAngle: 72,
-    bgDim: 0.75,
+    bgDim: 0.5,
     // The motion values below are overwritten by the chosen preset.
     windHeading: -18,
     breeze: 0.2,
@@ -145,17 +166,31 @@ export function defaultParams(): Params {
     clumpLag: 0.35,
     flutter: 0.05,
     tuftSpread: 0.4,
-    baked: 0.42,
+    tuftPull: 0.45,
+    baked: 0.25,
     tuftDepth: 0.55,
     bladeTone: 0.34,
     tilt: 0.55,
     relief: 0.9,
     shimmer: 0.1,
-    touch: !reducedMotion,
-    touchForce: 1.7,
-    touchRadius: 0.15,
-    follow: 1,
-    rootTurn: 0.4,
+    // Reduced motion still answers the pointer: nothing moves on its own, and the visitor still
+    // has to be able to find what's under the grass.
+    touch: true,
+    touchForce: 16,
+    touchRadius: 0.085,
+    airFade: 0.7,
+    airLean: 2.4,
+    airFull: 0.32,
+    airStiffness: 70,
+    regrow: 0.02,
+    sway: 0.3,
+    rhythmCells: 1.5,
+    rhythmA: 12,
+    rhythmB: 19,
+    layScale: 1.45,
+    layDrift: 0.55,
+    nestSpread: 3,
+    nestTwist: 0.55,
     schools: 7,
     schoolSeed: 7,
     headingSpread: 1.0,
@@ -167,16 +202,18 @@ export function defaultParams(): Params {
     curlScale: 2.5,
     curlPeriod: 2,
     ramp: DEFAULT_RAMP,
-    cellSize: 5,
+    cellSize: 7,
     thin: 0.7,
     bold: 0.38,
     dither: 0.6,
     blend: 0.25,
     gain: 1.3,
-    underlay: 0.84,
+    underlay: 0.8,
+    grain: 0.62,
+    groundShade: 0.38,
     glow: 0.12,
-    exposure: 1.3,
-    contrast: 0.95,
+    exposure: 1.08,
+    contrast: 0.92,
     saturation: 1.02,
     loopSeconds: 48,
     paused: reducedMotion,
@@ -197,14 +234,15 @@ export function applyUrlParams(p: Params) {
   if (rot === 'auto' || rot === '0' || rot === '90' || rot === '-90') p.rotate = rot;
   const numeric = [
     'split', 'zoom', 'renderScale', 'lenScale', 'widthScale', 'jitter', 'density', 'rootShade', 'sheen',
-    'phase', 'loopSeconds', 'follow', 'rootTurn', 'schools', 'schoolSeed', 'headingSpread',
+    'phase', 'loopSeconds', 'schools', 'schoolSeed', 'headingSpread',
     'radiusScale', 'sharpness', 'waveSpeed', 'swing', 'restWeight', 'curlScale', 'curlPeriod',
-    'bgDim', 'cellSize', 'thin', 'bold', 'dither', 'blend', 'gain', 'underlay', 'glow', 'exposure', 'contrast', 'saturation',
+    'bgDim', 'cellSize', 'thin', 'bold', 'dither', 'blend', 'gain', 'underlay', 'grain', 'groundShade', 'glow', 'exposure', 'contrast', 'saturation',
     'windHeading', 'breeze', 'gust', 'ripple', 'schoolAmount', 'baked', 'tuftDepth', 'bladeTone', 'tilt', 'relief', 'shimmer', 'lightAngle',
     'gustCells', 'gustCross', 'gustTrips', 'gustDetail', 'gustEdge', 'gustTurn', 'pressAt',
     'stiffness', 'damping', 'coupling', 'lagTime', 'yield', 'setRate', 'calm',
-    'tuftMix', 'tuftGain', 'tuftLag', 'clumpGain', 'clumpLag', 'flutter', 'tuftSpread',
-    'touchForce', 'touchRadius',
+    'tuftMix', 'tuftGain', 'tuftLag', 'clumpGain', 'clumpLag', 'flutter', 'tuftSpread', 'tuftPull',
+    'touchForce', 'touchRadius', 'airFade', 'airLean', 'airFull', 'airStiffness', 'regrow',
+    'sway', 'rhythmCells', 'rhythmA', 'rhythmB', 'layScale', 'layDrift', 'nestSpread', 'nestTwist',
   ] as const;
   for (const k of numeric) {
     const v = num(k);

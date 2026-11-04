@@ -1,0 +1,58 @@
+<svg class="art me" viewBox="0 0 300 250" aria-hidden="true">
+  <g class="legs">
+    <path class="tube" d="M136 160 L126 224"/>
+    <path class="tube-in" d="M136 160 L126 224"/>
+    <path class="tube" d="M166 160 L182 220"/>
+    <path class="tube-in" d="M166 160 L182 220"/>
+    <path class="w" d="M112 222 C109 240 117 248 128 248 C139 248 143 238 141 224 C134 218 118 218 112 222 Z"/>
+    <path class="t" d="M119 229 L135 229 M119 235 L135 235"/>
+    <path class="w" d="M169 220 C169 238 177 246 188 244 C199 242 201 230 197 216 C190 212 175 214 169 220 Z"/>
+    <path class="t" d="M176 226 L192 222 M178 232 L194 228"/>
+  </g>
+
+  <g class="arm">
+    <path class="tube thin" d="M124 104 L76 90 L34 62"/>
+    <path class="tube-in thin" d="M124 104 L76 90 L34 62"/>
+    <path class="t" d="M46 62 L38 74"/>
+    <path class="w" d="M36 64 C28 68 17 62 15 53 C13 45 21 39 29 43 C37 46 41 58 36 64 Z"/>
+    <path class="t" d="M17 47 L8 40 M21 42 L16 31 M28 41 L28 29"/>
+  </g>
+
+  <g class="arm">
+    <path class="tube thin" d="M178 104 L228 100"/>
+    <path class="tube-in thin" d="M178 104 L228 100"/>
+    <g class="wave">
+      <path class="tube thin" d="M228 100 L268 112"/>
+      <path class="tube-in thin" d="M228 100 L268 112"/>
+      <path class="t" d="M260 100 L256 118"/>
+      <path class="w" d="M266 104 C272 98 284 100 288 108 C292 116 286 124 278 123 C270 122 262 112 266 104 Z"/>
+      <path class="t" d="M287 106 L297 100 M290 112 L300 112 M287 119 L296 124"/>
+    </g>
+  </g>
+
+  <path class="w" d="M120 96 C134 86 168 86 182 96 C184 120 180 146 176 166 C160 172 140 172 124 166 C120 146 118 120 120 96 Z"/>
+  <path class="t" d="M151 92 L150 169"/>
+  <path class="t" d="M128 99 L178 149 M122 105 L172 155"/>
+  <path class="w" d="M164 150 C170 144 186 146 192 152 C194 162 190 174 184 178 C176 178 166 172 162 164 C160 158 160 154 164 150 Z"/>
+  <path class="t" d="M166 156 C174 156 184 158 190 162"/>
+
+  <path class="w" d="M150 6 C116 6 106 40 112 66 C116 84 130 94 150 94 C170 94 186 84 190 66 C196 40 184 6 150 6 Z"/>
+  <path class="w" d="M150 22 C128 22 122 42 124 58 C126 74 138 82 150 82 C162 82 176 74 178 58 C180 42 172 22 150 22 Z"/>
+  <path class="t" d="M138 90 C136 94 136 98 138 102 M162 90 C164 94 164 98 162 102"/>
+
+  <g class="face-asleep">
+    <path class="t" d="M150 58 C148 62 150 64 153 63"/>
+    <ellipse class="k" cx="150" cy="71" rx="5" ry="4"/>
+  </g>
+  <g class="face-awake">
+    <circle class="k" cx="138" cy="53" r="3.5"/>
+    <circle class="k" cx="164" cy="53" r="3.5"/>
+    <path class="t" d="M150 58 C148 62 150 64 153 63"/>
+    <path d="M138 67 C144 75 158 75 164 67"/>
+  </g>
+  <g class="shades">
+    <path class="k" d="M128 44 C134 40 146 42 147 48 C148 56 140 60 134 58 C128 56 126 48 128 44 Z"/>
+    <path class="k" d="M155 48 C156 42 168 40 174 44 C176 48 174 56 168 58 C162 60 154 56 155 48 Z"/>
+    <path d="M147 47 C150 45 152 45 155 47"/>
+  </g>
+</svg>

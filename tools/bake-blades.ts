@@ -1,4 +1,4 @@
-// Bake the grass world into ~245k long blades, grouped into tufts and clumps.
+// Bake the grass world into ~48k very long blades, grouped into tufts and clumps.
 //
 //   npm run bake                      (world.jpg → public/grass/blades.bin + meta.json)
 //   tsx tools/bake-blades.ts <image> <outDir>
@@ -13,15 +13,15 @@ import { ATTR_COMPONENTS, LEN_MAX, ROOT_COMPONENTS, TUFT_REACH, WIDTH_MAX, type 
 
 const [input = 'public/grass/world.jpg', outDir = 'public/grass'] = process.argv.slice(2);
 
-const SPACING = 3.2; // one blade per 3.2×3.2 px → 656×375 = 246,000 for the 2100×1200 world
+const SPACING = 7.2; // one blade per 7.2×7.2 px → 291×166 = 48,306 for the 2100×1200 world
 const PRIOR_DEG = 54; // measured dominant fur direction (up and to the right)
-const LEN_DARK = 26; // image px, length of the darkest blades
-const LEN_BRIGHT = 60; // image px, length of the brightest blades
-const TUFT_SIZE = 32; // image px across a tuft, measured across the fur
-const CLUMP_SIZE = 170; // image px across a clump of tufts
+const LEN_DARK = 150; // image px, length of the darkest blades
+const LEN_BRIGHT = 270; // image px, length of the brightest blades
+const TUFT_SIZE = 72; // image px across a tuft, measured across the fur
+const CLUMP_SIZE = 300; // image px across a clump of tufts
 const GROUP_STRETCH = 1.9; // groups are elongated along the fur, like leaning grass
-const WIDTH_MIN = 1.8;
-const WIDTH_MAX_PX = 2.6;
+const WIDTH_MIN = 5;
+const WIDTH_MAX_PX = 8;
 const SEED = 20261103;
 
 // ---------- helpers ----------
@@ -311,7 +311,7 @@ for (let b = 0; b < count; b++) {
 }
 
 const meta: BladeMeta = {
-  version: 3,
+  version: 4,
   count,
   imageWidth: W,
   imageHeight: H,

@@ -1,0 +1,14 @@
+<svg class="art snore-layer" viewBox="0 0 120 120" aria-hidden="true">
+  <g class="snore">
+    <circle class="bubble-skin" cx="44" cy="76" r="48"/>
+    <path class="t" d="M18 62 C22 48 34 40 48 40"/>
+    <path class="t" d="M64 104 C70 100 75 94 77 86"/>
+  </g>
+  <g class="pop">
+    <path d="M44 16 L44 -6 M86 34 L102 18 M104 76 L126 76 M86 118 L102 134 M2 34 L-14 18 M-16 76 L-38 76"/>
+    <circle class="k" cx="72" cy="4" r="3"/>
+    <circle class="k" cx="118" cy="44" r="3"/>
+    <circle class="k" cx="-6" cy="-2" r="3"/>
+    <text x="-34" y="-8" class="pop-word">pop!</text>
+  </g>
+</svg>

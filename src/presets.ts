@@ -5,7 +5,7 @@ type MotionKey =
   | 'windHeading' | 'breeze' | 'gust' | 'gustCells' | 'gustCross' | 'gustTrips' | 'gustDetail' | 'gustEdge'
   | 'gustTurn' | 'pressAt' | 'ripple' | 'schoolAmount'
   | 'stiffness' | 'damping' | 'coupling' | 'lagTime' | 'yield' | 'setRate' | 'calm'
-  | 'lenScale' | 'rootTurn' | 'follow'
+  | 'lenScale'
   | 'tuftMix' | 'tuftGain' | 'tuftLag' | 'clumpGain' | 'clumpLag' | 'flutter' | 'tuftSpread'
   | 'tilt' | 'relief' | 'shimmer';
 
@@ -33,7 +33,7 @@ export const PRESETS: Preset[] = [
       breeze: 0.5, gust: 0.85, gustCells: 1.3, gustCross: 0.55, gustTrips: 1, gustDetail: 0.22, gustEdge: 0.5,
       gustTurn: 0.9, pressAt: 0.74,
       stiffness: 10, damping: 3.2, coupling: 240, lagTime: 0.45, yield: 0.28, setRate: 0.2,
-      lenScale: 1, rootTurn: 0.45, follow: 1,
+      lenScale: 1,
       tuftMix: 0.75, tuftGain: 0.25, tuftLag: 0.45, clumpGain: 0.2, clumpLag: 0.35, flutter: 0.04, tuftSpread: 0.35,
       tilt: 0.55, relief: 0.9, shimmer: 0.1,
     },
@@ -47,7 +47,7 @@ export const PRESETS: Preset[] = [
       breeze: 0.45, gust: 0.85, gustCells: 2.1, gustCross: 0.95, gustTrips: 2, gustDetail: 0.34, gustEdge: 0.42,
       gustTurn: 1.1, pressAt: 0.72,
       stiffness: 14, damping: 3.6, coupling: 90, lagTime: 0.6, yield: 0.2, setRate: 0.25,
-      lenScale: 1, rootTurn: 0.5, follow: 1.05,
+      lenScale: 1,
       tuftMix: 1, tuftGain: 0.5, tuftLag: 0.85, clumpGain: 0.4, clumpLag: 0.6, flutter: 0.05, tuftSpread: 0.7,
       tilt: 0.55, relief: 0.9, shimmer: 0.09,
     },
@@ -61,9 +61,9 @@ export const PRESETS: Preset[] = [
       breeze: 0.55, gust: 0.95, gustCells: 1.7, gustCross: 0.7, gustTrips: 1, gustDetail: 0.26, gustEdge: 0.55,
       gustTurn: 1, pressAt: 0.72,
       stiffness: 6, damping: 1.6, coupling: 160, lagTime: 0.7, yield: 0.34, setRate: 0.12,
-      lenScale: 1.3, rootTurn: 0.3, follow: 1.1,
-      tuftMix: 0.85, tuftGain: 0.3, tuftLag: 0.6, clumpGain: 0.3, clumpLag: 0.45, flutter: 0.03, tuftSpread: 0.45,
-      tilt: 0.55, relief: 0.9, shimmer: 0.12,
+      lenScale: 1,
+      tuftMix: 0.55, tuftGain: 0.3, tuftLag: 0.6, clumpGain: 0.3, clumpLag: 0.45, flutter: 0.03, tuftSpread: 0.22,
+      tilt: 0.55, relief: 0.45, shimmer: 0.12,
     },
   },
   {
@@ -75,7 +75,7 @@ export const PRESETS: Preset[] = [
       breeze: 0.4, gust: 0.8, gustCells: 3, gustCross: 1.3, gustTrips: 3, gustDetail: 0.42, gustEdge: 0.38,
       gustTurn: 1.3, pressAt: 0.68,
       stiffness: 24, damping: 5, coupling: 120, lagTime: 0.3, yield: 0.42, setRate: 0.3,
-      lenScale: 0.9, rootTurn: 0.5, follow: 1,
+      lenScale: 1,
       tuftMix: 0.8, tuftGain: 0.35, tuftLag: 0.6, clumpGain: 0.25, clumpLag: 0.4, flutter: 0.07, tuftSpread: 0.5,
       tilt: 0.55, relief: 0.9, shimmer: 0.16,
     },

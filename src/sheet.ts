@@ -5,12 +5,6 @@ import sheetFrag from './shaders/sheet.frag.glsl?raw';
 
 const STEP_SECONDS = 1 / 60;
 const MAX_STEPS_PER_FRAME = 4;
-/** Pointer speed (world heights per second) that counts as a full-strength gust. */
-const FULL_SPEED = 0.9;
-/** How long the pointer's wind keeps blowing after it stops (time constant, seconds). */
-const POINTER_DECAY = 0.3;
-/** Seconds after the last pointer move during which the grass may still be moving from it. */
-const POINTER_LINGER = 4;
 
 function target(width: number, height: number) {
   return new THREE.WebGLRenderTarget(width, height, {
@@ -28,28 +22,17 @@ function target(width: number, height: number) {
  *
  * The grass keeps what the wind does to it, so what you see at any moment is only a function of
  * the recent gusts. Once every spot has been crossed by a gust, the state no longer depends on
- * how it started, and with a looping wind it repeats with the loop. A pointer trail stays until
- * a later gust blows through it.
+ * how it started, and with a looping wind it repeats with the loop. What the pointer's air lays
+ * over stays that way until a later gust blows through it.
  */
 export class GrassSheet {
   private readonly targets: [THREE.WebGLRenderTarget, THREE.WebGLRenderTarget];
   private current = 0;
   private readonly material: THREE.RawShaderMaterial;
   private readonly scene = new THREE.Scene();
-
-  private pointer: THREE.Vector2 | null = null; // height units
-  private brushStart: THREE.Vector2 | null = null;
-  private readonly pointerLean = new THREE.Vector2();
-  private pointerPress = 0;
   private accumulator = 0;
-  private sincePointer = Infinity;
 
-  constructor(
-    width: number,
-    height: number,
-    private readonly aspect: number,
-    wind: THREE.Texture,
-  ) {
+  constructor(width: number, height: number, wind: THREE.Texture, lay: THREE.Texture) {
     this.targets = [target(width, height), target(width, height)];
     this.material = new THREE.RawShaderMaterial({
       glslVersion: THREE.GLSL3,
@@ -59,8 +42,9 @@ export class GrassSheet {
         uPrev: { value: null },
         uPrevMemory: { value: null },
         uWind: { value: wind },
+        uLay: { value: lay },
+        uAir: { value: null },
         uTexel: { value: new THREE.Vector2(1 / width, 1 / height) },
-        uAspect: { value: aspect },
         uDt: { value: STEP_SECONDS },
         uStiffness: { value: 1 },
         uCoupling: { value: 1 },
@@ -69,11 +53,12 @@ export class GrassSheet {
         uYield: { value: 0.3 },
         uSet: { value: 0.2 },
         uCalm: { value: 0.04 },
-        uBrushA: { value: new THREE.Vector2() },
-        uBrushB: { value: new THREE.Vector2() },
-        uRadius: { value: 0.1 },
-        uPointerLean: { value: new THREE.Vector2() },
-        uPointerPress: { value: 0 },
+        uWindDir: { value: new THREE.Vector2(1, 0) },
+        uSway: { value: 0 },
+        uAirLean: { value: 1 },
+        uAirFull: { value: 0.2 },
+        uAirStiffness: { value: 0 },
+        uRegrow: { value: 0 },
       },
       depthTest: false,
       depthWrite: false,
@@ -93,29 +78,6 @@ export class GrassSheet {
     return this.targets[this.current].textures[1];
   }
 
-  /** True while something the pointer did may still be moving. */
-  get pointerActive() {
-    return this.sincePointer < POINTER_LINGER;
-  }
-
-  /** Pointer position in world UV (y-up). */
-  move(u: number, v: number) {
-    if (!Number.isFinite(u) || !Number.isFinite(v)) return;
-    const next = new THREE.Vector2(u * this.aspect, v);
-    if (!this.pointer) {
-      this.pointer = next;
-      this.brushStart = next.clone();
-      return;
-    }
-    this.pointer.copy(next);
-  }
-
-  /** The pointer left, so the next move shouldn't draw a stroke across the whole world. */
-  lift() {
-    this.pointer = null;
-    this.brushStart = null;
-  }
-
   clear(renderer: THREE.WebGLRenderer) {
     const color = renderer.getClearColor(new THREE.Color());
     const alpha = renderer.getClearAlpha();
@@ -128,20 +90,7 @@ export class GrassSheet {
   }
 
   /** Advance the sheet by `seconds`, in fixed steps. */
-  advance(renderer: THREE.WebGLRenderer, camera: THREE.Camera, seconds: number, p: Params) {
-    const moved = this.pointer && this.brushStart ? this.pointer.distanceTo(this.brushStart) : 0;
-    if (p.touch && moved > 1e-5) {
-      const velocity = this.pointer!.clone().sub(this.brushStart!).divideScalar(Math.max(seconds, 1 / 240));
-      // The pointer is wind: it blows the way it's going, and faster swipes blow harder.
-      const strength = Math.min(1, velocity.length() / FULL_SPEED);
-      this.pointerLean.lerp(velocity.normalize().multiplyScalar(p.touchForce), 0.6);
-      this.pointerPress += (strength - this.pointerPress) * 0.6;
-      this.sincePointer = 0;
-    } else {
-      this.pointerPress *= Math.exp(-seconds / POINTER_DECAY);
-      this.sincePointer += seconds;
-    }
-
+  advance(renderer: THREE.WebGLRenderer, camera: THREE.Camera, seconds: number, p: Params, air: THREE.Texture) {
     const u = this.material.uniforms;
     u.uStiffness.value = p.stiffness;
     u.uCoupling.value = p.coupling;
@@ -150,12 +99,14 @@ export class GrassSheet {
     u.uYield.value = p.yield;
     u.uSet.value = p.setRate;
     u.uCalm.value = p.calm;
-    u.uRadius.value = p.touchRadius;
-    u.uPointerLean.value.copy(this.pointerLean);
-    u.uPointerPress.value = this.pointerPress;
-    const end = this.pointer ?? this.brushStart ?? u.uBrushB.value;
-    u.uBrushA.value.copy(this.brushStart ?? end);
-    u.uBrushB.value.copy(end);
+    const heading = (p.windHeading * Math.PI) / 180;
+    u.uWindDir.value.set(Math.cos(heading), Math.sin(heading));
+    u.uSway.value = p.sway;
+    u.uAir.value = air;
+    u.uAirLean.value = p.airLean;
+    u.uAirFull.value = p.airFull;
+    u.uAirStiffness.value = p.airStiffness;
+    u.uRegrow.value = p.regrow;
 
     this.accumulator = Math.min(this.accumulator + seconds, MAX_STEPS_PER_FRAME * STEP_SECONDS);
     while (this.accumulator >= STEP_SECONDS) {
@@ -167,6 +118,5 @@ export class GrassSheet {
       renderer.render(this.scene, camera);
       this.current = next;
     }
-    if (this.pointer) this.brushStart = this.pointer.clone();
   }
 }

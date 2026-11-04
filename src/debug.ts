@@ -62,8 +62,6 @@ export function createGui(
   response.add(p, 'coupling', 0, 1200, 10).name('neighbor pull');
   response.add(p, 'lagTime', 0.05, 1.5, 0.01).name('late tufts delay (s)');
   response.add(p, 'lenScale', 0.5, 1.8, 0.01).name('blade length');
-  response.add(p, 'follow', 0, 2.5, 0.01).name('lean per bend');
-  response.add(p, 'rootTurn', 0, 1, 0.01).name('lean at base');
   response.add(p, 'tuftMix', 0, 1, 0.01).name('tuft cohesion');
   response.add(p, 'tuftGain', 0, 1, 0.01).name('tuft give varies');
   response.add(p, 'tuftLag', 0, 1, 0.01).name('tuft timing varies');
@@ -83,8 +81,14 @@ export function createGui(
 
   const touch = gui.addFolder('Mouse wind');
   touch.add(p, 'touch').name('enabled');
-  touch.add(p, 'touchForce', 0, 4, 0.01).name('strength');
-  touch.add(p, 'touchRadius', 0.02, 0.4, 0.005).name('radius');
+  touch.add(p, 'touchForce', 0, 60, 0.5).name('strength');
+  touch.add(p, 'touchRadius', 0.02, 0.3, 0.005).name('radius');
+  touch.add(p, 'airFade', 0.1, 3, 0.01).name('air keeps going');
+  touch.add(p, 'airLean', 0.2, 6, 0.01).name('lean per air speed');
+
+  const rhythm = gui.addFolder('Rhythm of the wind');
+  rhythm.add(p, 'sway', 0, 0.6, 0.01).name('lean per wave');
+  rhythm.add(p, 'rhythmCells', 0.3, 5, 0.01).name('waves per height');
 
   const school = gui.addFolder('School field');
   school.add(p, 'schoolAmount', 0, 1.5, 0.01).name('amount');

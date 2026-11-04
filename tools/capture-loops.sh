@@ -27,9 +27,9 @@ trap 'rm -rf "$profile" "$marker"' EXIT
 
 for mode in ${=MODES}; do
   name=loop-$mode
-  # Portrait shows the grass closer up, so the same quality costs more than twice the size.
-  encoder=""
-  [ $mode = portrait ] && encoder="&crf=34&vp9crf=50"
+  # Long moving blades are expensive to encode, and this is only the fallback.
+  encoder="&crf=38&vp9crf=58"
+  [ $mode = portrait ] && encoder="&crf=36&vp9crf=56"
   touch "$marker"
   sleep 1
   started=$(date +%s)

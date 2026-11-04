@@ -1,0 +1,10 @@
+<svg class="art" viewBox="0 0 160 160" aria-hidden="true">
+  <path class="w" d="M36 150 L37 50 L104 49 L105 150"/>
+  <path class="t" d="M54 50 L54 40 L58 40 M84 49 L84 40 L80 40"/>
+  <path class="w" d="M52 40 L88 40 L86 22 C80 14 60 14 54 22 Z"/>
+  <path d="M10 151 L150 149"/>
+  <path class="w" d="M49 62 L60 62 L60 76 L49 76 Z M81 62 L92 62 L92 76 L81 76 Z M49 88 L60 88 L60 102 L49 102 Z M81 88 L92 88 L92 102 L81 102 Z M49 114 L60 114 L60 128 L49 128 Z M81 114 L92 114 L92 128 L81 128 Z"/>
+  <path class="w" d="M65 150 L65 118 L76 118 L76 150"/>
+  <path class="w" d="M128 62 C110 62 102 78 109 91 L128 124 L147 91 C154 78 146 62 128 62 Z"/>
+  <circle class="k" cx="128" cy="81" r="7"/>
+</svg>

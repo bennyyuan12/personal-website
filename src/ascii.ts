@@ -41,8 +41,9 @@ export class CellPass {
       count: 2,
       type: THREE.HalfFloatType,
       depthBuffer: false,
-      minFilter: THREE.NearestFilter,
-      magFilter: THREE.NearestFilter,
+      // Letters read exact cells with texelFetch; only the soft shadow on drawings uses the filter.
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.LinearFilter,
       generateMipmaps: false,
     });
     this.material = new THREE.RawShaderMaterial({

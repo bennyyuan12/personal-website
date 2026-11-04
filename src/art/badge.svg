@@ -1,0 +1,8 @@
+<svg class="art" viewBox="0 0 160 160" aria-hidden="true">
+  <path d="M50 6 L78 58 M110 6 L82 58"/>
+  <path class="t" d="M62 6 L80 40 M98 6 L84 32"/>
+  <rect class="w" x="70" y="54" width="20" height="15" rx="3"/>
+  <path class="w" d="M38 69 L123 67 C126 67 127 69 127 72 L126 148 C126 151 124 152 122 152 L38 153 C35 153 34 151 34 148 L34 73 C34 70 35 69 38 69 Z"/>
+  <path class="k" d="M71 80 L89 80 L89 95 L104 95 L104 113 L89 113 L89 128 L71 128 L71 113 L56 113 L56 95 L71 95 Z"/>
+  <path class="t" d="M50 139 L110 138"/>
+</svg>

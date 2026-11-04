@@ -13,9 +13,9 @@ export interface TierSettings {
 }
 
 export const TIERS: Record<Tier, TierSettings> = {
-  high: { density: 1, segments: 6, dprCap: 2, bladeScale: 1.5 },
-  medium: { density: 0.6, segments: 4, dprCap: 2, bladeScale: 1 },
-  low: { density: 0.35, segments: 3, dprCap: 1.5, bladeScale: 0.75 },
+  high: { density: 1, segments: 10, dprCap: 2, bladeScale: 1.5 },
+  medium: { density: 0.65, segments: 7, dprCap: 2, bladeScale: 1 },
+  low: { density: 0.42, segments: 5, dprCap: 1.5, bladeScale: 0.75 },
 };
 
 const ORDER: Tier[] = ['high', 'medium', 'low'];

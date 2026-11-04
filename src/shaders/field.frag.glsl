@@ -3,10 +3,12 @@
 //   gusts    the main feature: broad patches carried across the world
 //   detail   weaker, smaller features riding on them
 //   heading  each gust blows its own way, so it combs the grass differently from the last one
+//   rhythm   a steady train of waves rolling across the field, which never stops
 // The grass doesn't follow this directly: the sheet (sheet.frag.glsl) responds to it, and it
 // keeps what the gusts did to it.
 //
 // outWind: RG = the lean the wind is asking for. B = how hard it blows here, 0..1.
+//          A = the rhythm here, -1..1: signed push along the wind, which the grass gives back.
 //
 // Every time term is periodic in the loop phase: gust patterns scroll by a whole number of
 // repeats per loop, so the wind at the end of the loop is the wind at its start.
@@ -42,6 +44,9 @@ uniform float uGustEdge;   // softness of a gust's edge
 uniform float uGustTurn;   // how far gusts differ in direction
 uniform float uPressAt;    // how strong a gust must be before it moves the grass much
 uniform float uRipple;
+uniform float uRhythmCells; // wave fronts per height along the wind
+uniform int uRhythmA;       // waves per loop: a whole number, so the rhythm closes the loop
+uniform int uRhythmB;
 
 in vec2 vUv;
 layout(location = 0) out vec4 outWind;
@@ -77,6 +82,12 @@ float carried(float along, float across, float cells, float crossCells, int repe
   return loopNoise(vec3(x, across * crossCells + 16.0, ph * 4.0), ivec2(repeat, 4));
 }
 
+// A sine shaped from a triangle wave, the cheap wave Crysis used for its plants.
+float wave(float x) {
+  float t = abs(fract(x + 0.5) * 2.0 - 1.0);
+  return t * t * (3.0 - 2.0 * t) * 2.0 - 1.0;
+}
+
 void main() {
   vec2 q = vUv * vec2(uAspect, 1.0);
   float ph = fract(uPhase);
@@ -97,5 +108,13 @@ void main() {
 
   vec2 lean = (uBreeze + uGust * strength) * vec2(cos(angle), sin(angle));
   vec2 still = uSchoolAmount * schools(q, ph) + uRipple * 0.5 * loopCurl(q * uCurlScale, ph, uCurlPeriod);
-  outWind = vec4(lean + still, smoothstep(uPressAt - 0.12, uPressAt + 0.12, strength), 1.0);
+
+  // The rhythm: wave fronts rolling downwind, with bent fronts so they aren't ruled lines, and two
+  // periods that don't divide evenly so no two waves look alike. Stronger inside a gust.
+  float bent = 0.55 * loopNoise(vec3(q * 1.1 + 11.0, 0.5), ivec2(0, 8));
+  float front = along * uRhythmCells + bent;
+  float rhythm = 0.64 * wave(float(uRhythmA) * ph - front) + 0.36 * wave(float(uRhythmB) * ph - front * 1.37 + 0.3);
+  rhythm *= mix(0.72, 1.0, strength);
+
+  outWind = vec4(lean + still, smoothstep(uPressAt - 0.12, uPressAt + 0.12, strength), rhythm);
 }

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { Air } from './air';
 import { CellPass, createCdfTexture, createRampTexture } from './ascii';
 import type { BladeMeta } from './bladeFormat';
 import { createBackground, createBladeGeometry, createBladeMaterial } from './blades';
@@ -7,6 +8,7 @@ import { FieldPass, SurfacePass } from './field';
 import { buildGlyphAtlas, SDF_RADIUS, type GlyphAtlas } from './glyphs';
 import { VIEW_MODES, type Params } from './params';
 import { TIERS, type Tier } from './quality';
+import { LayPass } from './lay';
 import { GrassSheet } from './sheet';
 import { computeView, type Rotation } from './view';
 import fullscreenVert from './shaders/fullscreen.vert.glsl?raw';
@@ -32,6 +34,12 @@ export interface App {
   pointer(x: number | null, y?: number): void;
   /** True while something the pointer did may still be moving. */
   readonly pointerActive: boolean;
+  /** Keep air landing on a spot (CSS px), or stop with null. */
+  setHold(slot: number, hold: { x: number; y: number; radius: number; strength: number } | null): void;
+  /** What's lying in the grass (CSS px), and a painter for its exact outline, also in CSS px. */
+  place(objects: { x: number; y: number; rx: number; ry: number }[], paint: (ctx: CanvasRenderingContext2D) => void): void;
+  /** CSS px per world height, the unit the grass measures distance in. */
+  readonly worldHeightCss: number;
   /** Re-read the window size (or keep a fixed viewport, e.g. for capture). */
   resize(): void;
   setFixedViewport(viewport: Viewport | null): void;
@@ -66,11 +74,13 @@ export async function createApp(
 
   const renderer = new THREE.WebGLRenderer({
     canvas,
+    alpha: true,
+    premultipliedAlpha: true,
     antialias: false,
     powerPreference: 'high-performance',
     preserveDrawingBuffer: options.preserveDrawingBuffer ?? false,
   });
-  renderer.setClearColor(0x000000, 1);
+  renderer.setClearColor(0x000000, 0);
   photo.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
 
   const imageSize = new THREE.Vector2(meta.imageWidth, meta.imageHeight);
@@ -80,26 +90,41 @@ export async function createApp(
   const aspect = meta.imageWidth / meta.imageHeight;
   const field = new FieldPass(aspect, (meta.priorAngleDeg * Math.PI) / 180);
   field.setSchools(params);
-  const surface = new SurfacePass(field);
-  const sheet = new GrassSheet(field.size.x, field.size.y, aspect, field.texture);
+  const lay = new LayPass(aspect);
+  lay.render(renderer, camera, params, []);
+  const surface = new SurfacePass(field, lay.texture);
+  const sheet = new GrassSheet(field.size.x, field.size.y, field.texture, lay.texture);
+  const air = new Air(aspect);
+
+  // ---- what's lying in the grass: its outline, over the world ----
+  const shapesCanvas = document.createElement('canvas');
+  shapesCanvas.width = Math.round(meta.imageWidth / 2);
+  shapesCanvas.height = Math.round(meta.imageHeight / 2);
+  const shapesContext = shapesCanvas.getContext('2d')!;
+  const shapes = new THREE.CanvasTexture(shapesCanvas);
+  shapes.colorSpace = THREE.NoColorSpace;
+  shapes.generateMipmaps = false;
+  shapes.minFilter = THREE.LinearFilter;
+  shapes.magFilter = THREE.LinearFilter;
 
   // ---- blade pass → MRT (color, direction) ----
   const target = new THREE.WebGLRenderTarget(1, 1, {
     count: 2,
     type: THREE.HalfFloatType,
-    depthBuffer: false,
+    depthBuffer: true,
     minFilter: THREE.LinearFilter,
     magFilter: THREE.LinearFilter,
     generateMipmaps: false,
   });
   const ramp = createRampTexture(meta.lumRamp);
-  const background = createBackground(photo, surface.lightTexture, ramp, imageSize, meta.priorAngleDeg);
+  const background = createBackground(photo, surface.lightTexture, ramp, shapes, imageSize, meta.priorAngleDeg);
   background.renderOrder = 0;
   const bladeMat = createBladeMaterial(
     photo,
     surface.fieldTexture,
     surface.lightTexture,
     ramp,
+    shapes,
     imageSize,
     meta.lenMax,
     meta.widthMax,
@@ -146,6 +171,9 @@ export async function createApp(
       uBlend: { value: 0 },
       uGain: { value: 1 },
       uUnderlay: { value: 0 },
+      uGrain: { value: 1 },
+      uGroundShade: { value: 0 },
+      uLightDir: { value: new THREE.Vector2(0, 1) },
       uGlow: { value: 0 },
       uExposure: { value: 1 },
       uContrast: { value: 1 },
@@ -162,6 +190,11 @@ export async function createApp(
 
   const viewport = new THREE.Vector2(1, 1);
   const clipToUV = new THREE.Matrix3();
+  let worldHeightCss = 1;
+
+  function toUV(x: number, y: number) {
+    return new THREE.Vector3((2 * x) / viewport.x - 1, 1 - (2 * y) / viewport.y, 1).applyMatrix3(clipToUV);
+  }
 
   function resize() {
     const w = fixedViewport?.width ?? window.innerWidth;
@@ -186,6 +219,7 @@ export async function createApp(
     du.uClipToUV.value.copy(view.clipToUV);
 
     clipToUV.copy(view.clipToUV);
+    worldHeightCss = meta.imageHeight * view.scale;
 
     // ASCII grid: square cells, a whole number of device px so glyphs stay crisp. The atlas is
     // sampled at the mip level that matches, and the edge ramp is sized to ~1 device px.
@@ -209,8 +243,6 @@ export async function createApp(
     u.uSheen.value = params.sheen;
     const la = (params.lightAngle * Math.PI) / 180;
     u.uLightDir.value.set(Math.cos(la), Math.sin(la));
-    u.uFollow.value = params.follow;
-    u.uRootTurn.value = params.rootTurn;
     u.uTuftMix.value = params.tuftMix;
     u.uTuftGain.value = params.tuftGain;
     u.uTuftLag.value = params.tuftLag;
@@ -218,11 +250,11 @@ export async function createApp(
     u.uClumpLag.value = params.clumpLag;
     u.uFlutter.value = params.flutter;
     u.uTuftSpread.value = params.tuftSpread;
+    u.uTuftPull.value = params.tuftPull;
     u.uBaked.value = params.baked;
     u.uTuftDepth.value = params.tuftDepth;
     u.uBladeTone.value = params.bladeTone;
     const bu = (background.material as THREE.RawShaderMaterial).uniforms;
-    bu.uBaked.value = params.baked;
     bu.uDim.value = params.bgDim;
     const du = displayMat.uniforms;
     du.uView.value = VIEW_MODES.indexOf(params.view);
@@ -233,6 +265,9 @@ export async function createApp(
     du.uBlend.value = params.blend;
     du.uGain.value = params.gain;
     du.uUnderlay.value = params.underlay;
+    du.uGrain.value = params.grain;
+    du.uGroundShade.value = params.groundShade;
+    du.uLightDir.value.set(Math.cos(la), Math.sin(la));
     du.uGlow.value = params.glow;
     du.uExposure.value = params.exposure;
     du.uContrast.value = params.contrast;
@@ -255,19 +290,54 @@ export async function createApp(
     resize,
     pointer(x, y = 0) {
       if (x === null) {
-        sheet.lift();
+        air.lift();
         return;
       }
       if (viewport.x <= 1 || viewport.y <= 1) return;
-      const uv = new THREE.Vector3((2 * x) / viewport.x - 1, 1 - (2 * y) / viewport.y, 1).applyMatrix3(clipToUV);
-      sheet.move(uv.x, uv.y);
+      const uv = toUV(x, y);
+      air.move(uv.x, uv.y);
+    },
+    setHold(slot, hold) {
+      if (!hold) {
+        air.setHold(slot, null);
+        return;
+      }
+      const uv = toUV(hold.x, hold.y);
+      air.setHold(slot, { u: uv.x, v: uv.y, radius: hold.radius / worldHeightCss, strength: hold.strength });
+    },
+    place(objects, paint) {
+      const nests = objects.map((o) => {
+        const uv = toUV(o.x, o.y);
+        return new THREE.Vector4(uv.x * aspect, uv.y, o.rx / worldHeightCss, o.ry / worldHeightCss);
+      });
+      lay.render(renderer, camera, params, nests);
+
+      const origin = toUV(0, 0);
+      const across = toUV(1, 0).x - origin.x;
+      const down = toUV(0, 1).y - origin.y;
+      const c = shapesContext;
+      const { width, height } = shapesCanvas;
+      c.setTransform(1, 0, 0, 1, 0, 0);
+      c.fillStyle = '#000';
+      c.fillRect(0, 0, width, height);
+      c.setTransform(width * across, 0, 0, -height * down, width * origin.x, height * (1 - origin.y));
+      c.fillStyle = '#fff';
+      c.strokeStyle = '#fff';
+      c.lineCap = 'round';
+      c.lineJoin = 'round';
+      paint(c);
+      shapes.needsUpdate = true;
+    },
+    get worldHeightCss() {
+      return worldHeightCss;
     },
     get pointerActive() {
-      return sheet.pointerActive;
+      return air.active;
     },
     advance(seconds) {
       field.render(renderer, camera, params);
-      sheet.advance(renderer, camera, seconds, params);
+      air.step(renderer, camera, seconds, params);
+      sheet.advance(renderer, camera, seconds, params, air.texture);
     },
     settle(seconds) {
       const end = params.phase;
@@ -277,7 +347,7 @@ export async function createApp(
       for (let i = hops; i >= 1; i--) {
         params.phase = (end - (i * hop) / params.loopSeconds + 8) % 1;
         field.render(renderer, camera, params);
-        sheet.advance(renderer, camera, hop, params);
+        sheet.advance(renderer, camera, hop, params, air.texture);
       }
       params.phase = end;
     },
@@ -315,6 +385,6 @@ export async function createApp(
       await renderer.compileAsync(bladeScene, camera);
       await renderer.compileAsync(displayScene, camera);
     },
-    debug: { cells, target, field, surface, sheet },
+    debug: { cells, target, field, surface, sheet, air, lay, shapesCanvas },
   };
 }

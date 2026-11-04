@@ -20,13 +20,13 @@
 
 export const ROOT_COMPONENTS = 2;
 export const ATTR_COMPONENTS = 12;
-export const LEN_MAX = 80;
-export const WIDTH_MAX = 4;
+export const LEN_MAX = 400;
+export const WIDTH_MAX = 10;
 /** Longest tuft-center offset that can be stored (image px). */
-export const TUFT_REACH = 110;
+export const TUFT_REACH = 220;
 
 export interface BladeMeta {
-  version: 3;
+  version: 4;
   count: number;
   imageWidth: number;
   imageHeight: number;

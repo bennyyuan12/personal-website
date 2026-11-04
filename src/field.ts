@@ -92,6 +92,9 @@ export class FieldPass {
         uGustTurn: { value: 0 },
         uPressAt: { value: 0.5 },
         uRipple: { value: 0 },
+        uRhythmCells: { value: 1.5 },
+        uRhythmA: { value: 12 },
+        uRhythmB: { value: 19 },
       },
       depthTest: false,
       depthWrite: false,
@@ -153,6 +156,9 @@ export class FieldPass {
     u.uGustTurn.value = p.gustTurn;
     u.uPressAt.value = p.pressAt;
     u.uRipple.value = p.ripple;
+    u.uRhythmCells.value = p.rhythmCells;
+    u.uRhythmA.value = Math.max(1, Math.round(p.rhythmA));
+    u.uRhythmB.value = Math.max(1, Math.round(p.rhythmB));
     renderer.setRenderTarget(this.target);
     renderer.render(this.scene, camera);
   }
@@ -164,7 +170,7 @@ export class SurfacePass {
   private readonly material: THREE.RawShaderMaterial;
   private readonly scene = new THREE.Scene();
 
-  constructor(field: FieldPass) {
+  constructor(field: FieldPass, lay: THREE.Texture) {
     const size = field.size;
     this.target = fieldTarget(size.x, size.y, 2);
     this.material = new THREE.RawShaderMaterial({
@@ -174,6 +180,7 @@ export class SurfacePass {
       uniforms: {
         uSheet: { value: null },
         uMemory: { value: null },
+        uLay: { value: lay },
         uTexel: { value: new THREE.Vector2(1 / size.x, 1 / size.y) },
         uLightDir: { value: new THREE.Vector2(0, 1) },
         uTilt: { value: 0 },
@@ -194,7 +201,13 @@ export class SurfacePass {
     return this.target.textures[1];
   }
 
-  render(renderer: THREE.WebGLRenderer, camera: THREE.Camera, p: Params, sheet: THREE.Texture, memory: THREE.Texture) {
+  render(
+    renderer: THREE.WebGLRenderer,
+    camera: THREE.Camera,
+    p: Params,
+    sheet: THREE.Texture,
+    memory: THREE.Texture,
+  ) {
     const u = this.material.uniforms;
     u.uSheet.value = sheet;
     u.uMemory.value = memory;

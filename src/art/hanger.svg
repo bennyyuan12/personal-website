@@ -1,0 +1,9 @@
+<svg class="art" viewBox="0 0 160 160" aria-hidden="true">
+  <path d="M80 42 C80 32 95 32 95 21 C95 8 70 8 70 22"/>
+  <path class="w" d="M53 54 L80 46 L108 54 L148 80 L131 106 L113 94 L114 154 L47 155 L47 94 L29 106 L12 80 Z"/>
+  <path d="M66 50 C70 62 90 62 95 50"/>
+  <path class="w" d="M71 58 L77 58 L68 128 L60 127 Z"/>
+  <path class="t" d="M72 68 L76 68 M71 78 L75 78 M70 88 L74 88 M68 98 L72 98 M67 108 L71 108 M66 118 L70 118"/>
+  <path class="w" d="M90 57 L96 56 L104 112 L96 113 Z"/>
+  <path class="t" d="M93 68 L97 67 M95 80 L99 79 M96 92 L100 91 M98 104 L102 103"/>
+</svg>
