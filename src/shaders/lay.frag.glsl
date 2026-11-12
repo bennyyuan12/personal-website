@@ -1,8 +1,10 @@
 // The lay of the grass: which way it grew and has come to lie, before any wind. Long grass is never
 // combed one way. It falls into sweeps and cowlicks, so this is a swirling flow that runs across
-// the field, and around anything lying in the grass the blades curl in over it, like a nest.
+// the field. Around something that settled into the grass the blades curl in over it, like a nest;
+// around something that landed hard they're pressed out and swirl around it.
 //
 // RG = the lean of the grass here, as a share of its length: 0 standing .. 1 lying flat.
+// BA = the same, as if nothing had pressed it out: where the blades that sprang back want to lie.
 
 precision highp float;
 precision highp int;
@@ -15,8 +17,11 @@ uniform float uLayScale;   // swirls per height
 uniform float uLayDrift;   // how much the prevailing wind has combed it
 uniform int uCount;
 uniform vec4 uNests[12];   // center x, y, half width, half height (height units)
-uniform float uNestSpread; // how far out the curl reaches, in nest radii
-uniform float uNestTwist;  // radians: 0 points straight in, higher spirals around
+uniform float uNestPull[12]; // 1 curls in over it, -1 pressed out around it, 0 not there yet
+uniform float uNestSpread;  // how far out the curl reaches, in nest radii
+uniform float uNestTwist;   // radians: 0 points straight in, higher spirals around
+uniform float uPressSpread; // the same for grass pressed out
+uniform float uPressTwist;
 
 in vec2 vUv;
 layout(location = 0) out vec4 outLay;
@@ -32,16 +37,25 @@ void main() {
   float strength = length(flow);
   vec2 lean = (flow / max(strength, 1e-4)) * mix(0.68, 0.94, smoothstep(0.2, 1.3, strength));
 
-  float cs = cos(uNestTwist);
-  float sn = sin(uNestTwist);
+  vec2 sprung = lean;
   for (int i = 0; i < uCount; i++) {
     vec4 c = uNests[i];
+    float pull = uNestPull[i];
+    if (pull == 0.0) continue;
     vec2 toCenter = c.xy - q;
     float r = length(toCenter / c.zw);
     if (r < 1e-3) continue;
     vec2 inward = toCenter / length(toCenter);
-    vec2 curl = vec2(cs * inward.x - sn * inward.y, sn * inward.x + cs * inward.y);
-    lean = mix(lean, curl * 0.92, exp(-r * r / (uNestSpread * uNestSpread)));
+    bool pressed = pull < 0.0;
+    float twist = pressed ? uPressTwist : uNestTwist;
+    float spread = pressed ? uPressSpread : uNestSpread;
+    vec2 way = pressed ? -inward : inward;
+    float cs = cos(twist);
+    float sn = sin(twist);
+    vec2 curl = vec2(cs * way.x - sn * way.y, sn * way.x + cs * way.y);
+    float amount = abs(pull) * exp(-r * r / (spread * spread));
+    lean = mix(lean, curl * 0.92, amount);
+    if (!pressed) sprung = mix(sprung, curl * 0.92, amount);
   }
-  outLay = vec4(lean, 0.0, 1.0);
+  outLay = vec4(lean, sprung);
 }

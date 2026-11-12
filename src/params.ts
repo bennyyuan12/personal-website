@@ -87,6 +87,10 @@ export interface Params {
   layDrift: number;
   nestSpread: number;
   nestTwist: number;
+  pressSpread: number;
+  pressTwist: number;
+  stray: number;
+  strayFan: number;
   // school field
   schools: number;
   schoolSeed: number;
@@ -191,6 +195,10 @@ export function defaultParams(): Params {
     layDrift: 0.55,
     nestSpread: 3,
     nestTwist: 0.55,
+    pressSpread: 1.5,
+    pressTwist: 1.1,
+    stray: 0.2,
+    strayFan: 0.9,
     schools: 7,
     schoolSeed: 7,
     headingSpread: 1.0,
@@ -242,7 +250,7 @@ export function applyUrlParams(p: Params) {
     'stiffness', 'damping', 'coupling', 'lagTime', 'yield', 'setRate', 'calm',
     'tuftMix', 'tuftGain', 'tuftLag', 'clumpGain', 'clumpLag', 'flutter', 'tuftSpread', 'tuftPull',
     'touchForce', 'touchRadius', 'airFade', 'airLean', 'airFull', 'airStiffness', 'regrow',
-    'sway', 'rhythmCells', 'rhythmA', 'rhythmB', 'layScale', 'layDrift', 'nestSpread', 'nestTwist',
+    'sway', 'rhythmCells', 'rhythmA', 'rhythmB', 'layScale', 'layDrift', 'nestSpread', 'nestTwist', 'pressSpread', 'pressTwist', 'stray', 'strayFan',
   ] as const;
   for (const k of numeric) {
     const v = num(k);

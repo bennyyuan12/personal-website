@@ -31,6 +31,9 @@ uniform sampler2D uPhoto;
 uniform sampler2D uField;  // RG lean of the grass here, BA the same lean a moment ago
 uniform sampler2D uLight;  // brightness from that lean (see surface.frag.glsl)
 uniform sampler2D uShapes; // R: 1 where something is lying on the grass
+uniform sampler2D uLay;    // RG how the grass lies, BA how it would without being pressed out
+uniform float uStray;      // share of blades that spring back up after being pressed out
+uniform float uStrayFan;   // how far (radians) those blades wander from the way the grass lies
 uniform float uTuftReach;  // image px: scale of the tuft offset
 uniform float uTuftMix;    // 0: each blade feels its own spot; 1: the whole tuft feels one spot
 uniform float uTuftGain;   // how much tufts differ in how far they give
@@ -108,10 +111,24 @@ void main() {
   float splay = uTuftSpread * ((tuftSeed - 0.5) * 2.0 + 0.45 * (seed - 0.5) * 2.0)
               + uJitter * sin(TAU * (k * uPhase + seed));
 
+  // Where something landed hard the grass is pressed out around it, but not every blade stays
+  // down. A few spring back, wandering every way, and those are what cross over it.
+  vec2 sprung = vec2(0.0);
+  float wisp = 0.0;
+  if (fract(seed * 91.73) < uStray) {
+    vec4 lay = texture(uLay, windUV);
+    // Some fall back the way they were pressed from, over the thing that pressed them.
+    vec2 back = fract(seed * 5.37) < 0.62 ? -lay.rg : lay.ba;
+    vec2 loose = turn(back, (fract(seed * 17.3) - 0.5) * 2.0 * uStrayFan) * (0.58 + 0.42 * tuftSeed);
+    wisp = min(1.0, length(lay.ba - lay.rg) * 1.6);
+    sprung = (loose - lay.rg) * wisp;
+    w *= 1.0 - 0.4 * wisp;
+  }
+
   // ---- Shape: two steps along the lie of the grass, then a curve through them ----
-  vec2 lean = leanAt(windUV, late, give, splay);
+  vec2 lean = leanAt(windUV, late, give, splay) + sprung;
   vec2 mid = lean * L * 0.5;
-  vec2 far = leanAt(windUV + mid / uImageSize, min(late + 0.25, 1.0), give, splay * 1.3);
+  vec2 far = leanAt(windUV + mid / uImageSize, min(late + 0.25, 1.0), give, splay * 1.3) + sprung;
   far = turn(far, uFlutter * length(lean) * sin(TAU * (k * uPhase + seed * 7.0)));
   vec2 tip = mid + far * L * 0.5;
   tip += tuftOffset * uTuftPull * (0.4 + 0.6 * tuftSeed); // wisps: tips draw in toward their tuft
@@ -135,7 +152,9 @@ void main() {
   // and most of what makes grass look deep.
   vec3 photo = textureLod(uPhoto, aRoot, 6.0).rgb;
   float tone = mix(MID_GREY, dot(photo, LUMA), uBaked);
-  vShade = tone * mix(uRootShade, 2.0 - uRootShade, t) * mix(0.62, 1.2, height);
+  // Blades standing clear of the thatch are in the light all the way down.
+  float rootShade = mix(uRootShade, 1.0, 0.75 * wisp);
+  vShade = tone * mix(rootShade, 2.0 - rootShade, t) * mix(0.62, 1.2, max(height, wisp));
   vShade *= texture(uLight, windUV).r; // shaded as a group too, so tufts flash together
   vShade *= 1.0 + uSheen * dot(dir(atan(tangent.y, tangent.x)), uLightDir);
   vec2 fromCenter = (aC.xy * 2.0 - 1.0) * uTuftReach / 90.0;

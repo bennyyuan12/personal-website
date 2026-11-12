@@ -32,8 +32,11 @@ export class LayPass {
         uLayDrift: { value: 0.5 },
         uCount: { value: 0 },
         uNests: { value: this.nests },
+        uNestPull: { value: new Float32Array(MAX_NESTS) },
         uNestSpread: { value: 2 },
         uNestTwist: { value: 0.8 },
+        uPressSpread: { value: 1.5 },
+        uPressTwist: { value: 1 },
       },
       depthTest: false,
       depthWrite: false,
@@ -49,8 +52,13 @@ export class LayPass {
     return this.target.texture;
   }
 
-  /** nests: x, y, half width, half height, in height units. */
-  render(renderer: THREE.WebGLRenderer, camera: THREE.Camera, p: Params, nests: THREE.Vector4[]) {
+  /** nests: x, y, half width, half height, in height units, and how strongly it's there. */
+  render(
+    renderer: THREE.WebGLRenderer,
+    camera: THREE.Camera,
+    p: Params,
+    nests: { shape: THREE.Vector4; pull: number }[],
+  ) {
     const u = this.material.uniforms;
     const heading = (p.windHeading * Math.PI) / 180;
     u.uWindDir.value.set(Math.cos(heading), Math.sin(heading));
@@ -58,9 +66,14 @@ export class LayPass {
     u.uLayDrift.value = p.layDrift;
     u.uNestSpread.value = p.nestSpread;
     u.uNestTwist.value = p.nestTwist;
+    u.uPressSpread.value = p.pressSpread;
+    u.uPressTwist.value = p.pressTwist;
     const count = Math.min(MAX_NESTS, nests.length);
     u.uCount.value = count;
-    for (let i = 0; i < count; i++) this.nests[i].copy(nests[i]);
+    for (let i = 0; i < count; i++) {
+      this.nests[i].copy(nests[i].shape);
+      u.uNestPull.value[i] = nests[i].pull;
+    }
     renderer.setRenderTarget(this.target);
     renderer.render(this.scene, camera);
     renderer.setRenderTarget(null);

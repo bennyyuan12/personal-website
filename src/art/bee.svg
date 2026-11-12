@@ -1,0 +1,10 @@
+<svg class="art" viewBox="0 0 120 120" aria-hidden="true">
+  <path class="w" d="M52 42 C40 26 48 10 60 14 C72 18 68 34 62 44 Z"/>
+  <path class="w" d="M66 44 C74 28 92 26 96 36 C100 46 84 54 70 52 Z"/>
+  <path class="w" d="M26 74 C24 56 42 44 62 46 C84 48 98 60 96 74 C94 88 76 96 56 94 C38 92 28 86 26 74 Z"/>
+  <path class="thick" d="M48 48 C42 62 42 78 46 92"/>
+  <path class="thick" d="M68 48 C74 62 74 78 70 93"/>
+  <circle class="k" cx="35" cy="66" r="3"/>
+  <path class="t" d="M31 56 C24 46 16 44 12 48 M37 52 C34 40 28 34 22 34"/>
+  <path class="t" d="M95 72 L108 74"/>
+</svg>

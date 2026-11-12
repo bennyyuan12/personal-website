@@ -9,7 +9,7 @@ uniform float uAspect;
 uniform vec2 uSpot;      // where the pointer is blowing, height units
 uniform float uBlow;     // how hard, per second
 uniform float uRadius;
-uniform vec4 uHolds[2];  // x, y, radius, strength
+uniform vec4 uHolds[4];  // x, y, radius, strength
 
 in vec2 vUv;
 layout(location = 0) out vec4 outDivergence;
@@ -26,7 +26,7 @@ void main() {
   float s = texture(uVelocity, vUv - vec2(0.0, uTexel.y)).y;
   vec2 p = vUv * vec2(uAspect, 1.0);
   float source = uBlow * landing(p, uSpot, uRadius);
-  for (int i = 0; i < 2; i++) {
+  for (int i = 0; i < 4; i++) {
     if (uHolds[i].z > 0.0) source += uHolds[i].w * landing(p, uHolds[i].xy, uHolds[i].z);
   }
   outDivergence = vec4((e - w + n - s) * 0.5 / uDx - source, 0.0, 0.0, 1.0);

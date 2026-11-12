@@ -52,7 +52,7 @@ export class Air {
   private readonly subtract: THREE.RawShaderMaterial;
   private readonly mesh: THREE.Mesh;
   private readonly scene = new THREE.Scene();
-  private readonly holds = [new THREE.Vector4(), new THREE.Vector4()];
+  private readonly holds = [new THREE.Vector4(), new THREE.Vector4(), new THREE.Vector4(), new THREE.Vector4()];
   private readonly push = new THREE.Vector2();
   private readonly spot = new THREE.Vector2();
   private current = 0;

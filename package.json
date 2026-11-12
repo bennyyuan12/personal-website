@@ -9,11 +9,16 @@
     "preview": "vite preview",
     "bake": "tsx tools/bake-blades.ts public/grass/world.jpg public/grass",
     "world": "tsx tools/make-world.ts tools/source/photo.jpg public/grass/world.jpg",
-    "capture": "zsh tools/capture-loops.sh"
+    "capture": "zsh tools/capture-loops.sh",
+    "seed": "tsx tools/seed-book.ts",
+    "edit": "vite --open '/?edit'"
   },
   "dependencies": {
+    "@fontsource/caveat": "^5.3.0",
+    "@fontsource/courier-prime": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
-    "@fontsource/patrick-hand": "^5.3.0",
+    "@fontsource/permanent-marker": "^5.3.0",
+    "@fontsource/special-elite": "^5.3.0",
     "@mapbox/tiny-sdf": "^2.3.0",
     "lil-gui": "^0.21.0",
     "three": "^0.187.0"

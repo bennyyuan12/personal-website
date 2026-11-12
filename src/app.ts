@@ -36,8 +36,10 @@ export interface App {
   readonly pointerActive: boolean;
   /** Keep air landing on a spot (CSS px), or stop with null. */
   setHold(slot: number, hold: { x: number; y: number; radius: number; strength: number } | null): void;
-  /** What's lying in the grass (CSS px), and a painter for its exact outline, also in CSS px. */
-  place(objects: { x: number; y: number; rx: number; ry: number }[], paint: (ctx: CanvasRenderingContext2D) => void): void;
+  /** How the grass lies around what's in it (CSS px). pull: 1 curls in, -1 presses out, 0 absent. */
+  setNests(nests: { x: number; y: number; rx: number; ry: number; pull: number }[]): void;
+  /** Paint the exact outline of what's lying on the grass, in CSS px. */
+  paintOutlines(paint: (ctx: CanvasRenderingContext2D) => void): void;
   /** CSS px per world height, the unit the grass measures distance in. */
   readonly worldHeightCss: number;
   /** Re-read the window size (or keep a fixed viewport, e.g. for capture). */
@@ -125,6 +127,7 @@ export async function createApp(
     surface.lightTexture,
     ramp,
     shapes,
+    lay.texture,
     imageSize,
     meta.lenMax,
     meta.widthMax,
@@ -251,6 +254,8 @@ export async function createApp(
     u.uFlutter.value = params.flutter;
     u.uTuftSpread.value = params.tuftSpread;
     u.uTuftPull.value = params.tuftPull;
+    u.uStray.value = params.stray;
+    u.uStrayFan.value = params.strayFan;
     u.uBaked.value = params.baked;
     u.uTuftDepth.value = params.tuftDepth;
     u.uBladeTone.value = params.bladeTone;
@@ -305,13 +310,18 @@ export async function createApp(
       const uv = toUV(hold.x, hold.y);
       air.setHold(slot, { u: uv.x, v: uv.y, radius: hold.radius / worldHeightCss, strength: hold.strength });
     },
-    place(objects, paint) {
-      const nests = objects.map((o) => {
-        const uv = toUV(o.x, o.y);
-        return new THREE.Vector4(uv.x * aspect, uv.y, o.rx / worldHeightCss, o.ry / worldHeightCss);
-      });
-      lay.render(renderer, camera, params, nests);
-
+    setNests(nests) {
+      lay.render(
+        renderer,
+        camera,
+        params,
+        nests.map((o) => {
+          const uv = toUV(o.x, o.y);
+          return { shape: new THREE.Vector4(uv.x * aspect, uv.y, o.rx / worldHeightCss, o.ry / worldHeightCss), pull: o.pull };
+        }),
+      );
+    },
+    paintOutlines(paint) {
       const origin = toUV(0, 0);
       const across = toUV(1, 0).x - origin.x;
       const down = toUV(0, 1).y - origin.y;

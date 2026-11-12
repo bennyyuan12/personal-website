@@ -1,0 +1,3719 @@
+{
+  "version": 1,
+  "sections": [
+    {
+      "id": "front",
+      "title": "Front",
+      "tab": null,
+      "color": "#2c3b23",
+      "pages": [
+        {
+          "id": "hello",
+          "name": "This book belongs to",
+          "items": [
+            {
+              "id": "i1",
+              "type": "sticker",
+              "art": "tape-green",
+              "x": 380,
+              "y": 214,
+              "w": 240,
+              "h": 54,
+              "rot": -4
+            },
+            {
+              "id": "i2",
+              "type": "text",
+              "style": "label",
+              "html": "This book belongs to",
+              "x": 150,
+              "y": 300,
+              "w": 700,
+              "align": "center"
+            },
+            {
+              "id": "i3",
+              "type": "text",
+              "style": "title",
+              "html": "Benny Yuan",
+              "x": 80,
+              "y": 372,
+              "w": 840,
+              "size": 1.42,
+              "align": "center",
+              "rot": -3
+            },
+            {
+              "id": "i4",
+              "type": "sticker",
+              "art": "underline",
+              "x": 230,
+              "y": 548,
+              "w": 540,
+              "h": 40,
+              "ink": "red",
+              "rot": -3
+            },
+            {
+              "id": "i5",
+              "type": "text",
+              "style": "caption",
+              "html": "(BinHuai)",
+              "x": 610,
+              "y": 590,
+              "w": 260,
+              "rot": 5
+            },
+            {
+              "id": "i6",
+              "type": "text",
+              "style": "body",
+              "html": "full-stack engineering<br>&amp; data",
+              "x": 150,
+              "y": 700,
+              "w": 700,
+              "align": "center"
+            },
+            {
+              "id": "i7",
+              "type": "sticker",
+              "art": "nap",
+              "x": 320,
+              "y": 850,
+              "w": 360,
+              "h": 252
+            },
+            {
+              "id": "i8",
+              "type": "text",
+              "style": "stamp",
+              "html": "If found, return to the grass",
+              "x": 150,
+              "y": 1164,
+              "w": 700,
+              "ink": "red",
+              "size": 0.74,
+              "align": "center",
+              "rot": -4
+            }
+          ]
+        },
+        {
+          "id": "contents",
+          "name": "Contents",
+          "items": [
+            {
+              "id": "i9",
+              "type": "text",
+              "style": "title",
+              "html": "Contents",
+              "x": 76,
+              "y": 84,
+              "w": 700,
+              "size": 0.9,
+              "rot": -2
+            },
+            {
+              "id": "ia",
+              "type": "sticker",
+              "art": "tape-red",
+              "x": 52,
+              "y": 306,
+              "w": 250,
+              "h": 56,
+              "rot": -4.8
+            },
+            {
+              "id": "ib",
+              "type": "text",
+              "style": "heading",
+              "html": "Experience",
+              "x": 96,
+              "y": 300,
+              "w": 620,
+              "size": 1.14,
+              "goto": "experience",
+              "rot": 0.8
+            },
+            {
+              "id": "ic",
+              "type": "text",
+              "style": "body",
+              "html": "What I’ve built, analyzed and organized.",
+              "x": 100,
+              "y": 384,
+              "w": 640,
+              "size": 0.82,
+              "goto": "experience"
+            },
+            {
+              "id": "id",
+              "type": "text",
+              "style": "label",
+              "html": "p. {{page}}",
+              "x": 740,
+              "y": 322,
+              "w": 190,
+              "align": "right",
+              "goto": "experience"
+            },
+            {
+              "id": "ie",
+              "type": "sticker",
+              "art": "tape-kraft",
+              "x": 52,
+              "y": 538,
+              "w": 250,
+              "h": 56,
+              "rot": -1.7
+            },
+            {
+              "id": "if",
+              "type": "text",
+              "style": "heading",
+              "html": "My Take on Tech",
+              "x": 96,
+              "y": 532,
+              "w": 620,
+              "size": 1.14,
+              "goto": "tech",
+              "rot": -0.6
+            },
+            {
+              "id": "ig",
+              "type": "text",
+              "style": "body",
+              "html": "Notes on building software.",
+              "x": 100,
+              "y": 616,
+              "w": 640,
+              "size": 0.82,
+              "goto": "tech"
+            },
+            {
+              "id": "ih",
+              "type": "text",
+              "style": "label",
+              "html": "p. {{page}}",
+              "x": 740,
+              "y": 554,
+              "w": 190,
+              "align": "right",
+              "goto": "tech"
+            },
+            {
+              "id": "ii",
+              "type": "sticker",
+              "art": "tape-green",
+              "x": 52,
+              "y": 770,
+              "w": 250,
+              "h": 56,
+              "rot": -2.7
+            },
+            {
+              "id": "ij",
+              "type": "text",
+              "style": "heading",
+              "html": "About Me",
+              "x": 96,
+              "y": 764,
+              "w": 620,
+              "size": 1.14,
+              "goto": "about",
+              "rot": -0.5
+            },
+            {
+              "id": "ik",
+              "type": "text",
+              "style": "body",
+              "html": "School, tools, languages, where to find me.",
+              "x": 100,
+              "y": 848,
+              "w": 640,
+              "size": 0.82,
+              "goto": "about"
+            },
+            {
+              "id": "il",
+              "type": "text",
+              "style": "label",
+              "html": "p. {{page}}",
+              "x": 740,
+              "y": 786,
+              "w": 190,
+              "align": "right",
+              "goto": "about"
+            },
+            {
+              "id": "im",
+              "type": "sticker",
+              "art": "tape-blue",
+              "x": 52,
+              "y": 1002,
+              "w": 250,
+              "h": 56,
+              "rot": -3.3
+            },
+            {
+              "id": "in",
+              "type": "text",
+              "style": "heading",
+              "html": "Ya Like Jazz?",
+              "x": 96,
+              "y": 996,
+              "w": 620,
+              "size": 1.14,
+              "goto": "jazz",
+              "rot": 0.1
+            },
+            {
+              "id": "io",
+              "type": "text",
+              "style": "body",
+              "html": "What doesn’t fit on a resume.",
+              "x": 100,
+              "y": 1080,
+              "w": 640,
+              "size": 0.82,
+              "goto": "jazz"
+            },
+            {
+              "id": "ip",
+              "type": "text",
+              "style": "label",
+              "html": "p. {{page}}",
+              "x": 740,
+              "y": 1018,
+              "w": 190,
+              "align": "right",
+              "goto": "jazz"
+            },
+            {
+              "id": "iq",
+              "type": "text",
+              "style": "caption",
+              "html": "or grab a tag on the side",
+              "x": 430,
+              "y": 1236,
+              "w": 400,
+              "align": "right",
+              "rot": -2
+            },
+            {
+              "id": "ir",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 840,
+              "y": 1226,
+              "w": 110,
+              "h": 60,
+              "rot": -18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "title": "Experience",
+      "tab": "Experience",
+      "color": "#b9502f",
+      "pages": [
+        {
+          "id": "experience",
+          "name": "Experience: the list",
+          "items": [
+            {
+              "id": "is",
+              "type": "text",
+              "style": "title",
+              "html": "Experience",
+              "x": 68,
+              "y": 78,
+              "w": 820,
+              "size": 1.1,
+              "rot": -2
+            },
+            {
+              "id": "it",
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 208,
+              "w": 560,
+              "h": 38,
+              "ink": "red",
+              "rot": -2
+            },
+            {
+              "id": "iu",
+              "type": "text",
+              "style": "body",
+              "html": "Things I’ve built, analyzed and organized. Pick one and the book flips to it.",
+              "x": 76,
+              "y": 270,
+              "w": 840,
+              "size": 0.9
+            },
+            {
+              "id": "iv",
+              "type": "text",
+              "style": "label",
+              "html": "Work",
+              "x": 76,
+              "y": 400,
+              "w": 300,
+              "backing": "dymo"
+            },
+            {
+              "id": "iw",
+              "type": "text",
+              "style": "body",
+              "html": "<b>Boston Global Medical Collaboration</b><br><small>Full-Stack & Analytics Engineer · 2026 – now · p. {{page}}</small>",
+              "x": 196,
+              "y": 478,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": -0.2,
+              "goto": "bgmc"
+            },
+            {
+              "id": "ix",
+              "type": "sticker",
+              "art": "badge",
+              "x": 62,
+              "y": 492,
+              "w": 118,
+              "h": 118,
+              "rot": 3.6,
+              "goto": "bgmc"
+            },
+            {
+              "id": "iy",
+              "type": "text",
+              "style": "body",
+              "html": "<b>The Refitting Room</b><br><small>Founder & Full-Stack Developer · p. {{page}}</small>",
+              "x": 196,
+              "y": 678,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": -0.3,
+              "goto": "refitting-room"
+            },
+            {
+              "id": "iz",
+              "type": "sticker",
+              "art": "hanger",
+              "x": 62,
+              "y": 692,
+              "w": 118,
+              "h": 118,
+              "rot": 1.8,
+              "goto": "refitting-room"
+            },
+            {
+              "id": "i10",
+              "type": "text",
+              "style": "body",
+              "html": "<b>Odun Technology</b><br><small>Data Research Intern · 2025 · p. {{page}}</small>",
+              "x": 196,
+              "y": 878,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": 0.5,
+              "goto": "odun"
+            },
+            {
+              "id": "i11",
+              "type": "sticker",
+              "art": "fish",
+              "x": 62,
+              "y": 892,
+              "w": 118,
+              "h": 118,
+              "rot": -1.7,
+              "goto": "odun"
+            },
+            {
+              "id": "i12",
+              "type": "text",
+              "style": "body",
+              "html": "<b>Kalodata</b><br><small>Data Science Intern · 2024 · p. {{page}}</small>",
+              "x": 196,
+              "y": 1078,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": 0.5,
+              "goto": "kalodata"
+            },
+            {
+              "id": "i13",
+              "type": "sticker",
+              "art": "chart",
+              "x": 62,
+              "y": 1092,
+              "w": 118,
+              "h": 118,
+              "rot": -4.7,
+              "goto": "kalodata"
+            }
+          ]
+        },
+        {
+          "id": "experience-2",
+          "name": "Experience: the list, continued",
+          "items": [
+            {
+              "id": "i14",
+              "type": "text",
+              "style": "label",
+              "html": "Projects",
+              "x": 76,
+              "y": 72,
+              "w": 300,
+              "backing": "dymo",
+              "ink": "red"
+            },
+            {
+              "id": "i15",
+              "type": "text",
+              "style": "body",
+              "html": "<b>SafeLease NYC</b><br><small>NVIDIA Spark Hackathon prototype · p. {{page}}</small>",
+              "x": 196,
+              "y": 148,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": -0.4,
+              "goto": "safelease"
+            },
+            {
+              "id": "i16",
+              "type": "sticker",
+              "art": "building",
+              "x": 62,
+              "y": 162,
+              "w": 118,
+              "h": 118,
+              "rot": -1.7,
+              "goto": "safelease"
+            },
+            {
+              "id": "i17",
+              "type": "text",
+              "style": "body",
+              "html": "<b>Home Cardiac Rehab MVP</b><br><small>2nd place, Pulse Foundry hackathon · p. {{page}}</small>",
+              "x": 196,
+              "y": 328,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": -0.3,
+              "goto": "cardiac-rehab"
+            },
+            {
+              "id": "i18",
+              "type": "sticker",
+              "art": "heart",
+              "x": 62,
+              "y": 342,
+              "w": 118,
+              "h": 118,
+              "rot": -1,
+              "goto": "cardiac-rehab"
+            },
+            {
+              "id": "i19",
+              "type": "text",
+              "style": "body",
+              "html": "<b>AI Tailor Research Agent</b><br><small>Supervised voice prototype · p. {{page}}</small>",
+              "x": 196,
+              "y": 508,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": 0.1,
+              "goto": "tailor-agent"
+            },
+            {
+              "id": "i1a",
+              "type": "sticker",
+              "art": "phone",
+              "x": 62,
+              "y": 522,
+              "w": 118,
+              "h": 118,
+              "rot": -3.2,
+              "goto": "tailor-agent"
+            },
+            {
+              "id": "i1b",
+              "type": "text",
+              "style": "body",
+              "html": "<b>KYC Intake & Adjudication MVP</b><br><small>End-to-end MVP · 2025 · p. {{page}}</small>",
+              "x": 196,
+              "y": 688,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": -0.2,
+              "goto": "kyc"
+            },
+            {
+              "id": "i1c",
+              "type": "sticker",
+              "art": "doc",
+              "x": 62,
+              "y": 702,
+              "w": 118,
+              "h": 118,
+              "rot": 4.1,
+              "goto": "kyc"
+            },
+            {
+              "id": "i1d",
+              "type": "text",
+              "style": "body",
+              "html": "<b>Revenue Funnel & Churn Analytics</b><br><small>Stripe + HubSpot · 2024 · p. {{page}}</small>",
+              "x": 196,
+              "y": 868,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": -0.1,
+              "goto": "revenue-funnel"
+            },
+            {
+              "id": "i1e",
+              "type": "sticker",
+              "art": "funnel",
+              "x": 62,
+              "y": 882,
+              "w": 118,
+              "h": 118,
+              "rot": -2.9,
+              "goto": "revenue-funnel"
+            },
+            {
+              "id": "i1f",
+              "type": "text",
+              "style": "label",
+              "html": "Community",
+              "x": 76,
+              "y": 1062,
+              "w": 300,
+              "backing": "dymo",
+              "ink": "green"
+            },
+            {
+              "id": "i1g",
+              "type": "text",
+              "style": "body",
+              "html": "<b>CSSA</b><br><small>Student leadership · p. {{page}}</small>",
+              "x": 196,
+              "y": 1136,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": -0.9,
+              "goto": "cssa"
+            },
+            {
+              "id": "i1h",
+              "type": "sticker",
+              "art": "megaphone",
+              "x": 62,
+              "y": 1150,
+              "w": 118,
+              "h": 118,
+              "rot": -3.9,
+              "goto": "cssa"
+            }
+          ]
+        },
+        {
+          "id": "bgmc",
+          "name": "Boston Global Medical Collaboration",
+          "items": [
+            {
+              "id": "i1i",
+              "type": "text",
+              "style": "label",
+              "html": "Work · 01",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i1j",
+              "type": "text",
+              "style": "title",
+              "html": "Boston Global Medical Collaboration",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 0.68,
+              "rot": -1.2
+            },
+            {
+              "id": "i1k",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 349.91679999999997,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i1l",
+              "type": "text",
+              "style": "label",
+              "html": "Full-Stack & Analytics Engineer",
+              "x": 72,
+              "y": 409.91679999999997,
+              "w": 860,
+              "backing": "dymo",
+              "rot": -0.4
+            },
+            {
+              "id": "i1m",
+              "type": "text",
+              "style": "stamp",
+              "html": "Jun 2026 – now",
+              "x": 540,
+              "y": 491.91679999999997,
+              "w": 400,
+              "ink": "red",
+              "rot": 5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i1n",
+              "type": "text",
+              "style": "body",
+              "html": "Bilingual registration, admin and inquiry workflows, plus the first-party analytics that show how people move through them.",
+              "x": 80,
+              "y": 616.25024,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": -1.2
+            },
+            {
+              "id": "i1o",
+              "type": "sticker",
+              "art": "badge",
+              "x": 580,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": 6,
+              "card": true
+            },
+            {
+              "id": "i1p",
+              "type": "text",
+              "style": "note",
+              "html": "bilingual, start to finish",
+              "x": 96,
+              "y": 1000,
+              "w": 400,
+              "rot": -3
+            },
+            {
+              "id": "i1q",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 370,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -8
+            },
+            {
+              "id": "i1r",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "bgmc-2",
+          "name": "Boston Global Medical Collaboration, what I did",
+          "items": [
+            {
+              "id": "i1v",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i1w",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 180.977712,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i1x",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Built bilingual registration, admin and inquiry workflows in Next.js, TypeScript and PostgreSQL, with API validation, duplicate-safe saving and CSV exports.</li><li>Supported an additive PostgreSQL release that preserved 211 registrations and seven events.</li><li>Added event deduplication, bounded retries, reconciliation and retention to the analytics.</li><li>Tied consented browsing to saved registration outcomes. Withdrawing consent removes the measurement data and keeps the business records.</li></ul>",
+              "x": 66,
+              "y": 202.977712,
+              "w": 868,
+              "backing": "torn",
+              "size": 0.86,
+              "rot": 0.6
+            },
+            {
+              "id": "i1s",
+              "type": "text",
+              "style": "label",
+              "html": "Next.js",
+              "x": 78,
+              "y": 930.044576,
+              "w": 226,
+              "backing": "dymo",
+              "ink": "red",
+              "rot": 3
+            },
+            {
+              "id": "i1t",
+              "type": "text",
+              "style": "label",
+              "html": "TypeScript",
+              "x": 290,
+              "y": 930.044576,
+              "w": 287,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": 1.1
+            },
+            {
+              "id": "i1u",
+              "type": "text",
+              "style": "label",
+              "html": "PostgreSQL",
+              "x": 563,
+              "y": 930.044576,
+              "w": 287,
+              "backing": "dymo",
+              "ink": "green",
+              "rot": 1.6
+            },
+            {
+              "id": "i1y",
+              "type": "text",
+              "style": "title",
+              "html": "211",
+              "x": 520,
+              "y": 1066,
+              "w": 420,
+              "size": 0.95,
+              "ink": "red",
+              "align": "center",
+              "rot": -4
+            },
+            {
+              "id": "i1z",
+              "type": "sticker",
+              "art": "circle",
+              "x": 510,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": -3
+            },
+            {
+              "id": "i20",
+              "type": "text",
+              "style": "caption",
+              "html": "registrations carried through a database release",
+              "x": 510,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i21",
+              "type": "text",
+              "style": "note",
+              "html": "duplicate-safe = pressing submit twice is fine",
+              "x": 76,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": -3,
+              "size": 0.86
+            }
+          ]
+        },
+        {
+          "id": "refitting-room",
+          "name": "The Refitting Room",
+          "items": [
+            {
+              "id": "i22",
+              "type": "text",
+              "style": "label",
+              "html": "Work · 02",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i23",
+              "type": "text",
+              "style": "title",
+              "html": "The Refitting Room",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 0.82,
+              "rot": -1.2
+            },
+            {
+              "id": "i24",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 309.1488,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i25",
+              "type": "text",
+              "style": "label",
+              "html": "Founder & Full-Stack Developer",
+              "x": 72,
+              "y": 369.1488,
+              "w": 860,
+              "backing": "dymo",
+              "rot": 0.7
+            },
+            {
+              "id": "i26",
+              "type": "text",
+              "style": "stamp",
+              "html": "My own venture",
+              "x": 60,
+              "y": 451.1488,
+              "w": 400,
+              "ink": "red",
+              "rot": -5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i27",
+              "type": "text",
+              "style": "body",
+              "html": "My own venture: customer and admin workflows for garment intakes, order status, shipments and audit records.",
+              "x": 220,
+              "y": 593.8278399999999,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": 1.2
+            },
+            {
+              "id": "i28",
+              "type": "sticker",
+              "art": "hanger",
+              "x": 80,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": -6,
+              "card": true
+            },
+            {
+              "id": "i29",
+              "type": "text",
+              "style": "note",
+              "html": "hence the hanger",
+              "x": 504,
+              "y": 1000,
+              "w": 400,
+              "rot": 3
+            },
+            {
+              "id": "i2a",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 450,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -150
+            },
+            {
+              "id": "i2b",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "refitting-room-2",
+          "name": "The Refitting Room, what I did",
+          "items": [
+            {
+              "id": "i2i",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i2j",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 179.662992,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i2k",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Built the customer and admin sides in Next.js, TypeScript and PostgreSQL, behind authenticated access.</li><li>Set up Auth.js sign-in, account recovery and role-based access, with ownership checks on private garment photos.</li><li>Made submissions retry-safe: an exact retry returns the saved record, and a failed notification still keeps the lead.</li><li>Used Zod validation, Prisma transactions and idempotent webhooks to keep orders consistent across retries.</li></ul>",
+              "x": 66,
+              "y": 201.662992,
+              "w": 868,
+              "backing": "torn",
+              "size": 0.86,
+              "rot": 0.6
+            },
+            {
+              "id": "i2c",
+              "type": "text",
+              "style": "label",
+              "html": "Next.js",
+              "x": 78,
+              "y": 850.674016,
+              "w": 226,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -0.5
+            },
+            {
+              "id": "i2d",
+              "type": "text",
+              "style": "label",
+              "html": "TypeScript",
+              "x": 290,
+              "y": 850.674016,
+              "w": 287,
+              "backing": "dymo",
+              "ink": "green",
+              "rot": -1.6
+            },
+            {
+              "id": "i2e",
+              "type": "text",
+              "style": "label",
+              "html": "PostgreSQL",
+              "x": 563,
+              "y": 850.674016,
+              "w": 287,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": 2
+            },
+            {
+              "id": "i2f",
+              "type": "text",
+              "style": "label",
+              "html": "Prisma",
+              "x": 104,
+              "y": 932.674016,
+              "w": 205,
+              "backing": "dymo",
+              "ink": "blue",
+              "rot": -1.4
+            },
+            {
+              "id": "i2g",
+              "type": "text",
+              "style": "label",
+              "html": "Auth.js",
+              "x": 295,
+              "y": 932.674016,
+              "w": 226,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -1.3
+            },
+            {
+              "id": "i2h",
+              "type": "text",
+              "style": "label",
+              "html": "Zod",
+              "x": 507,
+              "y": 932.674016,
+              "w": 144,
+              "backing": "dymo",
+              "ink": "red",
+              "rot": 0.4
+            },
+            {
+              "id": "i2l",
+              "type": "text",
+              "style": "title",
+              "html": "retry-safe",
+              "x": 60,
+              "y": 1066,
+              "w": 420,
+              "size": 0.5,
+              "ink": "red",
+              "align": "center",
+              "rot": 4
+            },
+            {
+              "id": "i2m",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": 3
+            },
+            {
+              "id": "i2n",
+              "type": "text",
+              "style": "caption",
+              "html": "an exact retry returns the record already saved",
+              "x": 50,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i2o",
+              "type": "text",
+              "style": "note",
+              "html": "verification tokens are stored hashed",
+              "x": 544,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": 3,
+              "size": 0.86
+            }
+          ]
+        },
+        {
+          "id": "odun",
+          "name": "Odun Technology",
+          "items": [
+            {
+              "id": "i2p",
+              "type": "text",
+              "style": "label",
+              "html": "Work · 03",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i2q",
+              "type": "text",
+              "style": "title",
+              "html": "Odun Technology",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 1,
+              "rot": -1.2
+            },
+            {
+              "id": "i2r",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 345.84000000000003,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i2s",
+              "type": "text",
+              "style": "label",
+              "html": "Data Research Intern",
+              "x": 72,
+              "y": 405.84000000000003,
+              "w": 860,
+              "backing": "dymo",
+              "rot": 0.7
+            },
+            {
+              "id": "i2t",
+              "type": "text",
+              "style": "stamp",
+              "html": "Jun – Dec 2025",
+              "x": 540,
+              "y": 487.84000000000003,
+              "w": 400,
+              "ink": "red",
+              "rot": 5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i2u",
+              "type": "text",
+              "style": "body",
+              "html": "Research on the business of fishing ponds: unit economics, the size of the market and where to expand.",
+              "x": 80,
+              "y": 631.909,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": -1.2
+            },
+            {
+              "id": "i2v",
+              "type": "sticker",
+              "art": "fish",
+              "x": 580,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": 6,
+              "card": true
+            },
+            {
+              "id": "i2w",
+              "type": "text",
+              "style": "note",
+              "html": "yes, the fish is for the fishing ponds",
+              "x": 96,
+              "y": 1000,
+              "w": 400,
+              "rot": -3
+            },
+            {
+              "id": "i2x",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 370,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -8
+            },
+            {
+              "id": "i2y",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "odun-2",
+          "name": "Odun Technology, what I did",
+          "items": [
+            {
+              "id": "i32",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i33",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 178.714528,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i34",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Analyzed gross margin, operating margin and inventory turnover to assess unit economics for due diligence.</li><li>Built a bottom-up market model from operational drivers, for go-to-market planning and investment discussions.</li><li>Made regional penetration analyses and heat maps to compare expansion markets.</li><li>Combined public sources, surveys and interviews to find what drives adoption and pricing.</li></ul>",
+              "x": 66,
+              "y": 200.714528,
+              "w": 868,
+              "backing": "torn",
+              "size": 0.94,
+              "rot": 0.6
+            },
+            {
+              "id": "i2z",
+              "type": "text",
+              "style": "label",
+              "html": "Unit economics",
+              "x": 78,
+              "y": 852.5709439999999,
+              "w": 369,
+              "backing": "dymo",
+              "ink": "green",
+              "rot": -1
+            },
+            {
+              "id": "i30",
+              "type": "text",
+              "style": "label",
+              "html": "Market model",
+              "x": 433,
+              "y": 852.5709439999999,
+              "w": 328,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -1.6
+            },
+            {
+              "id": "i31",
+              "type": "text",
+              "style": "label",
+              "html": "Heat maps",
+              "x": 104,
+              "y": 934.5709439999999,
+              "w": 267,
+              "backing": "dymo",
+              "ink": "blue",
+              "rot": -2
+            },
+            {
+              "id": "i35",
+              "type": "text",
+              "style": "title",
+              "html": "bottom-up",
+              "x": 520,
+              "y": 1066,
+              "w": 420,
+              "size": 0.5,
+              "ink": "red",
+              "align": "center",
+              "rot": -4
+            },
+            {
+              "id": "i36",
+              "type": "sticker",
+              "art": "circle",
+              "x": 510,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": -3
+            },
+            {
+              "id": "i37",
+              "type": "text",
+              "style": "caption",
+              "html": "a market model built from operational drivers",
+              "x": 510,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i38",
+              "type": "text",
+              "style": "note",
+              "html": "public sources + surveys + interviews",
+              "x": 76,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": -3,
+              "size": 0.86
+            }
+          ]
+        },
+        {
+          "id": "kalodata",
+          "name": "Kalodata",
+          "items": [
+            {
+              "id": "i39",
+              "type": "text",
+              "style": "label",
+              "html": "Work · 04",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i3a",
+              "type": "text",
+              "style": "title",
+              "html": "Kalodata",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 1.2,
+              "rot": -1.2
+            },
+            {
+              "id": "i3b",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 264.304,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i3c",
+              "type": "text",
+              "style": "label",
+              "html": "Data Science Intern",
+              "x": 72,
+              "y": 324.304,
+              "w": 860,
+              "backing": "dymo",
+              "rot": 0.4
+            },
+            {
+              "id": "i3d",
+              "type": "text",
+              "style": "stamp",
+              "html": "Jun – Aug 2024",
+              "x": 60,
+              "y": 406.304,
+              "w": 400,
+              "ink": "red",
+              "rot": -5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i3e",
+              "type": "text",
+              "style": "body",
+              "html": "Retention analysis across two markets: why adoption looked different in the US and China, and what to improve in onboarding.",
+              "x": 220,
+              "y": 569.1632,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": 1.2
+            },
+            {
+              "id": "i3f",
+              "type": "sticker",
+              "art": "chart",
+              "x": 80,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": -6,
+              "card": true
+            },
+            {
+              "id": "i3g",
+              "type": "text",
+              "style": "note",
+              "html": "US and China, side by side",
+              "x": 504,
+              "y": 1000,
+              "w": 400,
+              "rot": 3
+            },
+            {
+              "id": "i3h",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 450,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -150
+            },
+            {
+              "id": "i3i",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "kalodata-2",
+          "name": "Kalodata, what I did",
+          "items": [
+            {
+              "id": "i3m",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i3n",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 178.714528,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i3o",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Analyzed US and China retention cohorts and found a D1 retention gap.</li><li>Segmented cohorts by persona and workflow to study advanced-filter adoption and churn in China.</li><li>Worked with Product to clarify advanced-filter labels after the analysis surfaced the difference.</li><li>Kept a cohort dashboard of D1/D7 retention and feature adoption by geography and persona.</li></ul>",
+              "x": 66,
+              "y": 200.714528,
+              "w": 868,
+              "backing": "torn",
+              "size": 0.94,
+              "rot": 0.6
+            },
+            {
+              "id": "i3j",
+              "type": "text",
+              "style": "label",
+              "html": "Cohort analysis",
+              "x": 78,
+              "y": 852.5709439999999,
+              "w": 390,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -1.5
+            },
+            {
+              "id": "i3k",
+              "type": "text",
+              "style": "label",
+              "html": "Retention",
+              "x": 454,
+              "y": 852.5709439999999,
+              "w": 267,
+              "backing": "dymo",
+              "ink": "blue",
+              "rot": 0.1
+            },
+            {
+              "id": "i3l",
+              "type": "text",
+              "style": "label",
+              "html": "Dashboards",
+              "x": 104,
+              "y": 934.5709439999999,
+              "w": 287,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -0.4
+            },
+            {
+              "id": "i3p",
+              "type": "text",
+              "style": "title",
+              "html": "D1 / D7",
+              "x": 60,
+              "y": 1066,
+              "w": 420,
+              "size": 0.72,
+              "ink": "red",
+              "align": "center",
+              "rot": 4
+            },
+            {
+              "id": "i3q",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": 3
+            },
+            {
+              "id": "i3r",
+              "type": "text",
+              "style": "caption",
+              "html": "retention, tracked by geography and persona",
+              "x": 50,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i3s",
+              "type": "text",
+              "style": "note",
+              "html": "clearer filter labels came out of this",
+              "x": 544,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": 3,
+              "size": 0.86
+            }
+          ]
+        },
+        {
+          "id": "safelease",
+          "name": "SafeLease NYC",
+          "items": [
+            {
+              "id": "i3t",
+              "type": "text",
+              "style": "label",
+              "html": "Project · 05",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i3u",
+              "type": "text",
+              "style": "title",
+              "html": "SafeLease NYC",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 1,
+              "rot": -1.2
+            },
+            {
+              "id": "i3v",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 243.92000000000002,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i3w",
+              "type": "text",
+              "style": "label",
+              "html": "NVIDIA Spark Hackathon prototype",
+              "x": 72,
+              "y": 303.92,
+              "w": 860,
+              "backing": "dymo",
+              "rot": -0.3
+            },
+            {
+              "id": "i3x",
+              "type": "text",
+              "style": "stamp",
+              "html": "Team project",
+              "x": 540,
+              "y": 385.92,
+              "w": 400,
+              "ink": "red",
+              "rot": 5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i3y",
+              "type": "text",
+              "style": "body",
+              "html": "A housing-risk explorer built with a team: search an address, see it on the map, read the building’s profile.",
+              "x": 80,
+              "y": 557.952,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": -1.2
+            },
+            {
+              "id": "i3z",
+              "type": "sticker",
+              "art": "building",
+              "x": 580,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": 6,
+              "card": true
+            },
+            {
+              "id": "i40",
+              "type": "text",
+              "style": "note",
+              "html": "address → map → building profile",
+              "x": 96,
+              "y": 1000,
+              "w": 400,
+              "rot": -3
+            },
+            {
+              "id": "i41",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 370,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -8
+            },
+            {
+              "id": "i42",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "safelease-2",
+          "name": "SafeLease NYC, what I did",
+          "items": [
+            {
+              "id": "i47",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i48",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 205.895088,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i49",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Co-developed it with React, Python, FastAPI and Mapbox GL.</li><li>Normalized property identifiers and joined housing records to building footprints with Python-generated GeoJSON.</li><li>Kept unmatched scores as null and reported the join coverage.</li><li>The prototype has cached lookups, fallback sources and mock tests for malformed property IDs.</li></ul>",
+              "x": 66,
+              "y": 227.895088,
+              "w": 868,
+              "backing": "torn",
+              "size": 0.94,
+              "rot": 0.6
+            },
+            {
+              "id": "i43",
+              "type": "text",
+              "style": "label",
+              "html": "React",
+              "x": 78,
+              "y": 880.209824,
+              "w": 185,
+              "backing": "dymo",
+              "ink": "blue",
+              "rot": -1.6
+            },
+            {
+              "id": "i44",
+              "type": "text",
+              "style": "label",
+              "html": "Python",
+              "x": 249,
+              "y": 880.209824,
+              "w": 205,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -0.6
+            },
+            {
+              "id": "i45",
+              "type": "text",
+              "style": "label",
+              "html": "FastAPI",
+              "x": 440,
+              "y": 880.209824,
+              "w": 226,
+              "backing": "dymo",
+              "ink": "red",
+              "rot": 0
+            },
+            {
+              "id": "i46",
+              "type": "text",
+              "style": "label",
+              "html": "Mapbox GL",
+              "x": 652,
+              "y": 880.209824,
+              "w": 267,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": 2.2
+            },
+            {
+              "id": "i4a",
+              "type": "text",
+              "style": "title",
+              "html": "null",
+              "x": 520,
+              "y": 1066,
+              "w": 420,
+              "size": 0.95,
+              "ink": "red",
+              "align": "center",
+              "rot": -4
+            },
+            {
+              "id": "i4b",
+              "type": "sticker",
+              "art": "circle",
+              "x": 510,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": -3
+            },
+            {
+              "id": "i4c",
+              "type": "text",
+              "style": "caption",
+              "html": "what an unmatched score stays, with coverage reported",
+              "x": 510,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i4d",
+              "type": "text",
+              "style": "note",
+              "html": "built with a team at the NVIDIA Spark Hackathon",
+              "x": 76,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": -3,
+              "size": 0.86
+            }
+          ]
+        },
+        {
+          "id": "cardiac-rehab",
+          "name": "Home Cardiac Rehab MVP",
+          "items": [
+            {
+              "id": "i4e",
+              "type": "text",
+              "style": "label",
+              "html": "Award · 06",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i4f",
+              "type": "text",
+              "style": "title",
+              "html": "Home Cardiac Rehab MVP",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 0.82,
+              "rot": -1.2
+            },
+            {
+              "id": "i4g",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 309.1488,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i4h",
+              "type": "text",
+              "style": "label",
+              "html": "2nd place · Pulse Foundry AI Healthcare Hackathon",
+              "x": 72,
+              "y": 369.1488,
+              "w": 860,
+              "backing": "dymo",
+              "rot": -0.9
+            },
+            {
+              "id": "i4i",
+              "type": "text",
+              "style": "stamp",
+              "html": "Spring 2026",
+              "x": 60,
+              "y": 499.1488,
+              "w": 400,
+              "ink": "red",
+              "rot": -5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i4j",
+              "type": "text",
+              "style": "body",
+              "html": "A home cardiac-rehab MVP built at a hackathon: onboarding, activity tracking, care-team dashboards and voice-enabled safety workflows.",
+              "x": 220,
+              "y": 620.22784,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": 1.2
+            },
+            {
+              "id": "i4k",
+              "type": "sticker",
+              "art": "heart",
+              "x": 80,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": -6,
+              "card": true
+            },
+            {
+              "id": "i4l",
+              "type": "text",
+              "style": "note",
+              "html": "spring 2026",
+              "x": 504,
+              "y": 1000,
+              "w": 400,
+              "rot": 3
+            },
+            {
+              "id": "i4m",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 450,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -150
+            },
+            {
+              "id": "i4n",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "cardiac-rehab-2",
+          "name": "Home Cardiac Rehab MVP, what I did",
+          "items": [
+            {
+              "id": "i4q",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i4r",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 228.834752,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i4s",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Contributed to the Next.js and TypeScript app.</li><li>Modeled demo data for OCR intake, rehabilitation sessions, wearable metrics and care-team alerts.</li><li>Set those workflows up so the whole thing could be tested end to end.</li></ul>",
+              "x": 66,
+              "y": 250.834752,
+              "w": 868,
+              "backing": "torn",
+              "size": 1.04,
+              "rot": 0.6
+            },
+            {
+              "id": "i4o",
+              "type": "text",
+              "style": "label",
+              "html": "Next.js",
+              "x": 78,
+              "y": 834.330496,
+              "w": 226,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -1.7
+            },
+            {
+              "id": "i4p",
+              "type": "text",
+              "style": "label",
+              "html": "TypeScript",
+              "x": 290,
+              "y": 834.330496,
+              "w": 287,
+              "backing": "dymo",
+              "ink": "red",
+              "rot": -1.9
+            },
+            {
+              "id": "i4t",
+              "type": "text",
+              "style": "title",
+              "html": "2nd",
+              "x": 60,
+              "y": 1066,
+              "w": 420,
+              "size": 0.95,
+              "ink": "red",
+              "align": "center",
+              "rot": 4
+            },
+            {
+              "id": "i4u",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": 3
+            },
+            {
+              "id": "i4v",
+              "type": "text",
+              "style": "caption",
+              "html": "place, Pulse Foundry AI Healthcare Hackathon",
+              "x": 50,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i4w",
+              "type": "text",
+              "style": "note",
+              "html": "care-team dashboards + voice safety checks",
+              "x": 544,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": 3,
+              "size": 0.86
+            }
+          ]
+        },
+        {
+          "id": "tailor-agent",
+          "name": "AI Tailor Research Agent",
+          "items": [
+            {
+              "id": "i4x",
+              "type": "text",
+              "style": "label",
+              "html": "Project · 07",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i4y",
+              "type": "text",
+              "style": "title",
+              "html": "AI Tailor Research Agent",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 0.82,
+              "rot": -1.2
+            },
+            {
+              "id": "i4z",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 309.1488,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i50",
+              "type": "text",
+              "style": "label",
+              "html": "Supervised prototype",
+              "x": 72,
+              "y": 369.1488,
+              "w": 860,
+              "backing": "dymo",
+              "rot": 1.2
+            },
+            {
+              "id": "i51",
+              "type": "text",
+              "style": "stamp",
+              "html": "Prototype",
+              "x": 540,
+              "y": 451.1488,
+              "w": 400,
+              "ink": "red",
+              "rot": 5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i52",
+              "type": "text",
+              "style": "body",
+              "html": "A supervised voice-research prototype. It gathers prices, turnaround ranges and rush availability, and keeps the original wording for an operator to review.",
+              "x": 80,
+              "y": 575.92684,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": -1.2
+            },
+            {
+              "id": "i53",
+              "type": "sticker",
+              "art": "phone",
+              "x": 580,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": 6,
+              "card": true
+            },
+            {
+              "id": "i54",
+              "type": "text",
+              "style": "note",
+              "html": "a prototype: not yet proven in real use",
+              "x": 96,
+              "y": 1000,
+              "w": 400,
+              "rot": -3
+            },
+            {
+              "id": "i55",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 370,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -8
+            },
+            {
+              "id": "i56",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "tailor-agent-2",
+          "name": "AI Tailor Research Agent, what I did",
+          "items": [
+            {
+              "id": "i5b",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i5c",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 199.94875199999998,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i5d",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Connected Twilio Media Streams, OpenAI Realtime and optional ElevenLabs speech over WebSockets, in Node.js.</li><li>Extracted prices, turnaround ranges and rush availability into structured records with distinct outcome states.</li><li>Added provider-readiness checks, a bounded audio preflight and stream cleanup for debugging real-time voice.</li></ul>",
+              "x": 66,
+              "y": 221.94875199999998,
+              "w": 868,
+              "backing": "torn",
+              "size": 0.94,
+              "rot": 0.6
+            },
+            {
+              "id": "i57",
+              "type": "text",
+              "style": "label",
+              "html": "Node.js",
+              "x": 78,
+              "y": 810.1024960000001,
+              "w": 226,
+              "backing": "dymo",
+              "ink": "red",
+              "rot": 0
+            },
+            {
+              "id": "i58",
+              "type": "text",
+              "style": "label",
+              "html": "WebSockets",
+              "x": 290,
+              "y": 810.1024960000001,
+              "w": 287,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -2.5
+            },
+            {
+              "id": "i59",
+              "type": "text",
+              "style": "label",
+              "html": "Twilio",
+              "x": 563,
+              "y": 810.1024960000001,
+              "w": 205,
+              "backing": "dymo",
+              "ink": "green",
+              "rot": 2.2
+            },
+            {
+              "id": "i5a",
+              "type": "text",
+              "style": "label",
+              "html": "OpenAI Realtime",
+              "x": 104,
+              "y": 892.1024960000001,
+              "w": 390,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": 2.8
+            },
+            {
+              "id": "i5e",
+              "type": "text",
+              "style": "title",
+              "html": "supervised",
+              "x": 520,
+              "y": 1066,
+              "w": 420,
+              "size": 0.5,
+              "ink": "red",
+              "align": "center",
+              "rot": -4
+            },
+            {
+              "id": "i5f",
+              "type": "sticker",
+              "art": "circle",
+              "x": 510,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": -3
+            },
+            {
+              "id": "i5g",
+              "type": "text",
+              "style": "caption",
+              "html": "outcomes are kept for an operator to review",
+              "x": 510,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i5h",
+              "type": "text",
+              "style": "note",
+              "html": "keeps the original wording, not just a summary",
+              "x": 76,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": -3,
+              "size": 0.86
+            }
+          ]
+        },
+        {
+          "id": "kyc",
+          "name": "KYC Intake & Adjudication MVP",
+          "items": [
+            {
+              "id": "i5i",
+              "type": "text",
+              "style": "label",
+              "html": "Project · 08",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i5j",
+              "type": "text",
+              "style": "title",
+              "html": "KYC Intake & Adjudication MVP",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 0.68,
+              "rot": -1.2
+            },
+            {
+              "id": "i5k",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 280.6112,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i5l",
+              "type": "text",
+              "style": "label",
+              "html": "End-to-end MVP",
+              "x": 72,
+              "y": 340.6112,
+              "w": 860,
+              "backing": "dymo",
+              "rot": 0.5
+            },
+            {
+              "id": "i5m",
+              "type": "text",
+              "style": "stamp",
+              "html": "Fall 2025",
+              "x": 60,
+              "y": 422.6112,
+              "w": 400,
+              "ink": "red",
+              "rot": -5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i5n",
+              "type": "text",
+              "style": "body",
+              "html": "An MVP that takes in emails and PDFs, pulls out identity fields and writes structured case notes into HubSpot.",
+              "x": 220,
+              "y": 578.13216,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": 1.2
+            },
+            {
+              "id": "i5o",
+              "type": "sticker",
+              "art": "doc",
+              "x": 80,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": -6,
+              "card": true
+            },
+            {
+              "id": "i5p",
+              "type": "text",
+              "style": "note",
+              "html": "clear cases: rules. edge cases: LLM.",
+              "x": 504,
+              "y": 1000,
+              "w": 400,
+              "rot": 3
+            },
+            {
+              "id": "i5q",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 450,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -150
+            },
+            {
+              "id": "i5r",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "kyc-2",
+          "name": "KYC Intake & Adjudication MVP, what I did",
+          "items": [
+            {
+              "id": "i5v",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i5w",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 218.721792,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i5x",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Built the flow end to end: document intake, field extraction and structured HubSpot case notes.</li><li>Designed deterministic matching for the clear cases and a review queue for the ambiguous ones.</li><li>Limited LLM use to edge-case decisions.</li></ul>",
+              "x": 66,
+              "y": 240.721792,
+              "w": 868,
+              "backing": "torn",
+              "size": 1.04,
+              "rot": 0.6
+            },
+            {
+              "id": "i5s",
+              "type": "text",
+              "style": "label",
+              "html": "HubSpot",
+              "x": 78,
+              "y": 854.5564160000001,
+              "w": 226,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -1.8
+            },
+            {
+              "id": "i5t",
+              "type": "text",
+              "style": "label",
+              "html": "Email + PDF",
+              "x": 290,
+              "y": 854.5564160000001,
+              "w": 308,
+              "backing": "dymo",
+              "ink": "green",
+              "rot": 2.9
+            },
+            {
+              "id": "i5u",
+              "type": "text",
+              "style": "label",
+              "html": "Review queue",
+              "x": 584,
+              "y": 854.5564160000001,
+              "w": 328,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": 0
+            },
+            {
+              "id": "i5y",
+              "type": "text",
+              "style": "title",
+              "html": "review queue",
+              "x": 60,
+              "y": 1066,
+              "w": 420,
+              "size": 0.5,
+              "ink": "red",
+              "align": "center",
+              "rot": 4
+            },
+            {
+              "id": "i5z",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": 3
+            },
+            {
+              "id": "i60",
+              "type": "text",
+              "style": "caption",
+              "html": "where ambiguous records go, for a person to decide",
+              "x": 50,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i61",
+              "type": "text",
+              "style": "note",
+              "html": "scope: intake, case notes, human-review routing",
+              "x": 544,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": 3,
+              "size": 0.86
+            }
+          ]
+        },
+        {
+          "id": "revenue-funnel",
+          "name": "Revenue Funnel & Churn Analytics",
+          "items": [
+            {
+              "id": "i62",
+              "type": "text",
+              "style": "label",
+              "html": "Project · 09",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i63",
+              "type": "text",
+              "style": "title",
+              "html": "Revenue Funnel & Churn Analytics",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 0.68,
+              "rot": -1.2
+            },
+            {
+              "id": "i64",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 280.6112,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i65",
+              "type": "text",
+              "style": "label",
+              "html": "Stripe + HubSpot",
+              "x": 72,
+              "y": 340.6112,
+              "w": 860,
+              "backing": "dymo",
+              "rot": 0.6
+            },
+            {
+              "id": "i66",
+              "type": "text",
+              "style": "stamp",
+              "html": "Summer 2024",
+              "x": 540,
+              "y": 422.6112,
+              "w": 400,
+              "ink": "red",
+              "rot": 5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i67",
+              "type": "text",
+              "style": "body",
+              "html": "HubSpot pipeline data joined to Stripe activation and subscription records, to see where customers drop off and how long deals take to close.",
+              "x": 80,
+              "y": 560.23116,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": -1.2
+            },
+            {
+              "id": "i68",
+              "type": "sticker",
+              "art": "funnel",
+              "x": 580,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": 6,
+              "card": true
+            },
+            {
+              "id": "i69",
+              "type": "text",
+              "style": "note",
+              "html": "a failed payment ≠ choosing to leave",
+              "x": 96,
+              "y": 1000,
+              "w": 400,
+              "rot": -3
+            },
+            {
+              "id": "i6a",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 370,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -8
+            },
+            {
+              "id": "i6b",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "revenue-funnel-2",
+          "name": "Revenue Funnel & Churn Analytics, what I did",
+          "items": [
+            {
+              "id": "i6f",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i6g",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 217.98875199999998,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i6h",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Unified pipeline, activation and subscription data to analyze conversion drop-offs and time-to-close.</li><li>Compared retention and churn cohorts by plan and segment, separating payment-failure churn from voluntary churn.</li><li>Built SQL models and analysis-ready tables for consistent MRR, churn, activation and cohort-retention reporting.</li></ul>",
+              "x": 66,
+              "y": 239.98875199999998,
+              "w": 868,
+              "backing": "torn",
+              "size": 0.94,
+              "rot": 0.6
+            },
+            {
+              "id": "i6c",
+              "type": "text",
+              "style": "label",
+              "html": "SQL",
+              "x": 78,
+              "y": 856.022496,
+              "w": 144,
+              "backing": "dymo",
+              "ink": "green",
+              "rot": 2.9
+            },
+            {
+              "id": "i6d",
+              "type": "text",
+              "style": "label",
+              "html": "Stripe",
+              "x": 208,
+              "y": 856.022496,
+              "w": 205,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -0.5
+            },
+            {
+              "id": "i6e",
+              "type": "text",
+              "style": "label",
+              "html": "HubSpot",
+              "x": 399,
+              "y": 856.022496,
+              "w": 226,
+              "backing": "dymo",
+              "ink": "blue",
+              "rot": 1.6
+            },
+            {
+              "id": "i6i",
+              "type": "text",
+              "style": "title",
+              "html": "MRR",
+              "x": 520,
+              "y": 1066,
+              "w": 420,
+              "size": 0.95,
+              "ink": "red",
+              "align": "center",
+              "rot": -4
+            },
+            {
+              "id": "i6j",
+              "type": "sticker",
+              "art": "circle",
+              "x": 510,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": -3
+            },
+            {
+              "id": "i6k",
+              "type": "text",
+              "style": "caption",
+              "html": "plus churn, activation and cohort retention, from one set of tables",
+              "x": 510,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i6l",
+              "type": "text",
+              "style": "note",
+              "html": "two kinds of churn, kept apart",
+              "x": 76,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": -3,
+              "size": 0.86
+            }
+          ]
+        },
+        {
+          "id": "cssa",
+          "name": "CSSA",
+          "items": [
+            {
+              "id": "i6m",
+              "type": "text",
+              "style": "label",
+              "html": "Community · 10",
+              "x": 72,
+              "y": 78,
+              "w": 600
+            },
+            {
+              "id": "i6n",
+              "type": "text",
+              "style": "title",
+              "html": "CSSA",
+              "x": 68,
+              "y": 132,
+              "w": 864,
+              "size": 1.2,
+              "rot": -1.2
+            },
+            {
+              "id": "i6o",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 264.304,
+              "w": 500,
+              "h": 34,
+              "ink": "red",
+              "rot": -1
+            },
+            {
+              "id": "i6p",
+              "type": "text",
+              "style": "label",
+              "html": "Head of Career & Community Development",
+              "x": 72,
+              "y": 324.304,
+              "w": 860,
+              "backing": "dymo",
+              "rot": -0.5
+            },
+            {
+              "id": "i6q",
+              "type": "text",
+              "style": "stamp",
+              "html": "Since Sep 2023",
+              "x": 60,
+              "y": 406.304,
+              "w": 400,
+              "ink": "red",
+              "rot": -5,
+              "size": 0.86,
+              "align": "center"
+            },
+            {
+              "id": "i6r",
+              "type": "text",
+              "style": "body",
+              "html": "Student leadership: I led the team that runs career and networking events for the community.",
+              "x": 220,
+              "y": 587.0642,
+              "w": 700,
+              "backing": "card",
+              "size": 0.9,
+              "rot": 1.2
+            },
+            {
+              "id": "i6s",
+              "type": "sticker",
+              "art": "megaphone",
+              "x": 80,
+              "y": 900,
+              "w": 340,
+              "h": 340,
+              "rot": -6,
+              "card": true
+            },
+            {
+              "id": "i6t",
+              "type": "text",
+              "style": "note",
+              "html": "80+ students on the Amazon tour",
+              "x": 504,
+              "y": 1000,
+              "w": 400,
+              "rot": 3
+            },
+            {
+              "id": "i6u",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 450,
+              "y": 1130,
+              "w": 180,
+              "h": 72,
+              "rot": -150
+            },
+            {
+              "id": "i6v",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "cssa-2",
+          "name": "CSSA, what I did",
+          "items": [
+            {
+              "id": "i6z",
+              "type": "text",
+              "style": "heading",
+              "html": "What I did",
+              "x": 78,
+              "y": 80,
+              "w": 700,
+              "rot": -1.2
+            },
+            {
+              "id": "i70",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 400,
+              "y": 215.035648,
+              "w": 210,
+              "h": 50,
+              "rot": 3
+            },
+            {
+              "id": "i71",
+              "type": "text",
+              "style": "body",
+              "html": "<ul><li>Led a 15-member team delivering networking events for 200+ attendees: venues, logistics, speakers and promotion.</li><li>Negotiated partnerships that secured $8K in ticket sales and sponsorship.</li><li>Organized an Amazon company tour with employees, hosting 80+ students.</li><li>Set outreach targets and tracked sub-team performance in Excel.</li></ul>",
+              "x": 66,
+              "y": 237.035648,
+              "w": 868,
+              "backing": "torn",
+              "size": 0.94,
+              "rot": 0.6
+            },
+            {
+              "id": "i6w",
+              "type": "text",
+              "style": "label",
+              "html": "Events",
+              "x": 78,
+              "y": 861.928704,
+              "w": 205,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -2.9
+            },
+            {
+              "id": "i6x",
+              "type": "text",
+              "style": "label",
+              "html": "Partnerships",
+              "x": 269,
+              "y": 861.928704,
+              "w": 328,
+              "backing": "dymo",
+              "ink": "blue",
+              "rot": 0.4
+            },
+            {
+              "id": "i6y",
+              "type": "text",
+              "style": "label",
+              "html": "Excel",
+              "x": 583,
+              "y": 861.928704,
+              "w": 185,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": 2
+            },
+            {
+              "id": "i72",
+              "type": "text",
+              "style": "title",
+              "html": "200+",
+              "x": 60,
+              "y": 1066,
+              "w": 420,
+              "size": 0.95,
+              "ink": "red",
+              "align": "center",
+              "rot": 4
+            },
+            {
+              "id": "i73",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 1030,
+              "w": 440,
+              "h": 190,
+              "ink": "red",
+              "rot": 3
+            },
+            {
+              "id": "i74",
+              "type": "text",
+              "style": "caption",
+              "html": "attendees at our networking events",
+              "x": 50,
+              "y": 1232,
+              "w": 440,
+              "align": "center"
+            },
+            {
+              "id": "i75",
+              "type": "text",
+              "style": "note",
+              "html": "$8K in ticket sales and sponsorship",
+              "x": 544,
+              "y": 1058,
+              "w": 380,
+              "backing": "sticky",
+              "rot": 3,
+              "size": 0.86
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tech",
+      "title": "My Take on Tech",
+      "tab": "Tech takes",
+      "color": "#b8861f",
+      "pages": [
+        {
+          "id": "tech",
+          "name": "My Take on Tech: the list",
+          "items": [
+            {
+              "id": "i7j",
+              "type": "text",
+              "style": "title",
+              "html": "My Take on Tech",
+              "x": 68,
+              "y": 78,
+              "w": 860,
+              "size": 0.86,
+              "rot": -2
+            },
+            {
+              "id": "i7k",
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 196,
+              "w": 620,
+              "h": 38,
+              "ink": "red",
+              "rot": -2
+            },
+            {
+              "id": "i7l",
+              "type": "text",
+              "style": "body",
+              "html": "Notes on building software. New ones get taped in as I write them.",
+              "x": 76,
+              "y": 262,
+              "w": 840,
+              "size": 0.9
+            },
+            {
+              "id": "i7m",
+              "type": "text",
+              "style": "label",
+              "html": "Posts",
+              "x": 76,
+              "y": 400,
+              "w": 300,
+              "backing": "dymo"
+            },
+            {
+              "id": "i7n",
+              "type": "text",
+              "style": "body",
+              "html": "<b>Four things I keep coming back to</b><br><small>Draft · p. {{page}}</small>",
+              "x": 196,
+              "y": 478,
+              "w": 730,
+              "backing": "card",
+              "size": 0.88,
+              "rot": 0.2,
+              "goto": "four-things"
+            },
+            {
+              "id": "i7o",
+              "type": "sticker",
+              "art": "laptop",
+              "x": 62,
+              "y": 492,
+              "w": 118,
+              "h": 118,
+              "rot": 3.8,
+              "goto": "four-things"
+            },
+            {
+              "id": "i7p",
+              "type": "text",
+              "style": "stamp",
+              "html": "Draft",
+              "x": 660,
+              "y": 660,
+              "w": 260,
+              "ink": "red",
+              "rot": -6,
+              "align": "center"
+            }
+          ]
+        },
+        {
+          "id": "tech-2",
+          "name": "My Take on Tech: more to come",
+          "paper": "grid",
+          "items": [
+            {
+              "id": "i7q",
+              "type": "text",
+              "style": "heading",
+              "html": "more soon",
+              "x": 240,
+              "y": 420,
+              "w": 560,
+              "align": "center",
+              "rot": -3
+            },
+            {
+              "id": "i7r",
+              "type": "sticker",
+              "art": "sparkle",
+              "x": 420,
+              "y": 560,
+              "w": 180,
+              "h": 180
+            },
+            {
+              "id": "i7s",
+              "type": "text",
+              "style": "note",
+              "html": "Benny: to add a post, run “npm run edit” and pick “Blog post”.",
+              "x": 250,
+              "y": 820,
+              "w": 500,
+              "backing": "sticky",
+              "rot": 2,
+              "size": 0.84,
+              "ink": "red"
+            }
+          ]
+        },
+        {
+          "id": "four-things",
+          "name": "Four things I keep coming back to",
+          "items": [
+            {
+              "id": "i77",
+              "type": "text",
+              "style": "label",
+              "html": "Post",
+              "x": 72,
+              "y": 78,
+              "w": 400
+            },
+            {
+              "id": "i78",
+              "type": "text",
+              "style": "title",
+              "html": "Four things I keep coming back to",
+              "x": 68,
+              "y": 138,
+              "w": 860,
+              "size": 0.6120000000000001,
+              "rot": -1
+            },
+            {
+              "id": "i79",
+              "type": "sticker",
+              "art": "underline",
+              "x": 70,
+              "y": 274.75008,
+              "w": 460,
+              "h": 34,
+              "ink": "red"
+            },
+            {
+              "id": "i76",
+              "type": "text",
+              "style": "caption",
+              "html": "← all posts",
+              "x": 72,
+              "y": 1262,
+              "w": 420,
+              "goto": "tech"
+            },
+            {
+              "id": "i7e",
+              "type": "text",
+              "style": "stamp",
+              "html": "Draft",
+              "x": 650,
+              "y": 388,
+              "w": 260,
+              "ink": "red",
+              "rot": 6,
+              "align": "center"
+            },
+            {
+              "id": "i7f",
+              "type": "text",
+              "style": "body",
+              "html": "<p><b>1. The second submit is the real test.</b> Anything works once. The interesting part is what happens on the retry, the double click and the webhook that arrives twice.</p><p><b>2. Numbers should admit what they don’t know.</b> A dashboard is more useful when it says where its data stops, and keeps test assumptions apart from what real people did.</p>",
+              "x": 80,
+              "y": 500,
+              "w": 840
+            }
+          ]
+        },
+        {
+          "id": "four-things-2",
+          "name": "Four things I keep coming back to, continued",
+          "items": [
+            {
+              "id": "i7g",
+              "type": "text",
+              "style": "body",
+              "html": "<p><b>3. AI still needs a reviewer.</b> I like building with it. I also like keeping the original words, the unclear cases and a person who can check the result.</p><p><b>4. Boring choices leave room for fun ones.</b> Solid data and plain workflows are what make it possible to spend a week on a field of ASCII grass.</p>",
+              "x": 80,
+              "y": 100,
+              "w": 840
+            },
+            {
+              "id": "i7h",
+              "type": "sticker",
+              "art": "laptop",
+              "x": 560,
+              "y": 760,
+              "w": 300,
+              "h": 300,
+              "rot": 6
+            },
+            {
+              "id": "i7i",
+              "type": "text",
+              "style": "note",
+              "html": "Benny: these four are placeholder words. Rewrite them or delete this post.",
+              "x": 84,
+              "y": 800,
+              "w": 400,
+              "backing": "sticky",
+              "rot": -3,
+              "size": 0.84,
+              "ink": "red"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About Me",
+      "tab": "About me",
+      "color": "#2f6f6a",
+      "pages": [
+        {
+          "id": "about",
+          "name": "About Me",
+          "items": [
+            {
+              "id": "i7t",
+              "type": "text",
+              "style": "title",
+              "html": "About Me",
+              "x": 68,
+              "y": 78,
+              "w": 800,
+              "size": 1.1,
+              "rot": -2
+            },
+            {
+              "id": "i7u",
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 208,
+              "w": 480,
+              "h": 38,
+              "ink": "red",
+              "rot": -2
+            },
+            {
+              "id": "i7v",
+              "type": "text",
+              "style": "body",
+              "html": "I’m Benny (BinHuai) Yuan. I work across full-stack engineering and data.",
+              "x": 80,
+              "y": 290,
+              "w": 760,
+              "backing": "card",
+              "rot": -1
+            },
+            {
+              "id": "i7w",
+              "type": "sticker",
+              "art": "cap",
+              "x": 76,
+              "y": 600,
+              "w": 170,
+              "h": 170,
+              "rot": -6
+            },
+            {
+              "id": "i7x",
+              "type": "text",
+              "style": "body",
+              "html": "<b>New York University</b><br>B.A. in Data Science, minor in Business Studies.<br><small>May 2026 · GPA 3.7</small>",
+              "x": 270,
+              "y": 596,
+              "w": 660,
+              "size": 0.9
+            },
+            {
+              "id": "i7y",
+              "type": "text",
+              "style": "caption",
+              "html": "data management, causal inference, machine learning",
+              "x": 280,
+              "y": 800,
+              "w": 620,
+              "rot": -1.5
+            },
+            {
+              "id": "i7z",
+              "type": "sticker",
+              "art": "gelato",
+              "x": 740,
+              "y": 930,
+              "w": 170,
+              "h": 170,
+              "rot": 8
+            },
+            {
+              "id": "i80",
+              "type": "text",
+              "style": "body",
+              "html": "<b>NYU Florence</b><br>Exchange semester, fall 2023.<br><small>Italian, art history and philosophy.</small>",
+              "x": 84,
+              "y": 940,
+              "w": 620,
+              "size": 0.9
+            },
+            {
+              "id": "i81",
+              "type": "sticker",
+              "art": "tape-cream",
+              "x": 320,
+              "y": 262,
+              "w": 220,
+              "h": 50,
+              "rot": 2
+            }
+          ]
+        },
+        {
+          "id": "about-2",
+          "name": "About Me: tools and where to find me",
+          "items": [
+            {
+              "id": "i82",
+              "type": "text",
+              "style": "heading",
+              "html": "Tools I reach for",
+              "x": 78,
+              "y": 80,
+              "w": 800,
+              "rot": -1.2
+            },
+            {
+              "id": "i83",
+              "type": "text",
+              "style": "label",
+              "html": "TypeScript",
+              "x": 84,
+              "y": 200,
+              "w": 289,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": 1.4
+            },
+            {
+              "id": "i84",
+              "type": "text",
+              "style": "label",
+              "html": "Next.js",
+              "x": 420,
+              "y": 196,
+              "w": 227.5,
+              "backing": "dymo",
+              "ink": "red",
+              "rot": 2.6
+            },
+            {
+              "id": "i85",
+              "type": "text",
+              "style": "label",
+              "html": "Node.js",
+              "x": 660,
+              "y": 206,
+              "w": 227.5,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -1.7
+            },
+            {
+              "id": "i86",
+              "type": "text",
+              "style": "label",
+              "html": "PostgreSQL",
+              "x": 110,
+              "y": 286,
+              "w": 289,
+              "backing": "dymo",
+              "ink": "green",
+              "rot": -1.9
+            },
+            {
+              "id": "i87",
+              "type": "text",
+              "style": "label",
+              "html": "Prisma",
+              "x": 440,
+              "y": 290,
+              "w": 207,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -0.6
+            },
+            {
+              "id": "i88",
+              "type": "text",
+              "style": "label",
+              "html": "Python",
+              "x": 650,
+              "y": 284,
+              "w": 207,
+              "backing": "dymo",
+              "ink": "blue",
+              "rot": 1.6
+            },
+            {
+              "id": "i89",
+              "type": "text",
+              "style": "label",
+              "html": "SQL",
+              "x": 90,
+              "y": 374,
+              "w": 145.5,
+              "backing": "dymo",
+              "ink": "red",
+              "rot": 2.5
+            },
+            {
+              "id": "i8a",
+              "type": "text",
+              "style": "label",
+              "html": "FastAPI",
+              "x": 250,
+              "y": 378,
+              "w": 227.5,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": -2
+            },
+            {
+              "id": "i8b",
+              "type": "text",
+              "style": "label",
+              "html": "Excel",
+              "x": 500,
+              "y": 370,
+              "w": 186.5,
+              "backing": "dymo",
+              "ink": "green",
+              "rot": 1.7
+            },
+            {
+              "id": "i8c",
+              "type": "text",
+              "style": "label",
+              "html": "Git",
+              "x": 720,
+              "y": 376,
+              "w": 145.5,
+              "backing": "dymo",
+              "ink": "ink",
+              "rot": 0
+            },
+            {
+              "id": "i8d",
+              "type": "text",
+              "style": "heading",
+              "html": "Languages",
+              "x": 78,
+              "y": 520,
+              "w": 800,
+              "rot": -1
+            },
+            {
+              "id": "i8e",
+              "type": "text",
+              "style": "body",
+              "html": "English and Mandarin, both native.<br>Italian, basic.",
+              "x": 84,
+              "y": 610,
+              "w": 800
+            },
+            {
+              "id": "i8f",
+              "type": "text",
+              "style": "heading",
+              "html": "Find me",
+              "x": 78,
+              "y": 800,
+              "w": 800,
+              "rot": -1.4
+            },
+            {
+              "id": "i8g",
+              "type": "text",
+              "style": "body",
+              "html": "<a href=\"https://github.com/bennyyuan12\">github.com/bennyyuan12</a>",
+              "x": 84,
+              "y": 892,
+              "w": 800
+            },
+            {
+              "id": "i8h",
+              "type": "text",
+              "style": "note",
+              "html": "or in the grass, asleep",
+              "x": 420,
+              "y": 1040,
+              "w": 440,
+              "backing": "sticky",
+              "rot": 4
+            },
+            {
+              "id": "i8i",
+              "type": "sticker",
+              "art": "nap",
+              "x": 110,
+              "y": 1080,
+              "w": 250,
+              "h": 175,
+              "rot": -4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jazz",
+      "title": "Ya Like Jazz?",
+      "tab": "Jazz?",
+      "color": "#6d4a7a",
+      "pages": [
+        {
+          "id": "jazz",
+          "name": "Ya Like Jazz?",
+          "items": [
+            {
+              "id": "i8j",
+              "type": "text",
+              "style": "title",
+              "html": "Ya Like Jazz?",
+              "x": 68,
+              "y": 78,
+              "w": 860,
+              "size": 0.96,
+              "rot": -2
+            },
+            {
+              "id": "i8k",
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 204,
+              "w": 600,
+              "h": 38,
+              "ink": "red",
+              "rot": -2
+            },
+            {
+              "id": "i8l",
+              "type": "text",
+              "style": "body",
+              "html": "The things I like that don’t fit on a resume.",
+              "x": 76,
+              "y": 270,
+              "w": 840,
+              "size": 0.9
+            },
+            {
+              "id": "i8m",
+              "type": "sticker",
+              "art": "bee",
+              "x": 330,
+              "y": 440,
+              "w": 340,
+              "h": 340,
+              "rot": -8
+            },
+            {
+              "id": "i8n",
+              "type": "text",
+              "style": "stamp",
+              "html": "Draft",
+              "x": 640,
+              "y": 800,
+              "w": 260,
+              "ink": "red",
+              "rot": 7,
+              "align": "center"
+            },
+            {
+              "id": "i8o",
+              "type": "text",
+              "style": "note",
+              "html": "Benny: what goes here? Records, shows, a favorite solo?",
+              "x": 110,
+              "y": 930,
+              "w": 480,
+              "backing": "sticky",
+              "rot": -3,
+              "size": 0.84,
+              "ink": "red"
+            }
+          ]
+        },
+        {
+          "id": "jazz-2",
+          "name": "Ya Like Jazz?: the lists",
+          "paper": "lined",
+          "items": [
+            {
+              "id": "i8p",
+              "type": "text",
+              "style": "heading",
+              "html": "On repeat",
+              "x": 150,
+              "y": 96,
+              "w": 700,
+              "rot": -1
+            },
+            {
+              "id": "i8q",
+              "type": "text",
+              "style": "note",
+              "html": "1.<br>2.<br>3.",
+              "x": 160,
+              "y": 196,
+              "w": 600,
+              "size": 1.06,
+              "ink": "blue"
+            },
+            {
+              "id": "i8r",
+              "type": "text",
+              "style": "heading",
+              "html": "Best show I’ve seen",
+              "x": 150,
+              "y": 470,
+              "w": 760,
+              "rot": -1
+            },
+            {
+              "id": "i8s",
+              "type": "text",
+              "style": "heading",
+              "html": "Would rather be doing",
+              "x": 150,
+              "y": 760,
+              "w": 800,
+              "rot": -1
+            },
+            {
+              "id": "i8t",
+              "type": "text",
+              "style": "note",
+              "html": "napping in long grass",
+              "x": 170,
+              "y": 852,
+              "w": 600,
+              "ink": "blue",
+              "rot": -1
+            },
+            {
+              "id": "i8u",
+              "type": "sticker",
+              "art": "sax",
+              "x": 600,
+              "y": 960,
+              "w": 300,
+              "h": 300,
+              "rot": 8
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

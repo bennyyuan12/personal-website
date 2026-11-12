@@ -1,5 +1,6 @@
 import { spawn } from 'node:child_process';
-import { mkdir, readdir, rm, stat, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { copyFile, mkdir, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import type { IncomingMessage } from 'node:http';
 import path from 'node:path';
 import sharp from 'sharp';
@@ -125,6 +126,68 @@ function capturePlugin(): Plugin {
   };
 }
 
+const BOOK_DIR = path.resolve('public/book');
+const PHOTO_TYPES = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.svg']);
+
+/**
+ * Dev-only endpoints for the scrapbook editor (?edit): write the book back to
+ * public/book/book.json, and take in photos dropped on a page. The site itself stays static.
+ */
+function bookPlugin(): Plugin {
+  let backedUp = false;
+  return {
+    name: 'book-edit',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use('/__book', async (req, res) => {
+        try {
+          if (req.method !== 'POST') throw new HttpError(405, 'POST only');
+          // Only the editor page itself may write files: another site open in the same browser
+          // can't set this header on a request to here.
+          if (req.headers['x-book-edit'] !== '1') throw new HttpError(403, 'not from the editor');
+          const site = req.headers['sec-fetch-site'];
+          if (site && site !== 'same-origin') throw new HttpError(403, 'not from the editor');
+          const url = new URL(req.url ?? '/', 'http://localhost');
+          const body = await readBody(req);
+          let reply: unknown = { ok: true };
+
+          if (url.pathname === '/save') {
+            if (body.length > 8e6) throw new HttpError(413, 'the book is too big');
+            const book = JSON.parse(body.toString('utf8')) as { version?: number; sections?: unknown };
+            if (book.version !== 1 || !Array.isArray(book.sections)) throw new HttpError(400, 'that is not a book');
+            const file = path.join(BOOK_DIR, 'book.json');
+            if (!backedUp) {
+              // Keep the book as it was before this session's first save, out of the repo.
+              await mkdir(FRAMES_ROOT, { recursive: true });
+              await copyFile(file, path.join(FRAMES_ROOT, 'book.before-edit.json')).catch(() => {});
+              backedUp = true;
+            }
+            await mkdir(BOOK_DIR, { recursive: true });
+            await writeFile(file, `${JSON.stringify(book, null, 2)}\n`);
+          } else if (url.pathname === '/photo') {
+            if (!body.length || body.length > 12e6) throw new HttpError(413, 'that photo is too big');
+            const given = path.basename(url.searchParams.get('name') ?? 'photo.jpg');
+            const ext = path.extname(given).toLowerCase();
+            if (!PHOTO_TYPES.has(ext)) throw new HttpError(400, 'not a kind of photo this takes');
+            const stem = path.basename(given, path.extname(given)).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'photo';
+            const name = `${stem}-${createHash('sha1').update(body).digest('hex').slice(0, 8)}${ext}`;
+            await mkdir(path.join(BOOK_DIR, 'photos'), { recursive: true });
+            await writeFile(path.join(BOOK_DIR, 'photos', name), body);
+            reply = { src: `book/photos/${name}` };
+          } else {
+            throw new HttpError(404, 'unknown');
+          }
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(reply));
+        } catch (err) {
+          res.statusCode = err instanceof HttpError ? err.status : 500;
+          res.end(err instanceof Error ? err.message : String(err));
+        }
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [capturePlugin()],
+  plugins: [capturePlugin(), bookPlugin()],
 });

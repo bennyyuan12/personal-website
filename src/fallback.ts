@@ -15,6 +15,7 @@ export interface Hole {
 
 /** Cuts the holes out of the grass. False if this browser can't, so the grass would hide everything. */
 function cutHoles(el: HTMLElement, holes: Hole[]) {
+  if (!holes.length) holes = [{ x: -9999, y: -9999, rx: 1, ry: 1 }];
   const layers = holes
     .map((h) => `radial-gradient(${h.rx}px ${h.ry}px at ${h.x}px ${h.y}px, transparent 72%, black 100%)`)
     .join(', ');
@@ -34,11 +35,12 @@ function stillImage() {
   return img;
 }
 
+/** Returns a function to call when the holes have moved. */
 export function showFallback(reason: string, holes: () => Hole[]) {
   console.info(`[grass] showing the fallback: ${reason}`);
   const canvas = document.querySelector<HTMLCanvasElement>('#stage');
   if (canvas) canvas.style.display = 'none';
-  if (document.querySelector('.fallback')) return;
+  if (document.querySelector('.fallback')) return null;
 
   const name = window.innerHeight > window.innerWidth ? 'loop-portrait' : 'loop-landscape';
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -75,4 +77,5 @@ export function showFallback(reason: string, holes: () => Hole[]) {
   };
   fit();
   window.addEventListener('resize', fit);
+  return fit;
 }
