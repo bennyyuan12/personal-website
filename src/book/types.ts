@@ -5,10 +5,19 @@ export const PAGE_WIDTH = 1000;
 export const PAGE_HEIGHT = 1370;
 
 export type TextStyle = 'title' | 'heading' | 'body' | 'note' | 'caption' | 'label' | 'stamp' | 'code';
-export type Backing = 'none' | 'sticky' | 'card' | 'torn' | 'kraft' | 'dymo';
+export type Backing = 'none' | 'sticky' | 'card' | 'torn' | 'kraft' | 'dymo' | 'boxed';
+/** What a carded sticker is drawn on. */
+export type Scrap = 'white' | 'kraft' | 'graph';
 export type Ink = 'ink' | 'red' | 'blue' | 'green' | 'white';
 export type Paper = 'plain' | 'lined' | 'grid' | 'dots' | 'kraft';
-export type Frame = 'polaroid' | 'print' | 'taped' | 'none';
+export type Frame = 'polaroid' | 'print' | 'taped' | 'none' | 'sticker' | 'stamp' | 'torn';
+/** What a photo is cut to. Unset: its own rectangle, or for a cut-out PNG, its own outline. */
+export type Shape = 'rect' | 'rounded' | 'circle' | 'heart' | 'star' | 'arch' | 'scallop';
+/** A torn scrap of paper something's stuck on. */
+export type BackPaper = 'pink' | 'cream' | 'kraft' | 'blue' | 'mustard' | 'grid' | 'print';
+/** How a photo's printed. Unset: in color. */
+export type Tone = 'mono' | 'old' | 'sepia' | 'faded';
+export type CollageLayout = 'grid' | 'mosaic' | 'strip' | 'film';
 
 interface Placed {
   id: string;
@@ -32,6 +41,8 @@ export interface TextItem extends Placed {
   ink?: Ink;
   align?: 'left' | 'center' | 'right';
   backing?: Backing;
+  /** A font from fonts.ts in place of the style's own. */
+  font?: string;
 }
 
 export interface PhotoItem extends Placed {
@@ -44,6 +55,33 @@ export interface PhotoItem extends Placed {
   alt?: string;
   /** Which part of the photo stays in view when the frame crops it, in percent. */
   focus?: [number, number];
+  shape?: Shape;
+  /** Cut out with scissors: the line cut along, as points in the photo (0 to 1 across and down). */
+  cut?: [number, number][];
+  /** Torn by hand rather than cut clean. */
+  edge?: 'torn';
+  /** A torn scrap of paper behind it. */
+  paper?: BackPaper;
+  tone?: Tone;
+  /** Which tape a taped print is stuck down with, from stickers.ts. */
+  tape?: string;
+}
+
+export interface CollagePhoto {
+  src: string;
+  /** Width over height of the photo itself. */
+  ratio: number;
+  focus?: [number, number];
+  alt?: string;
+}
+
+/** Several photos printed or stuck together, moved and sized as one. */
+export interface CollageItem extends Placed {
+  type: 'collage';
+  layout: CollageLayout;
+  photos: CollagePhoto[];
+  h: number;
+  caption?: string;
 }
 
 export interface StickerItem extends Placed {
@@ -52,11 +90,15 @@ export interface StickerItem extends Placed {
   art: string;
   h: number;
   ink?: Ink;
-  /** Drawn on a white card and taped down, like a photo. */
+  /** Drawn on a scrap of paper and stuck in, like a photo. */
   card?: boolean;
+  /** Which paper the scrap is. Unset: white. */
+  on?: Scrap;
+  /** A peel-off sticker: a white die-cut edge all the way round. */
+  cut?: boolean;
 }
 
-export type Item = TextItem | PhotoItem | StickerItem;
+export type Item = TextItem | PhotoItem | StickerItem | CollageItem;
 
 export interface Page {
   /** Also the page's address: the site's URL ends in #<id> while it's open. */
@@ -78,5 +120,7 @@ export interface Section {
 
 export interface BookData {
   version: 1;
+  /** Fonts for every title and every heading in the book, from fonts.ts. Unset: the pen everything else is in. */
+  fonts?: { title?: string; heading?: string };
   sections: Section[];
 }

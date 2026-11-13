@@ -6,6 +6,7 @@
 import './fonts';
 import './book.css';
 import { Flipper } from './flipper';
+import { FONTS, fontVars } from './fonts';
 import { renderPage, type RenderContext } from './render';
 import type { BookData, Page, Section } from './types';
 
@@ -198,6 +199,7 @@ export class Book {
     const here = this.sheets[this.at]?.page?.id;
     this.endFlip();
     this.data = data;
+    this.applyFonts();
     this.sheets = [];
     for (const section of data.sections) {
       for (const page of section.pages) this.sheets.push({ page, section });
@@ -209,6 +211,15 @@ export class Book {
     const kept = here ? this.indexOf(here) : -1;
     this.at = kept >= 0 ? kept : Math.min(this.at, this.sheets.length - 1);
     this.present();
+  }
+
+  /** The book-wide fonts for titles and headings. */
+  applyFonts() {
+    for (const kind of ['title', 'heading'] as const) {
+      const key = this.data.fonts?.[kind];
+      const vars = fontVars(kind, key && FONTS[key] ? key : 'architect');
+      for (const [name, value] of Object.entries(vars)) this.el.style.setProperty(name, value);
+    }
   }
 
   /** Draw empty photo slots and the like, for editing. */

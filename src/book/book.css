@@ -1,21 +1,33 @@
 /* paper grain, shared by the pages and everything cut from paper */
 :root {
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .36  0 0 0 0 .27  0 0 0 0 .13  .26 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36  0 0 0 0 .27  0 0 0 0 .14  .5 0 0 0 -.12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .32' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36  0 0 0 0 .28  0 0 0 0 .15  .34 0 0 0 -.11'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --mottle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='3' seed='21' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .6  0 0 0 0 .45  0 0 0 0 .22  .5 0 0 0 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --fleck: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='340'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='40' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 .98  0 0 0 0 .9  1.5 0 0 0 -.74'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --hand: 'Architects Daughter', 'Bradley Hand', 'Comic Sans MS', cursive;
+  --typed: 'Courier Prime', 'Courier New', monospace;
 }
 
 /* ---- the book ---- */
 /* Everything on it is sized in page units (--u), so it's the same book lying small in the grass. */
 .book {
   --u: calc(var(--page-w) / 1000);
-  --sheet: #efe6cd;
-  --pen: #26221b;
+  --sheet: #f4eedc;
+  --pen: #1f1b16;
+  /* The pen writes in capitals: a little smaller, a little looser, with room between the lines. */
+  --hand-scale: 0.885;
+  --hand-leading: 1.5;
+  --hand-case: uppercase;
+  --hand-spacing: 0.02em;
   position: fixed;
   left: 0;
   top: 0;
   width: calc(var(--page-w) * 2);
   height: var(--page-h);
   color: var(--pen);
-  font: 400 calc(var(--u) * 34) / 1.3 'Courier Prime', 'Courier New', monospace;
+  font: 400 calc(var(--u) * 29) / var(--hand-leading, 1.45) var(--hand);
+  text-transform: var(--hand-case, none);
+  letter-spacing: var(--hand-spacing, normal);
   transform-origin: 50% 50%;
   outline: none;
   touch-action: none;
@@ -80,10 +92,26 @@
   background-color: var(--sheet);
   background-image:
     var(--paper-art, linear-gradient(transparent, transparent)),
-    radial-gradient(circle at 16% 90%, #c9b48a33, transparent 24%),
-    radial-gradient(circle at 86% 10%, #c9b48a2b, transparent 20%),
-    var(--grain);
+    radial-gradient(circle at 12% 93%, #b8975a40, transparent 22%),
+    radial-gradient(circle at 90% 6%, #b8975a33, transparent 18%),
+    radial-gradient(circle at 71% 58%, #a9824a14, transparent 12%),
+    radial-gradient(ellipse at 50% 50%, transparent 62%, #8a6b3a22 100%),
+    var(--fleck),
+    var(--grain),
+    var(--fibre),
+    var(--mottle);
   box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+/* the same grain over whatever is stuck on, so scraps look like paper too and not like screen */
+.page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.4;
+  mix-blend-mode: multiply;
 }
 /* the page curves down into the spine */
 .page::before {
@@ -117,8 +145,8 @@
 .folio {
   position: absolute;
   bottom: calc(var(--u) * 30);
-  font: 400 calc(var(--u) * 23) / 1 'Special Elite', monospace;
-  opacity: 0.6;
+  font: 400 calc(var(--u) * 22) / 1 var(--hand);
+  opacity: 0.7;
 }
 .page.l .folio { left: calc(var(--u) * 56); }
 .page.r .folio { right: calc(var(--u) * 56); }
@@ -132,13 +160,22 @@
   margin: 0;
   transform: rotate(var(--r, 0deg));
 }
-.item.photo, .item.sticker { height: calc(var(--h) * var(--u)); }
+.item.photo, .item.sticker, .item.collage { height: calc(var(--h) * var(--u)); }
 .item[data-goto] { cursor: pointer; transition: translate 0.15s, filter 0.15s; }
 .item[data-goto]:hover, .item[data-goto]:focus-visible { translate: 0 calc(var(--u) * -4); filter: drop-shadow(0 calc(var(--u) * 6) calc(var(--u) * 6) #0004); outline: none; }
 .item[data-goto]:focus-visible .inner { outline: 2px dashed var(--pen); outline-offset: 3px; }
 
 /* what's written */
-.item.text { font-size: calc(var(--fs, 34) * var(--k, 1) * var(--u)); }
+.item.text { font-size: calc(var(--fs, 34) * var(--k, 1) * var(--hand-scale, 1) * var(--u)); }
+/* a font picked for this one piece of writing, in place of its style's own */
+.item.text.own-font {
+  font-size: calc(var(--fs, 34) * var(--own-scale, 1) * var(--k, 1) * var(--u));
+  font-family: var(--own-family);
+  font-weight: var(--own-weight);
+  line-height: var(--own-leading);
+  text-transform: var(--own-case);
+}
+.item.text.own-font :is(b, strong) { font-weight: max(700, var(--own-weight)); }
 .item.text .inner { box-sizing: border-box; overflow-wrap: break-word; }
 .a-center { text-align: center; }
 .a-right { text-align: right; }
@@ -147,13 +184,28 @@
 .i-green { color: #3d6b35; }
 .i-white { color: #fbf7ea; }
 
-.s-title { --fs: 104; font-family: 'Permanent Marker', 'Marker Felt', cursive; line-height: 0.98; letter-spacing: 0.01em; }
-.s-heading { --fs: 58; font-family: 'Permanent Marker', 'Marker Felt', cursive; line-height: 1.06; }
-.s-body { --fs: 34; line-height: 1.3; }
-.s-note { --fs: 52; font-family: 'Caveat', 'Bradley Hand', cursive; font-weight: 700; line-height: 1; }
-.s-caption { --fs: 42; font-family: 'Caveat', 'Bradley Hand', cursive; font-weight: 500; line-height: 1.02; }
-.s-label { --fs: 27; font-family: 'Special Elite', 'Courier New', monospace; line-height: 1.3; letter-spacing: 0.14em; text-transform: uppercase; }
-.s-stamp { --fs: 36; font-family: 'Special Elite', 'Courier New', monospace; line-height: 1.1; letter-spacing: 0.1em; text-transform: uppercase; }
+/* Titles and headings take their size from their own font (fonts.ts), not from the pen's. */
+.s-title, .s-heading { --hand-scale: 1; }
+.s-title {
+  --fs: calc(104 * var(--title-scale, 1));
+  font-family: var(--title-family, var(--hand));
+  font-weight: var(--title-weight, 400);
+  line-height: var(--title-leading, 0.98);
+  text-transform: var(--title-case, none);
+  letter-spacing: 0.01em;
+}
+.s-heading {
+  --fs: calc(58 * var(--heading-scale, 1));
+  font-family: var(--heading-family, var(--hand));
+  font-weight: var(--heading-weight, 400);
+  line-height: var(--heading-leading, 1.06);
+  text-transform: var(--heading-case, none);
+}
+.s-body { --fs: 29; line-height: var(--hand-leading, 1.45); }
+.s-note { --fs: 33; line-height: calc(var(--hand-leading, 1.45) * 0.91); }
+.s-caption { --fs: 25; line-height: calc(var(--hand-leading, 1.45) * 0.9); }
+.s-label { --fs: 22; line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase; }
+.s-stamp { --fs: 29; line-height: 1.2; letter-spacing: 0.08em; text-transform: uppercase; }
 .s-stamp .inner {
   display: inline-block;
   padding: 0.34em 0.7em 0.14em;
@@ -165,7 +217,7 @@
   -webkit-mask: var(--grain) 0 0 / 130px, linear-gradient(#000c, #000c);
   mask: var(--grain) 0 0 / 130px, linear-gradient(#000c, #000c);
 }
-.s-code { --fs: 25; font-family: 'JetBrains Mono', ui-monospace, monospace; line-height: 1.42; }
+.s-code { --fs: 25; --hand-scale: 1; letter-spacing: normal; text-transform: none; font-family: 'JetBrains Mono', ui-monospace, monospace; line-height: 1.42; }
 .s-code .inner {
   padding: 0.9em 1.1em;
   border-radius: calc(var(--u) * 8);
@@ -182,6 +234,7 @@
 .inner ul li { position: relative; }
 .inner ul li::before { content: '–'; position: absolute; left: -1.4em; }
 .inner li + li { margin-top: 0.42em; }
+.inner u { text-decoration-thickness: 0.07em; text-underline-offset: 0.2em; }
 .inner b, .inner strong { font-weight: 700; }
 .inner small { font-size: 0.86em; opacity: 0.72; }
 .inner a { color: inherit; text-decoration-thickness: 1.5px; text-underline-offset: 0.16em; }
@@ -207,40 +260,53 @@
   background: linear-gradient(#cf5a4c, #cf5a4c) 0 calc(var(--u) * 16) / 100% calc(var(--u) * 2.5) no-repeat, #fbf8ee;
   box-shadow: 0 0 0 1px #0002, 0 calc(var(--u) * 10) calc(var(--u) * 14) calc(var(--u) * -9) #0009;
 }
+/* The one typed thing in the book: a sheet out of a typewriter, torn off and stuck in. */
+.b-torn:not(.own-font) { --hand-scale: 1; font-family: var(--typed); line-height: 1.34; letter-spacing: normal; text-transform: none; }
+.b-torn.s-body { --fs: 31; }
+.b-torn { filter: drop-shadow(0 calc(var(--u) * 6) calc(var(--u) * 7) #2a1c0a52); }
 .b-torn .inner {
-  padding: calc(var(--u) * 58) calc(var(--u) * 40) calc(var(--u) * 40);
+  padding: calc(var(--u) * 54) calc(var(--u) * 46) calc(var(--u) * 50);
   background:
-    repeating-linear-gradient(#6f8fbf2e 0 calc(var(--u) * 2), transparent calc(var(--u) * 2) calc(var(--u) * 36)),
-    repeating-linear-gradient(90deg, #6f8fbf2e 0 calc(var(--u) * 2), transparent calc(var(--u) * 2) calc(var(--u) * 36)),
-    #fdfbf3;
-  clip-path: polygon(0 2.2%, 4% 0.6%, 9% 2.4%, 14% 0.4%, 19% 2%, 25% 0.8%, 31% 2.6%, 36% 0.5%, 42% 2.2%, 48% 0.9%, 54% 2.5%, 60% 0.3%, 66% 2.1%, 72% 0.7%, 78% 2.6%, 84% 0.5%, 90% 2.2%, 95% 0.8%, 100% 2%, 100% 100%, 0 100%);
-  filter: drop-shadow(0 calc(var(--u) * 5) calc(var(--u) * 5) #0005);
+    linear-gradient(178deg, #ffffff00 60%, #d9c9a233),
+    var(--fleck), var(--grain), var(--fibre),
+    #f8f4e9;
+  clip-path: polygon(0.0% calc(var(--u) * 5.0), 3.8% calc(var(--u) * 6.2), 7.7% calc(var(--u) * 10.2), 11.5% calc(var(--u) * 5.1), 15.4% calc(var(--u) * 5.6), 19.2% calc(var(--u) * 6.5), 23.1% calc(var(--u) * 2.0), 26.9% calc(var(--u) * 5.6), 30.8% calc(var(--u) * 6.9), 34.6% calc(var(--u) * 8.7), 38.5% calc(var(--u) * 1.0), 42.3% calc(var(--u) * 3.3), 46.2% calc(var(--u) * 1.0), 50.0% calc(var(--u) * 8.9), 53.8% calc(var(--u) * 7.6), 57.7% calc(var(--u) * 0.5), 61.5% calc(var(--u) * 10.8), 65.4% calc(var(--u) * 10.6), 69.2% calc(var(--u) * 7.2), 73.1% calc(var(--u) * 6.8), 76.9% calc(var(--u) * 1.7), 80.8% calc(var(--u) * 0.2), 84.6% calc(var(--u) * 5.8), 88.5% calc(var(--u) * 0.7), 92.3% calc(var(--u) * 2.1), 96.2% calc(var(--u) * 2.7), 100.0% calc(var(--u) * 0.3), calc(100% - var(--u) * 2.3) 11.1%, calc(100% - var(--u) * 2.2) 22.2%, calc(100% - var(--u) * 4.2) 33.3%, calc(100% - var(--u) * 2.6) 44.4%, calc(100% - var(--u) * 3.2) 55.6%, calc(100% - var(--u) * 2.5) 66.7%, calc(100% - var(--u) * 3.3) 77.8%, calc(100% - var(--u) * 2.3) 88.9%, 100.0% calc(100% - var(--u) * 3.3), 96.2% calc(100% - var(--u) * 12.0), 92.3% calc(100% - var(--u) * 11.9), 88.5% calc(100% - var(--u) * 10.1), 84.6% calc(100% - var(--u) * 8.5), 80.8% calc(100% - var(--u) * 3.8), 76.9% calc(100% - var(--u) * 2.8), 73.1% calc(100% - var(--u) * 3.5), 69.2% calc(100% - var(--u) * 0.8), 65.4% calc(100% - var(--u) * 9.2), 61.5% calc(100% - var(--u) * 4.8), 57.7% calc(100% - var(--u) * 10.2), 53.8% calc(100% - var(--u) * 4.6), 50.0% calc(100% - var(--u) * 11.5), 46.2% calc(100% - var(--u) * 10.2), 42.3% calc(100% - var(--u) * 0.0), 38.5% calc(100% - var(--u) * 2.5), 34.6% calc(100% - var(--u) * 10.9), 30.8% calc(100% - var(--u) * 5.6), 26.9% calc(100% - var(--u) * 11.8), 23.1% calc(100% - var(--u) * 4.8), 19.2% calc(100% - var(--u) * 0.9), 15.4% calc(100% - var(--u) * 7.6), 11.5% calc(100% - var(--u) * 9.3), 7.7% calc(100% - var(--u) * 3.2), 3.8% calc(100% - var(--u) * 1.0), 0.0% calc(100% - var(--u) * 4.0), calc(var(--u) * 4.8) 88.9%, calc(var(--u) * 3.8) 77.8%, calc(var(--u) * 0.6) 66.7%, calc(var(--u) * 1.2) 55.6%, calc(var(--u) * 0.5) 44.4%, calc(var(--u) * 0.3) 33.3%, calc(var(--u) * 4.0) 22.2%, calc(var(--u) * 0.9) 11.1%);
 }
+.b-torn .inner b, .b-torn .inner strong { letter-spacing: 0.02em; }
+.b-torn .inner hr { height: 0; margin: 0.7em 0 0.8em; border: 0; border-top: calc(var(--u) * 2) dashed #1f1b1680; }
+.b-torn .inner small { opacity: 0.78; }
+/* a box drawn round something with the same pen */
+.b-boxed .inner {
+  display: inline-block;
+  padding: 0.34em 0.7em 0.3em;
+  border: calc(var(--u) * 3.4) solid currentColor;
+  border-radius: 255px 14px 225px 16px / 14px 225px 18px 255px;
+}
+.b-boxed.a-center { text-align: center; }
 .b-kraft .inner {
   padding: calc(var(--u) * 26) calc(var(--u) * 30);
   border-radius: calc(var(--u) * 4);
-  background: var(--grain), #c9a875;
+  background: var(--fleck), var(--grain), var(--fibre), #bd9a63;
   box-shadow: 0 calc(var(--u) * 8) calc(var(--u) * 12) calc(var(--u) * -8) #0009;
 }
 /* a strip from a label maker: the ink colour is the colour of the tape */
 .b-dymo { color: #f4f0df; }
 .b-dymo .inner {
   display: inline-block;
-  padding: 0.42em 0.8em 0.22em;
-  border-radius: calc(var(--u) * 4);
-  background: #1f1d19;
-  box-shadow: inset 0 1px 0 #fff3, inset 0 -1px 0 #0006, 0 calc(var(--u) * 4) calc(var(--u) * 6) calc(var(--u) * -2) #0008;
-  text-shadow: 0 -1px 0 #0009, 0 1px 0 #fff4;
+  padding: 0.36em 0.9em 0.3em;
+  background: var(--grain), #1f1d19;
+  box-shadow: 0 calc(var(--u) * 4) calc(var(--u) * 6) calc(var(--u) * -2) #0008;
+  clip-path: polygon(0 6%, 1.5% 0, 98% 3%, 100% 10%, 99% 94%, 97.5% 100%, 2% 97%, 0 90%);
 }
-.b-dymo.i-red .inner { background: #b23a2a; }
-.b-dymo.i-blue .inner { background: #2c4a86; }
-.b-dymo.i-green .inner { background: #3d6b35; }
-.b-dymo.i-white .inner { background: #f1ebd8; color: #26221b; text-shadow: none; }
+.b-dymo.i-red .inner { background: var(--grain), #b23a2a; }
+.b-dymo.i-blue .inner { background: var(--grain), #2c4a86; }
+.b-dymo.i-green .inner { background: var(--grain), #3d6b35; }
+.b-dymo.i-white .inner { background: var(--grain), #f1ebd8; color: #26221b; }
 
 /* photos */
 .photo .shot { position: absolute; inset: 0; overflow: hidden; background: #d9d0b8; }
 .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.photo figcaption { font: 500 calc(var(--u) * 42) / 1 'Caveat', 'Bradley Hand', cursive; text-align: center; }
+.photo figcaption { font: 400 calc(var(--u) * 25) / 1.2 var(--hand); text-align: center; }
 .f-polaroid, .f-print, .f-taped {
   background: #fbf9f1;
   box-shadow: 0 0 0 1px #0000001f, 0 calc(var(--u) * 12) calc(var(--u) * 18) calc(var(--u) * -9) #000b;
@@ -250,8 +316,8 @@
 .f-print .shot, .f-taped .shot { inset: calc(var(--u) * 16); }
 .f-print figcaption, .f-taped figcaption, .f-none figcaption { position: absolute; left: 0; right: 0; top: calc(100% + var(--u) * 12); }
 .f-taped::before, .f-taped::after, .tape {
-  background: var(--grain), repeating-linear-gradient(90deg, #ffffff2e 0 calc(var(--u) * 10), transparent calc(var(--u) * 10) calc(var(--u) * 20)), var(--tape, #e7d9a2d9);
-  box-shadow: 0 1px 2px #0000002e;
+  background: var(--grain), var(--tape-print, repeating-linear-gradient(90deg, #ffffff2e 0 calc(var(--u) * 10), transparent calc(var(--u) * 10) calc(var(--u) * 20))), var(--tape, #e7d9a2d9);
+  box-shadow: var(--tape-shadow, 0 1px 2px #0000002e);
   clip-path: polygon(0 12%, 3% 0, 6% 14%, 9% 2%, 12% 12%, 12% 0, 88% 0, 88% 12%, 91% 2%, 94% 14%, 97% 0, 100% 12%, 100% 88%, 97% 100%, 94% 86%, 91% 98%, 88% 88%, 88% 100%, 12% 100%, 12% 88%, 9% 98%, 6% 86%, 3% 100%, 0 88%);
 }
 .f-taped::before, .f-taped::after {
@@ -270,7 +336,118 @@
   border: 2px dashed #26221b80;
   background: #26221b12;
 }
-.photo.empty .shot::after { content: 'photo goes here'; font: 500 calc(var(--u) * 40) 'Caveat', cursive; opacity: 0.7; }
+.photo.empty .shot::after { content: 'photo goes here'; font: 400 calc(var(--u) * 26) var(--hand); opacity: 0.7; }
+
+/* A peel-off sticker: a white edge cut all the way round whatever's there, even a cut-out's own
+   outline. Each white shadow pushes the edge one way; eight of them round it out. */
+.f-sticker, .sticker.cut {
+  --e: calc(var(--u) * 5);
+  --d: calc(var(--u) * 3.5);
+  --peel: drop-shadow(var(--e) 0 0 #fdfbf4) drop-shadow(calc(var(--e) * -1) 0 0 #fdfbf4)
+    drop-shadow(0 var(--e) 0 #fdfbf4) drop-shadow(0 calc(var(--e) * -1) 0 #fdfbf4)
+    drop-shadow(var(--d) var(--d) 0 #fdfbf4) drop-shadow(calc(var(--d) * -1) calc(var(--d) * -1) 0 #fdfbf4)
+    drop-shadow(var(--d) calc(var(--d) * -1) 0 #fdfbf4) drop-shadow(calc(var(--d) * -1) var(--d) 0 #fdfbf4)
+    drop-shadow(0 calc(var(--u) * 5) calc(var(--u) * 5) #00000059);
+  filter: var(--peel);
+}
+.f-sticker[data-goto]:hover, .f-sticker[data-goto]:focus-visible,
+.sticker.cut[data-goto]:hover, .sticker.cut[data-goto]:focus-visible { filter: var(--peel) drop-shadow(0 calc(var(--u) * 6) calc(var(--u) * 6) #0004); }
+.f-sticker .shot, .f-none .shot { background: none; }
+/* A cut-out keeps its own outline, so it's shown whole rather than cropped. */
+.f-sticker.sh-rect img { object-fit: contain; }
+.f-sticker figcaption, .f-stamp figcaption, .f-torn figcaption { position: absolute; left: 0; right: 0; top: calc(100% + var(--u) * 16); }
+
+/* what a photo's cut to */
+.sh-rounded .shot { border-radius: calc(var(--u) * 44); }
+.sh-circle .shot { border-radius: 50%; }
+.sh-arch .shot { border-radius: 999em 999em 0 0; }
+.sh-star .shot { clip-path: polygon(50% 0, 63% 36%, 100% 38%, 71% 62%, 81% 100%, 50% 78%, 19% 100%, 29% 62%, 0 38%, 37% 36%); }
+.sh-heart .shot { -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M50 96C18 72 0 52 3 30C6 8 36 0 50 24C64 0 94 8 97 30C100 52 82 72 50 96Z'/%3E%3C/svg%3E") 0 0 / 100% 100%; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M50 96C18 72 0 52 3 30C6 8 36 0 50 24C64 0 94 8 97 30C100 52 82 72 50 96Z'/%3E%3C/svg%3E") 0 0 / 100% 100%; }
+.sh-scallop .shot { -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-6 -6 112 112' preserveAspectRatio='none'%3E%3Cpath d='M50 6Q62.5 -4.6 69.1 10.4Q84.9 6.2 84.4 22.6Q100.5 25.7 92.9 40.2Q106 50 92.9 59.8Q100.5 74.3 84.4 77.4Q84.9 93.8 69.1 89.6Q62.5 104.6 50 94Q37.5 104.6 30.9 89.6Q15.1 93.8 15.6 77.4Q-0.5 74.3 7.1 59.8Q-6 50 7.1 40.2Q-0.5 25.7 15.6 22.6Q15.1 6.2 30.9 10.4Q37.5 -4.6 50 6Z'/%3E%3C/svg%3E") 0 0 / 100% 100%; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-6 -6 112 112' preserveAspectRatio='none'%3E%3Cpath d='M50 6Q62.5 -4.6 69.1 10.4Q84.9 6.2 84.4 22.6Q100.5 25.7 92.9 40.2Q106 50 92.9 59.8Q100.5 74.3 84.4 77.4Q84.9 93.8 69.1 89.6Q62.5 104.6 50 94Q37.5 104.6 30.9 89.6Q15.1 93.8 15.6 77.4Q-0.5 74.3 7.1 59.8Q-6 50 7.1 40.2Q-0.5 25.7 15.6 22.6Q15.1 6.2 30.9 10.4Q37.5 -4.6 50 6Z'/%3E%3C/svg%3E") 0 0 / 100% 100%; }
+
+/* a postage stamp, with its perforated edge */
+.f-stamp, .f-torn { filter: drop-shadow(0 calc(var(--u) * 7) calc(var(--u) * 6) #00000052); }
+.f-stamp::before, .f-torn::before { content: ''; position: absolute; inset: 0; background: var(--fleck), var(--grain), #fbf8ee; }
+.f-stamp::before {
+  --r: calc(var(--u) * 9);
+  -webkit-mask:
+    radial-gradient(var(--r), #0000 97%, #000) round calc(var(--r) * -1.5) calc(var(--r) * -1.5) / calc(var(--r) * 3) calc(var(--r) * 3),
+    linear-gradient(#000 0 0) 50% / calc(100% - var(--r) * 3) calc(100% - var(--r) * 3) no-repeat;
+  mask:
+    radial-gradient(var(--r), #0000 97%, #000) round calc(var(--r) * -1.5) calc(var(--r) * -1.5) / calc(var(--r) * 3) calc(var(--r) * 3),
+    linear-gradient(#000 0 0) 50% / calc(100% - var(--r) * 3) calc(100% - var(--r) * 3) no-repeat;
+}
+.f-stamp .shot { inset: calc(var(--u) * 30); }
+/* a print torn out of something, white border and all */
+.f-torn::before { clip-path: polygon(0% calc(var(--u) * 3.6), 3.8% calc(var(--u) * 1.7), 7.7% calc(var(--u) * 7.2), 11.5% calc(var(--u) * 0.8), 15.4% calc(var(--u) * 5.9), 19.2% calc(var(--u) * 4), 23.1% calc(var(--u) * 0.6), 26.9% calc(var(--u) * 5.6), 30.8% calc(var(--u) * 0.4), 34.6% calc(var(--u) * 4.8), 38.5% calc(var(--u) * 0.8), 42.3% calc(var(--u) * 1), 46.2% calc(var(--u) * 4.7), 50% calc(var(--u) * 9.1), 53.8% calc(var(--u) * 1.4), 57.7% calc(var(--u) * 2.5), 61.5% calc(var(--u) * 6.9), 65.4% calc(var(--u) * 10.4), 69.2% calc(var(--u) * 6.3), 73.1% calc(var(--u) * 4.4), 76.9% calc(var(--u) * 10.7), 80.8% calc(var(--u) * 0.5), 84.6% calc(var(--u) * 9.4), 88.5% calc(var(--u) * 3.2), 92.3% calc(var(--u) * 1.6), 96.2% calc(var(--u) * 1.3), 100% calc(var(--u) * 3.4), calc(100% - var(--u) * 7.3) 10%, calc(100% - var(--u) * 1.6) 20%, calc(100% - var(--u) * 5.2) 30%, calc(100% - var(--u) * 5.8) 40%, calc(100% - var(--u) * 3.4) 50%, calc(100% - var(--u) * 4.9) 60%, calc(100% - var(--u) * 0.6) 70%, calc(100% - var(--u) * 0.5) 80%, calc(100% - var(--u) * 1.9) 90%, 100% calc(100% - var(--u) * 7.5), 96.2% calc(100% - var(--u) * 4.7), 92.3% calc(100% - var(--u) * 3.5), 88.5% calc(100% - var(--u) * 6.4), 84.6% calc(100% - var(--u) * 5), 80.8% calc(100% - var(--u) * 3.3), 76.9% calc(100% - var(--u) * 8.7), 73.1% calc(100% - var(--u) * 7.7), 69.2% calc(100% - var(--u) * 2.7), 65.4% calc(100% - var(--u) * 6.3), 61.5% calc(100% - var(--u) * 5.8), 57.7% calc(100% - var(--u) * 9.6), 53.8% calc(100% - var(--u) * 8), 50% calc(100% - var(--u) * 3.2), 46.2% calc(100% - var(--u) * 10.8), 42.3% calc(100% - var(--u) * 1.3), 38.5% calc(100% - var(--u) * 4.6), 34.6% calc(100% - var(--u) * 8.3), 30.8% calc(100% - var(--u) * 1.7), 26.9% calc(100% - var(--u) * 5.4), 23.1% calc(100% - var(--u) * 0.4), 19.2% calc(100% - var(--u) * 7.4), 15.4% calc(100% - var(--u) * 8.4), 11.5% calc(100% - var(--u) * 6.3), 7.7% calc(100% - var(--u) * 9.6), 3.8% calc(100% - var(--u) * 3.5), 0% calc(100% - var(--u) * 7.6), calc(var(--u) * 5.3) 90%, calc(var(--u) * 5.2) 80%, calc(var(--u) * 4.1) 70%, calc(var(--u) * 7.6) 60%, calc(var(--u) * 8.5) 50%, calc(var(--u) * 4.3) 40%, calc(var(--u) * 6) 30%, calc(var(--u) * 0.5) 20%, calc(var(--u) * 6.3) 10%); }
+.f-torn .shot { inset: calc(var(--u) * 26); }
+
+/* cut out with scissors, or torn by hand */
+.photo .core { position: absolute; inset: 0; background: var(--fibre), var(--grain), #f4f0e4; }
+.f-none.cut, .f-none.edge-torn { filter: drop-shadow(0 calc(var(--u) * 4) calc(var(--u) * 4) #00000047); }
+.f-none.on-scrap { filter: drop-shadow(0 calc(var(--u) * 5) calc(var(--u) * 6) #00000047); }
+.photo.cut .shot, .photo.edge-torn .shot { background: none; }
+/* a torn scrap of paper it's stuck on */
+.photo .scrap { position: absolute; background: var(--fibre), var(--grain), #f6f1e3; }
+.photo .scrap i { position: absolute; inset: 0; background: var(--fleck), var(--grain), var(--fibre), var(--scrap, #e9dcc0); }
+.p-pink { --scrap: #d9979b; }
+.p-cream { --scrap: #e9dcc0; }
+.p-kraft { --scrap: #c3a074; }
+.p-blue { --scrap: #3f5d86; }
+.p-mustard { --scrap: #d8a443; }
+.photo .scrap.p-grid i {
+  background:
+    repeating-linear-gradient(#5f7fae4d 0 calc(var(--u) * 1.5), transparent calc(var(--u) * 1.5) calc(var(--u) * 22)),
+    repeating-linear-gradient(90deg, #5f7fae4d 0 calc(var(--u) * 1.5), transparent calc(var(--u) * 1.5) calc(var(--u) * 22)),
+    var(--grain), #f7f4ea;
+}
+.photo .scrap.p-print i {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 calc(var(--u) * 9), #2b261f40 calc(var(--u) * 9) calc(var(--u) * 13), transparent calc(var(--u) * 13) calc(var(--u) * 20)),
+    var(--fleck), var(--grain), #ebe3cf;
+}
+/* how it's printed */
+.tone-mono img { filter: grayscale(1) contrast(1.08); }
+.tone-old img { filter: grayscale(1) sepia(0.22) contrast(1.18) brightness(0.97); }
+.tone-sepia img { filter: sepia(0.7) contrast(1.05) saturate(0.85); }
+.tone-faded img { filter: saturate(0.55) contrast(0.88) brightness(1.07); }
+
+/* collages: several photos printed together, a photo-booth strip, or a strip of film */
+.collage .cells {
+  position: absolute;
+  inset: calc(var(--top) * var(--u)) calc(var(--side) * var(--u)) calc(var(--bottom) * var(--u));
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--rows), minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: calc(var(--gap) * var(--u));
+}
+.collage .cell { position: relative; overflow: hidden; background: #d9d0b8; }
+.collage .cell img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.collage figcaption { position: absolute; left: 0; right: 0; top: calc(100% + var(--u) * 12); font: 400 calc(var(--u) * 25) / 1.2 var(--hand); text-align: center; }
+.l-grid, .l-mosaic, .l-strip {
+  background: #fbf9f1;
+  box-shadow: 0 0 0 1px #0000001f, 0 calc(var(--u) * 12) calc(var(--u) * 18) calc(var(--u) * -9) #000b;
+}
+.l-strip figcaption { top: auto; bottom: calc(var(--u) * 30); left: 4%; right: 4%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.l-film {
+  background: #1d1b18;
+  box-shadow: 0 calc(var(--u) * 12) calc(var(--u) * 18) calc(var(--u) * -9) #000b;
+}
+.l-film::before, .l-film::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--u) * 8);
+  right: calc(var(--u) * 8);
+  height: calc(var(--u) * 20);
+  background: repeating-linear-gradient(90deg, transparent 0 calc(var(--u) * 10), #efe7d2 calc(var(--u) * 10) calc(var(--u) * 26), transparent calc(var(--u) * 26) calc(var(--u) * 36));
+  border-radius: calc(var(--u) * 3);
+}
+.l-film::before { top: calc(var(--u) * 19); }
+.l-film::after { bottom: calc(var(--u) * 19); }
+.l-film .cell { background: #000; }
+.collage.empty { min-height: calc(var(--u) * 200); border: 2px dashed #26221b80; background: #26221b12; box-shadow: none; }
+.collage.empty::after { content: 'collage: add photos'; position: absolute; inset: 0; display: grid; place-items: center; font: 400 calc(var(--u) * 26) var(--hand); opacity: 0.7; }
 
 /* stickers and tape */
 .tape-cream { --tape: #e7d9a2d9; }
@@ -278,24 +455,67 @@
 .tape-red { --tape: #cf6a58d9; }
 .tape-blue { --tape: #8fa9cfd9; }
 .tape-kraft { --tape: #b99562e6; }
+.tape-black { --tape: #1b1916f2; }
+.tape-black, .tape-red, .tape-duct { --tape-shadow: 0 calc(var(--u) * 3) calc(var(--u) * 4) calc(var(--u) * -1) #0006; }
+/* washi and the rest: a color, and what's printed on it */
+.tape-pink { --tape: #e7a7aed9; }
+.tape-mustard { --tape: #ddb046e0; }
+.tape-clear {
+  --tape: #ffffff26;
+  --tape-print: linear-gradient(172deg, #ffffff73 0 22%, #ffffff00 40% 70%, #ffffff40 85%);
+  --tape-shadow: 0 0 0 1px #ffffff40;
+}
+.tape-dots { --tape: #d98d93e0; --tape-print: radial-gradient(circle, #fff6ea 0 calc(var(--u) * 3.5), transparent calc(var(--u) * 4.2)) 0 0 / calc(var(--u) * 16) calc(var(--u) * 16); }
+.tape-stripes { --tape: #f1e6cce6; --tape-print: repeating-linear-gradient(-45deg, #b9473bd0 0 calc(var(--u) * 6), transparent calc(var(--u) * 6) calc(var(--u) * 14)); }
+.tape-check {
+  --tape: #f3ead6e6;
+  --tape-print:
+    repeating-linear-gradient(90deg, #c2433a73 0 calc(var(--u) * 9), transparent calc(var(--u) * 9) calc(var(--u) * 18)),
+    repeating-linear-gradient(0deg, #c2433a73 0 calc(var(--u) * 9), transparent calc(var(--u) * 9) calc(var(--u) * 18));
+}
+.tape-grid {
+  --tape: #a9cdb8e0;
+  --tape-print:
+    repeating-linear-gradient(90deg, #ffffff99 0 calc(var(--u) * 1.4), transparent calc(var(--u) * 1.4) calc(var(--u) * 11)),
+    repeating-linear-gradient(0deg, #ffffff99 0 calc(var(--u) * 1.4), transparent calc(var(--u) * 1.4) calc(var(--u) * 11));
+}
+.tape-stars { --tape: #2d3d63eb; --tape-print: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23f3d98b' d='M10 3l1.8 4.3 4.6.3-3.5 3 1.1 4.5L10 12.6 6 15.1l1.1-4.5-3.5-3 4.6-.3z'/%3E%3C/svg%3E") 0 0 / calc(var(--u) * 22) calc(var(--u) * 22); }
+.tape-ruler {
+  --tape: #e9c84ae8;
+  --tape-print:
+    repeating-linear-gradient(90deg, #26221bcc 0 calc(var(--u) * 1.6), transparent calc(var(--u) * 1.6) calc(var(--u) * 40)) 0 0 / 100% 46% no-repeat,
+    repeating-linear-gradient(90deg, #26221b99 0 calc(var(--u) * 1.2), transparent calc(var(--u) * 1.2) calc(var(--u) * 8)) 0 0 / 100% 24% no-repeat;
+}
+.tape-print {
+  --tape: #ece4d2eb;
+  --tape-print: repeating-linear-gradient(0deg, transparent 0 calc(var(--u) * 5), #3a332a59 calc(var(--u) * 5) calc(var(--u) * 7.5), transparent calc(var(--u) * 7.5) calc(var(--u) * 12));
+}
+.tape-duct {
+  --tape: #8e9196;
+  --tape-print:
+    linear-gradient(175deg, #ffffff33, #ffffff00 45%, #0000001f),
+    repeating-linear-gradient(0deg, #0000001a 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, #ffffff17 0 1px, transparent 1px 3px);
+}
 .sticker .art { overflow: visible; }
+/* a drawing made on a scrap of something and stuck in */
 .sticker.carded {
   box-sizing: border-box;
-  padding: calc(var(--u) * 30);
-  background: #fbf9f1;
-  box-shadow: 0 0 0 1px #0000001f, 0 calc(var(--u) * 12) calc(var(--u) * 18) calc(var(--u) * -9) #000b;
+  padding: calc(var(--u) * 26);
+  background: var(--fleck), var(--grain), var(--fibre), #f8f4e9;
+  box-shadow: 0 0 0 1px #0000001a, 0 calc(var(--u) * 10) calc(var(--u) * 16) calc(var(--u) * -9) #000a;
 }
-.sticker.carded::before {
-  content: '';
-  position: absolute;
-  top: calc(var(--u) * -24);
-  left: calc(50% - var(--u) * 80);
-  width: calc(var(--u) * 160);
-  height: calc(var(--u) * 46);
-  rotate: -3deg;
-  background: var(--grain), repeating-linear-gradient(90deg, #ffffff2e 0 calc(var(--u) * 10), transparent calc(var(--u) * 10) calc(var(--u) * 20)), #e7d9a2d9;
-  clip-path: polygon(0 12%, 3% 0, 6% 14%, 9% 2%, 12% 12%, 12% 0, 88% 0, 88% 12%, 91% 2%, 94% 14%, 97% 0, 100% 12%, 100% 88%, 97% 100%, 94% 86%, 91% 98%, 88% 88%, 88% 100%, 12% 100%, 12% 88%, 9% 98%, 6% 86%, 3% 100%, 0 88%);
+.sticker.carded.on-kraft { background: var(--fleck), var(--grain), var(--fibre), #bd9a63; }
+.sticker.carded.on-kraft .art .w { fill: #d6bb8c; }
+.sticker.carded.on-graph {
+  background:
+    repeating-linear-gradient(#5f7fae3d 0 calc(var(--u) * 1.6), transparent calc(var(--u) * 1.6) calc(var(--u) * 26)),
+    repeating-linear-gradient(90deg, #5f7fae3d 0 calc(var(--u) * 1.6), transparent calc(var(--u) * 1.6) calc(var(--u) * 26)),
+    var(--grain), #f6f3e6;
 }
+.sticker.carded.on-graph .art .w { fill: #f6f3e6; }
+.sticker .art text { fill: var(--pen); stroke: none; font-family: var(--hand); }
+.sticker .art .soft { opacity: 0.45; }
 .sticker .art * { vector-effect: non-scaling-stroke; }
 .sticker .art { stroke: var(--pen); stroke-width: calc(var(--u) * 3.6); }
 .sticker .art .t { stroke-width: calc(var(--u) * 2.6); }
@@ -303,6 +523,8 @@
 .sticker .art .w { fill: #fbf8ee; }
 .sticker .art .k { fill: var(--pen); stroke-width: calc(var(--u) * 1.4); }
 .sticker .art .red { fill: #c8402f; }
+.sticker .art .redline { stroke: #b23a2a; }
+.sticker .art text.redink { fill: #b23a2a; }
 .sticker.i-red .art { --pen: #b23a2a; }
 .sticker.i-blue .art { --pen: #2c4a86; }
 .sticker.i-green .art { --pen: #3d6b35; }

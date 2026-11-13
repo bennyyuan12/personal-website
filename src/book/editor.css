@@ -111,7 +111,49 @@ body.editing .slot .page.target::after {
 .ed-stickers button:hover:not(:disabled) { background: #fff; }
 .ed-stickers .art { stroke-width: 6; }
 .ed-stickers .art * { vector-effect: none; }
-.ed-stickers .ed-tape { background: var(--tape, #e7d9a2); clip-path: none; }
+.ed-stickers .ed-tape { --u: 0.55px; background: var(--tape-print, none), var(--tape, #e7d9a2), #f4f0df; clip-path: none; }
 .ed-inks { display: flex; gap: 5px; }
 .ed-inks button { width: 22px; min-height: 22px; padding: 0; border-radius: 50%; }
 .ed-inks button.on { outline: 2px solid #2f7cf6; outline-offset: 1px; }
+.ed-thumbs { display: grid; gap: 4px; margin-top: 8px; }
+.ed-thumb { display: flex; align-items: center; gap: 4px; }
+.ed-thumb img { width: 46px; height: 34px; margin-right: auto; border-radius: 3px; object-fit: cover; }
+.ed-thumb button { min-height: 22px; padding: 0 7px; }
+
+/* the scissors */
+.cutter {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: #0b0e09f2;
+  color: #e6edd6;
+  font: 12.5px/1.35 ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+.cutter-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid #ffffff24; }
+.cutter-bar b { font-size: 14px; }
+.cutter-hint { margin: 0; opacity: 0.7; }
+.cutter-gap { flex: 1; }
+.cutter-torn { display: flex; align-items: center; gap: 4px; }
+.cutter button {
+  min-height: 27px;
+  padding: 3px 10px;
+  border: 1px solid #ffffff30;
+  border-radius: 5px;
+  background: #ffffff12;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.cutter button:hover:not(:disabled) { background: #ffffff26; }
+.cutter button:disabled { opacity: 0.35; cursor: default; }
+.cutter button.primary { border-color: #cfe8a0; background: #cfe8a0; color: #11160e; font-weight: 600; }
+.cutter-stage { position: relative; place-self: center; line-height: 0; }
+.cutter-stage img { max-width: calc(100vw - 48px); max-height: calc(100vh - 92px); user-select: none; -webkit-user-select: none; }
+.cutter-draw { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; cursor: crosshair; touch-action: none; }
+.cutter-draw .shade { fill: #000000a6; }
+.cutter-draw .line { fill: none; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.cutter-draw .under { stroke: #000; stroke-width: 3; }
+.cutter-draw .over { stroke: #fff; stroke-width: 1.6; stroke-dasharray: 6 5; }
+.cutter-draw .start { fill: none; stroke: #cfe8a0; stroke-width: 13; stroke-linecap: round; vector-effect: non-scaling-stroke; }

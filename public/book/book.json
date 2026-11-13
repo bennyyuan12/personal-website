@@ -75,26 +75,59 @@
               "align": "center"
             },
             {
-              "id": "i7",
-              "type": "sticker",
-              "art": "nap",
-              "x": 320,
-              "y": 850,
-              "w": 360,
-              "h": 252
+              "id": "imwfc5m3zzvx",
+              "type": "photo",
+              "src": "book/photos/img-2622-a8211452.jpg",
+              "frame": "polaroid",
+              "w": 361,
+              "h": 527,
+              "x": 135,
+              "y": 819,
+              "rot": -3
             },
             {
-              "id": "i8",
-              "type": "text",
-              "style": "stamp",
-              "html": "If found, return to the grass",
-              "x": 150,
-              "y": 1164,
-              "w": 700,
-              "ink": "red",
-              "size": 0.74,
-              "align": "center",
+              "id": "imwfc65311lx",
+              "type": "sticker",
+              "art": "tape-blue",
+              "x": 186,
+              "y": 790,
+              "w": 220,
+              "h": 50,
               "rot": -4
+            },
+            {
+              "id": "imwfc6ae0zme",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 564,
+              "y": 1013,
+              "w": 246,
+              "h": 91,
+              "rot": 138.4
+            },
+            {
+              "id": "imwfc6jwc14j",
+              "type": "text",
+              "x": 603,
+              "y": 942,
+              "style": "caption",
+              "html": "If found, return to him",
+              "w": 420
+            }
+          ]
+        },
+        {
+          "id": "page",
+          "items": [
+            {
+              "id": "imwfeszcdo4x",
+              "type": "text",
+              "x": 106,
+              "y": 543,
+              "style": "caption",
+              "html": "“Everyone's got to be different. You can't copy anybody and end up with anything. If you copy, it means you're working without any real feeling. And without feeling, whatever you do amounts to nothing.”",
+              "w": 848,
+              "size": 1.08
             }
           ]
         },
@@ -370,7 +403,7 @@
               "id": "iw",
               "type": "text",
               "style": "body",
-              "html": "<b>Boston Global Medical Collaboration</b><br><small>Full-Stack & Analytics Engineer · 2026 – now · p. {{page}}</small>",
+              "html": "<b>BGMC + Advancing Autism</b><br><small>Full-Stack & Analytics Engineer · 2026 – now · p. {{page}}</small>",
               "x": 196,
               "y": 478,
               "w": 730,
@@ -483,79 +516,79 @@
               "id": "i15",
               "type": "text",
               "style": "body",
-              "html": "<b>SafeLease NYC</b><br><small>NVIDIA Spark Hackathon prototype · p. {{page}}</small>",
+              "html": "<b>Home Cardiac Rehab MVP</b><br><small>2nd place, Pulse Foundry hackathon · p. {{page}}</small>",
               "x": 196,
               "y": 148,
               "w": 730,
               "backing": "card",
               "size": 0.88,
               "rot": -0.4,
-              "goto": "safelease"
+              "goto": "cardiac-rehab"
             },
             {
               "id": "i16",
               "type": "sticker",
-              "art": "building",
+              "art": "heart",
               "x": 62,
               "y": 162,
               "w": 118,
               "h": 118,
               "rot": -1.7,
-              "goto": "safelease"
+              "goto": "cardiac-rehab"
             },
             {
               "id": "i17",
               "type": "text",
               "style": "body",
-              "html": "<b>Home Cardiac Rehab MVP</b><br><small>2nd place, Pulse Foundry hackathon · p. {{page}}</small>",
+              "html": "<b>CareCall</b><br><small>Siri → an AI phone agent · 2026 · p. {{page}}</small>",
               "x": 196,
               "y": 328,
               "w": 730,
               "backing": "card",
               "size": 0.88,
               "rot": -0.3,
-              "goto": "cardiac-rehab"
+              "goto": "carecall"
             },
             {
               "id": "i18",
               "type": "sticker",
-              "art": "heart",
+              "art": "phone",
               "x": 62,
               "y": 342,
               "w": 118,
               "h": 118,
               "rot": -1,
-              "goto": "cardiac-rehab"
+              "goto": "carecall"
             },
             {
               "id": "i19",
               "type": "text",
               "style": "body",
-              "html": "<b>AI Tailor Research Agent</b><br><small>Supervised voice prototype · p. {{page}}</small>",
+              "html": "<b>SafeLease NYC</b><br><small>NVIDIA Spark Hackathon prototype · p. {{page}}</small>",
               "x": 196,
               "y": 508,
               "w": 730,
               "backing": "card",
               "size": 0.88,
               "rot": 0.1,
-              "goto": "tailor-agent"
+              "goto": "safelease"
             },
             {
               "id": "i1a",
               "type": "sticker",
-              "art": "phone",
+              "art": "building",
               "x": 62,
               "y": 522,
               "w": 118,
               "h": 118,
               "rot": -3.2,
-              "goto": "tailor-agent"
+              "goto": "safelease"
             },
             {
               "id": "i1b",
               "type": "text",
               "style": "body",
-              "html": "<b>KYC Intake & Adjudication MVP</b><br><small>End-to-end MVP · 2025 · p. {{page}}</small>",
+              "html": "<b>Percy: KYC Intake & Review</b><br><small>End-to-end MVP · 2025 · p. {{page}}</small>",
               "x": 196,
               "y": 688,
               "w": 730,
@@ -579,7 +612,7 @@
               "id": "i1d",
               "type": "text",
               "style": "body",
-              "html": "<b>Revenue Funnel & Churn Analytics</b><br><small>Stripe + HubSpot · 2024 · p. {{page}}</small>",
+              "html": "<b>Revenue Funnel & Churn</b><br><small>SQL on synthetic data · 2024 · p. {{page}}</small>",
               "x": 196,
               "y": 868,
               "w": 730,
@@ -614,7 +647,7 @@
               "id": "i1g",
               "type": "text",
               "style": "body",
-              "html": "<b>CSSA</b><br><small>Student leadership · p. {{page}}</small>",
+              "html": "<b>CSSA</b><br><small>Student leadership · since 2023 · p. {{page}}</small>",
               "x": 196,
               "y": 1136,
               "w": 730,
@@ -638,7 +671,7 @@
         },
         {
           "id": "bgmc",
-          "name": "Boston Global Medical Collaboration",
+          "name": "BGMC",
           "items": [
             {
               "id": "i1i",
@@ -646,105 +679,174 @@
               "style": "label",
               "html": "Work · 01",
               "x": 72,
-              "y": 78,
-              "w": 600
+              "y": 58,
+              "w": 380
             },
             {
               "id": "i1j",
               "type": "text",
-              "style": "title",
-              "html": "Boston Global Medical Collaboration",
-              "x": 68,
-              "y": 132,
-              "w": 864,
-              "size": 0.68,
-              "rot": -1.2
+              "style": "caption",
+              "html": "Jun 2026 → now",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
             },
             {
               "id": "i1k",
-              "type": "sticker",
-              "art": "underline",
-              "x": 70,
-              "y": 349.91679999999997,
-              "w": 500,
-              "h": 34,
-              "ink": "red",
-              "rot": -1
+              "type": "text",
+              "style": "title",
+              "html": "BGMC",
+              "x": 66,
+              "y": 98,
+              "w": 868,
+              "size": 1.35,
+              "rot": -0.8
             },
             {
               "id": "i1l",
-              "type": "text",
-              "style": "label",
-              "html": "Full-Stack & Analytics Engineer",
-              "x": 72,
-              "y": 409.91679999999997,
-              "w": 860,
-              "backing": "dymo",
-              "rot": -0.4
+              "type": "sticker",
+              "art": "underline",
+              "x": 68,
+              "y": 248.44984,
+              "w": 320.23723679999995,
+              "h": 30,
+              "ink": "red",
+              "rot": -0.8
             },
             {
               "id": "i1m",
               "type": "text",
-              "style": "stamp",
-              "html": "Jun 2026 – now",
-              "x": 540,
-              "y": 491.91679999999997,
-              "w": 400,
-              "ink": "red",
-              "rot": 5,
-              "size": 0.86,
-              "align": "center"
+              "style": "caption",
+              "html": "Boston Global Medical Collaboration + Advancing Autism",
+              "x": 72,
+              "y": 286.44984,
+              "w": 856
             },
             {
               "id": "i1n",
               "type": "text",
-              "style": "body",
-              "html": "Bilingual registration, admin and inquiry workflows, plus the first-party analytics that show how people move through them.",
-              "x": 80,
-              "y": 616.25024,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": -1.2
+              "style": "label",
+              "html": "Full-Stack & Analytics Engineer",
+              "x": 72,
+              "y": 336.19984,
+              "w": 860,
+              "backing": "boxed",
+              "rot": -0.2
             },
             {
               "id": "i1o",
-              "type": "sticker",
-              "art": "badge",
-              "x": 580,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": 6,
-              "card": true
+              "type": "text",
+              "style": "caption",
+              "html": "a team of two",
+              "x": 570.2339999999999,
+              "y": 345.19984,
+              "w": 357.76600000000013
             },
             {
               "id": "i1p",
-              "type": "text",
-              "style": "note",
-              "html": "bilingual, start to finish",
-              "x": 96,
-              "y": 1000,
+              "type": "sticker",
+              "art": "bars-ab",
+              "x": 64,
+              "y": 428.19984,
               "w": 400,
-              "rot": -3
+              "h": 300,
+              "card": true,
+              "on": "graph",
+              "rot": -1.4
             },
             {
               "id": "i1q",
               "type": "sticker",
-              "art": "arrow",
-              "x": 370,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -8
+              "art": "tape-red",
+              "x": 180,
+              "y": 404.19984,
+              "w": 168,
+              "h": 44,
+              "rot": 1.5
             },
             {
               "id": "i1r",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 494,
+              "y": 442.19984,
+              "w": 26,
+              "h": 128.3242,
+              "rot": 0
+            },
+            {
+              "id": "i1s",
+              "type": "text",
+              "style": "note",
+              "html": "same page, same three days. the only difference was a popup.",
+              "x": 538,
+              "y": 440.19984,
+              "w": 392,
+              "ink": "blue",
+              "rot": 1.2,
+              "size": 0.92
+            },
+            {
+              "id": "i1t",
+              "type": "text",
+              "style": "note",
+              "html": "don’t argue about it. test it.",
+              "x": 538,
+              "y": 611.11884,
+              "w": 392,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": -1.4
+            },
+            {
+              "id": "i1u",
+              "type": "sticker",
+              "art": "tape-red",
+              "x": 389,
+              "y": 554.19984,
+              "w": 150,
+              "h": 34,
+              "rot": 90
+            },
+            {
+              "id": "i1v",
+              "type": "text",
+              "style": "heading",
+              "html": "what I took away",
+              "x": 72,
+              "y": 778.19984,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i1w",
+              "type": "sticker",
+              "art": "underline",
+              "x": 72,
+              "y": 828.19984,
+              "w": 344.427088,
+              "h": 22,
+              "rot": -0.6
+            },
+            {
+              "id": "i1x",
+              "type": "text",
+              "style": "body",
+              "html": "<p>I thought this job was building forms. Most of it turned out to be finding the spot where people give up on them.</p><p>We had a Register button that 27 of every 100 visitors clicked. Instead of arguing about a popup, we split 600 visitors in half for three days: 81 clicks without it, 279 with it. That settled it.</p><p>The other thing: a click is not a registration. I count them separately now.</p>",
+              "x": 72,
+              "y": 860.19984,
+              "w": 856
+            },
+            {
+              "id": "i1y",
               "type": "text",
               "style": "caption",
               "html": "← back to the list",
               "x": 72,
-              "y": 1262,
+              "y": 1276,
               "w": 420,
               "goto": "experience"
             }
@@ -752,121 +854,139 @@
         },
         {
           "id": "bgmc-2",
-          "name": "Boston Global Medical Collaboration, what I did",
+          "name": "BGMC: the TL;DR",
           "items": [
             {
-              "id": "i1v",
+              "id": "i1z",
               "type": "text",
               "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
-            },
-            {
-              "id": "i1w",
-              "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 180.977712,
-              "w": 210,
-              "h": 50,
-              "rot": 3
-            },
-            {
-              "id": "i1x",
-              "type": "text",
-              "style": "body",
-              "html": "<ul><li>Built bilingual registration, admin and inquiry workflows in Next.js, TypeScript and PostgreSQL, with API validation, duplicate-safe saving and CSV exports.</li><li>Supported an additive PostgreSQL release that preserved 211 registrations and seven events.</li><li>Added event deduplication, bounded retries, reconciliation and retention to the analytics.</li><li>Tied consented browsing to saved registration outcomes. Withdrawing consent removes the measurement data and keeps the business records.</li></ul>",
-              "x": 66,
-              "y": 202.977712,
-              "w": 868,
-              "backing": "torn",
-              "size": 0.86,
-              "rot": 0.6
-            },
-            {
-              "id": "i1s",
-              "type": "text",
-              "style": "label",
-              "html": "Next.js",
-              "x": 78,
-              "y": 930.044576,
-              "w": 226,
-              "backing": "dymo",
-              "ink": "red",
-              "rot": 3
-            },
-            {
-              "id": "i1t",
-              "type": "text",
-              "style": "label",
-              "html": "TypeScript",
-              "x": 290,
-              "y": 930.044576,
-              "w": 287,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": 1.1
-            },
-            {
-              "id": "i1u",
-              "type": "text",
-              "style": "label",
-              "html": "PostgreSQL",
-              "x": 563,
-              "y": 930.044576,
-              "w": 287,
-              "backing": "dymo",
-              "ink": "green",
-              "rot": 1.6
-            },
-            {
-              "id": "i1y",
-              "type": "text",
-              "style": "title",
-              "html": "211",
-              "x": 520,
-              "y": 1066,
-              "w": 420,
-              "size": 0.95,
-              "ink": "red",
-              "align": "center",
-              "rot": -4
-            },
-            {
-              "id": "i1z",
-              "type": "sticker",
-              "art": "circle",
-              "x": 510,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
-              "ink": "red",
-              "rot": -3
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
+              "rot": -1.6
             },
             {
               "id": "i20",
-              "type": "text",
-              "style": "caption",
-              "html": "registrations carried through a database release",
-              "x": 510,
-              "y": 1232,
-              "w": 440,
-              "align": "center"
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 138,
+              "w": 210,
+              "h": 26,
+              "ink": "red",
+              "rot": -1.6
             },
             {
               "id": "i21",
               "type": "text",
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
+            },
+            {
+              "id": "i22",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i23",
+              "type": "text",
+              "style": "body",
+              "html": "<b>BGMC</b><br>Full-Stack & Analytics Engineer<br><small>Jun 2026 → now · a team of two</small><hr><ul><li>Built frontend and backend for two bilingual English/Chinese event websites: registration, inquiry and organizer-admin workflows.</li><li>Ran a 3-day randomized A/B test of a registration popup with 600 unique visitors; Register click-through rose from 27% to 93%. Shipped the popup.</li><li>Migrated the live registration database with zero data loss across 211 registrations and 7 events, verified by before/after integrity checks.</li><li>Built a consent-based analytics dashboard tracking registration drop-off by language, device and traffic source.</li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": 0.5
+            },
+            {
+              "id": "i24",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 400,
+              "y": 152,
+              "w": 190,
+              "h": 46,
+              "rot": 2.5
+            },
+            {
+              "id": "i25",
+              "type": "text",
+              "style": "body",
+              "html": "<b>STACK</b><br>React · Next.js · TypeScript · Prisma · PostgreSQL · Vite · Neon",
+              "x": 60,
+              "y": 931.296,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": -1.6
+            },
+            {
+              "id": "i26",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 225,
+              "y": 915.296,
+              "w": 140,
+              "h": 38,
+              "rot": -4
+            },
+            {
+              "id": "i27",
+              "type": "text",
+              "style": "title",
+              "html": "27→93%",
+              "x": 540,
+              "y": 965.296,
+              "w": 400,
+              "size": 1.0063816435988207,
+              "ink": "red",
+              "align": "center",
+              "rot": -3
+            },
+            {
+              "id": "i28",
+              "type": "sticker",
+              "art": "circle",
+              "x": 530,
+              "y": 937.296,
+              "w": 420,
+              "h": 168.1917808219178,
+              "ink": "red",
+              "rot": -2
+            },
+            {
+              "id": "i29",
+              "type": "text",
+              "style": "caption",
+              "html": "Register click-through. 600 visitors, 3 days, split at random.",
+              "x": 540,
+              "y": 1119.4877808219178,
+              "w": 400,
+              "align": "center"
+            },
+            {
+              "id": "i2a",
+              "type": "text",
               "style": "note",
-              "html": "duplicate-safe = pressing submit twice is fine",
+              "html": "211 in, 211 out. counted before and after.",
               "x": 76,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": -3,
-              "size": 0.86
+              "y": 1198.7920000000001,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": -2
             }
           ]
         },
@@ -875,110 +995,180 @@
           "name": "The Refitting Room",
           "items": [
             {
-              "id": "i22",
+              "id": "i2b",
               "type": "text",
               "style": "label",
               "html": "Work · 02",
               "x": 72,
-              "y": 78,
-              "w": 600
+              "y": 58,
+              "w": 380
             },
             {
-              "id": "i23",
+              "id": "i2c",
+              "type": "text",
+              "style": "caption",
+              "html": "my own venture",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
+            },
+            {
+              "id": "i2d",
               "type": "text",
               "style": "title",
               "html": "The Refitting Room",
-              "x": 68,
-              "y": 132,
-              "w": 864,
-              "size": 0.82,
-              "rot": -1.2
+              "x": 66,
+              "y": 98,
+              "w": 868,
+              "size": 0.74,
+              "rot": -0.8
             },
             {
-              "id": "i24",
+              "id": "i2e",
               "type": "sticker",
               "art": "underline",
-              "x": 70,
-              "y": 309.1488,
-              "w": 500,
-              "h": 34,
+              "x": 68,
+              "y": 184.083616,
+              "w": 600,
+              "h": 30,
               "ink": "red",
-              "rot": -1
+              "rot": -0.8
             },
             {
-              "id": "i25",
+              "id": "i2f",
+              "type": "text",
+              "style": "caption",
+              "html": "alterations for a wardrobe that suddenly doesn’t fit",
+              "x": 72,
+              "y": 222.083616,
+              "w": 856
+            },
+            {
+              "id": "i2g",
               "type": "text",
               "style": "label",
               "html": "Founder & Full-Stack Developer",
               "x": 72,
-              "y": 369.1488,
+              "y": 271.833616,
               "w": 860,
-              "backing": "dymo",
-              "rot": 0.7
+              "backing": "boxed",
+              "rot": 0.5
             },
             {
-              "id": "i26",
+              "id": "i2h",
               "type": "text",
-              "style": "stamp",
-              "html": "My own venture",
-              "x": 60,
-              "y": 451.1488,
-              "w": 400,
-              "ink": "red",
-              "rot": -5,
-              "size": 0.86,
-              "align": "center"
+              "style": "caption",
+              "html": "built, not launched yet",
+              "x": 575.8802999999998,
+              "y": 280.833616,
+              "w": 352.11970000000014
             },
             {
-              "id": "i27",
-              "type": "text",
-              "style": "body",
-              "html": "My own venture: customer and admin workflows for garment intakes, order status, shipments and audit records.",
-              "x": 220,
-              "y": 593.8278399999999,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": 1.2
-            },
-            {
-              "id": "i28",
+              "id": "i2i",
               "type": "sticker",
-              "art": "hanger",
-              "x": 80,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": -6,
-              "card": true
+              "art": "splat",
+              "x": 602,
+              "y": 565.833616,
+              "w": 122,
+              "h": 166,
+              "card": true,
+              "on": "kraft",
+              "rot": -7
             },
             {
-              "id": "i29",
+              "id": "i2j",
+              "type": "sticker",
+              "art": "calls",
+              "x": 606,
+              "y": 363.833616,
+              "w": 330,
+              "h": 330,
+              "card": true,
+              "rot": 1.4
+            },
+            {
+              "id": "i2k",
+              "type": "sticker",
+              "art": "tape-kraft",
+              "x": 687,
+              "y": 339.833616,
+              "w": 168,
+              "h": 44,
+              "rot": 1.4
+            },
+            {
+              "id": "i2l",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 550,
+              "y": 377.833616,
+              "w": 26,
+              "h": 169.7656,
+              "rot": 180
+            },
+            {
+              "id": "i2m",
               "type": "text",
               "style": "note",
-              "html": "hence the hanger",
-              "x": 504,
-              "y": 1000,
-              "w": 400,
-              "rot": 3
+              "html": "one dot = one call. dark: a full quote. grey: part of one. empty: nothing I could use.",
+              "x": 70,
+              "y": 375.833616,
+              "w": 462,
+              "ink": "blue",
+              "rot": -1.2,
+              "size": 0.92
             },
             {
-              "id": "i2a",
+              "id": "i2n",
+              "type": "text",
+              "style": "note",
+              "html": "give the answer first. ask for the email after.",
+              "x": 70,
+              "y": 576.752616,
+              "w": 462,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": 1.4
+            },
+            {
+              "id": "i2o",
+              "type": "text",
+              "style": "heading",
+              "html": "why I started it",
+              "x": 72,
+              "y": 743.833616,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i2p",
               "type": "sticker",
-              "art": "arrow",
-              "x": 450,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -150
+              "art": "underline",
+              "x": 72,
+              "y": 793.833616,
+              "w": 316.831036,
+              "h": 22,
+              "rot": -0.6
             },
             {
-              "id": "i2b",
+              "id": "i2q",
+              "type": "text",
+              "style": "body",
+              "html": "<p>I talked to about a hundred people on GLP-1 medication. They kept saying the same two things: I bought new clothes too early, and I don’t know what’s worth keeping.</p><p>So the first thing I built wasn’t a shop. It was a questionnaire that says keep, alter or replace, and it shows you an answer before it asks for your email.</p><p>Then I needed real prices, which meant phoning about 400 tailors. I built an AI agent to make the calls, and reviewed what came back.</p>",
+              "x": 72,
+              "y": 825.833616,
+              "w": 856
+            },
+            {
+              "id": "i2r",
               "type": "text",
               "style": "caption",
               "html": "← back to the list",
               "x": 72,
-              "y": 1262,
+              "y": 1276,
               "w": 420,
               "goto": "experience"
             }
@@ -986,157 +1176,149 @@
         },
         {
           "id": "refitting-room-2",
-          "name": "The Refitting Room, what I did",
+          "name": "The Refitting Room: the TL;DR",
           "items": [
             {
-              "id": "i2i",
+              "id": "i2s",
               "type": "text",
               "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
-            },
-            {
-              "id": "i2j",
-              "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 179.662992,
-              "w": 210,
-              "h": 50,
-              "rot": 3
-            },
-            {
-              "id": "i2k",
-              "type": "text",
-              "style": "body",
-              "html": "<ul><li>Built the customer and admin sides in Next.js, TypeScript and PostgreSQL, behind authenticated access.</li><li>Set up Auth.js sign-in, account recovery and role-based access, with ownership checks on private garment photos.</li><li>Made submissions retry-safe: an exact retry returns the saved record, and a failed notification still keeps the lead.</li><li>Used Zod validation, Prisma transactions and idempotent webhooks to keep orders consistent across retries.</li></ul>",
-              "x": 66,
-              "y": 201.662992,
-              "w": 868,
-              "backing": "torn",
-              "size": 0.86,
-              "rot": 0.6
-            },
-            {
-              "id": "i2c",
-              "type": "text",
-              "style": "label",
-              "html": "Next.js",
-              "x": 78,
-              "y": 850.674016,
-              "w": 226,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -0.5
-            },
-            {
-              "id": "i2d",
-              "type": "text",
-              "style": "label",
-              "html": "TypeScript",
-              "x": 290,
-              "y": 850.674016,
-              "w": 287,
-              "backing": "dymo",
-              "ink": "green",
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
               "rot": -1.6
             },
             {
-              "id": "i2e",
-              "type": "text",
-              "style": "label",
-              "html": "PostgreSQL",
-              "x": 563,
-              "y": 850.674016,
-              "w": 287,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": 2
-            },
-            {
-              "id": "i2f",
-              "type": "text",
-              "style": "label",
-              "html": "Prisma",
-              "x": 104,
-              "y": 932.674016,
-              "w": 205,
-              "backing": "dymo",
-              "ink": "blue",
-              "rot": -1.4
-            },
-            {
-              "id": "i2g",
-              "type": "text",
-              "style": "label",
-              "html": "Auth.js",
-              "x": 295,
-              "y": 932.674016,
-              "w": 226,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -1.3
-            },
-            {
-              "id": "i2h",
-              "type": "text",
-              "style": "label",
-              "html": "Zod",
-              "x": 507,
-              "y": 932.674016,
-              "w": 144,
-              "backing": "dymo",
+              "id": "i2t",
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 138,
+              "w": 210,
+              "h": 26,
               "ink": "red",
-              "rot": 0.4
+              "rot": -1.6
             },
             {
-              "id": "i2l",
+              "id": "i2u",
               "type": "text",
-              "style": "title",
-              "html": "retry-safe",
-              "x": 60,
-              "y": 1066,
-              "w": 420,
-              "size": 0.5,
-              "ink": "red",
-              "align": "center",
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
+            },
+            {
+              "id": "i2v",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i2w",
+              "type": "text",
+              "style": "body",
+              "html": "<b>THE REFITTING ROOM</b><br>Founder & Full-Stack Developer<br><small>my own venture · built, not launched yet</small><hr><ul><li>Founded a wardrobe-alteration venture for professional women navigating GLP-1-related fit changes, shaped by ~100 user conversations.</li><li>Built the full-stack platform: authentication, intake, order tracking and admin workflows.</li><li>Implemented a rule-based planner that recommends what to keep, alter or replace by fit, wardrobe needs and timing.</li><li>Built a human-supervised AI phone agent that made 400 tailor calls; about 80% returned usable pricing, including complete quotes from 60%.</li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
+              "backing": "torn",
+              "size": 0.84,
+              "rot": -0.5
+            },
+            {
+              "id": "i2x",
+              "type": "sticker",
+              "art": "clip",
+              "x": 820,
+              "y": 118,
+              "w": 50,
+              "h": 110,
+              "rot": 8
+            },
+            {
+              "id": "i2y",
+              "type": "sticker",
+              "art": "tape-red",
+              "x": 30,
+              "y": 182,
+              "w": 140,
+              "h": 36,
+              "rot": -40
+            },
+            {
+              "id": "i2z",
+              "type": "text",
+              "style": "body",
+              "html": "<b>STACK</b><br>Next.js · TypeScript · Prisma · PostgreSQL · Node.js · Twilio · OpenAI Realtime",
+              "x": 470,
+              "y": 879.7212800000001,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": 1.6
+            },
+            {
+              "id": "i30",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 635,
+              "y": 863.7212800000001,
+              "w": 140,
+              "h": 38,
               "rot": 4
             },
             {
-              "id": "i2m",
-              "type": "sticker",
-              "art": "circle",
-              "x": 50,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
+              "id": "i31",
+              "type": "text",
+              "style": "title",
+              "html": "400 calls",
+              "x": 60,
+              "y": 913.7212800000001,
+              "w": 400,
+              "size": 0.6333263791613267,
               "ink": "red",
+              "align": "center",
               "rot": 3
             },
             {
-              "id": "i2n",
+              "id": "i32",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 885.7212800000001,
+              "w": 420,
+              "h": 128.82758620689654,
+              "ink": "red",
+              "rot": 2
+            },
+            {
+              "id": "i33",
               "type": "text",
               "style": "caption",
-              "html": "an exact retry returns the record already saved",
-              "x": 50,
-              "y": 1232,
-              "w": 440,
+              "html": "to tailor shops, made by an AI agent with a person checking",
+              "x": 60,
+              "y": 1028.5488662068965,
+              "w": 400,
               "align": "center"
             },
             {
-              "id": "i2o",
+              "id": "i34",
               "type": "text",
               "style": "note",
-              "html": "verification tokens are stored hashed",
-              "x": 544,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": 3,
-              "size": 0.86
+              "html": "what the calls said: $20 to $200+ an item, 5–14 days. rush costs 20–50% more.",
+              "x": 484,
+              "y": 1174.55152,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": 2
             }
           ]
         },
@@ -1145,110 +1327,180 @@
           "name": "Odun Technology",
           "items": [
             {
-              "id": "i2p",
+              "id": "i35",
               "type": "text",
               "style": "label",
               "html": "Work · 03",
               "x": 72,
-              "y": 78,
-              "w": 600
+              "y": 58,
+              "w": 380
             },
             {
-              "id": "i2q",
+              "id": "i36",
+              "type": "text",
+              "style": "caption",
+              "html": "Jun → Dec 2025",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
+            },
+            {
+              "id": "i37",
               "type": "text",
               "style": "title",
               "html": "Odun Technology",
-              "x": 68,
-              "y": 132,
-              "w": 864,
-              "size": 1,
-              "rot": -1.2
+              "x": 66,
+              "y": 98,
+              "w": 868,
+              "size": 0.86,
+              "rot": -0.8
             },
             {
-              "id": "i2r",
+              "id": "i38",
               "type": "sticker",
               "art": "underline",
-              "x": 70,
-              "y": 345.84000000000003,
-              "w": 500,
-              "h": 34,
+              "x": 68,
+              "y": 196.745824,
+              "w": 600,
+              "h": 30,
               "ink": "red",
-              "rot": -1
+              "rot": -0.8
             },
             {
-              "id": "i2s",
+              "id": "i39",
+              "type": "text",
+              "style": "caption",
+              "html": "market research on pay-to-fish ponds. yes, really.",
+              "x": 72,
+              "y": 234.745824,
+              "w": 856
+            },
+            {
+              "id": "i3a",
               "type": "text",
               "style": "label",
               "html": "Data Research Intern",
               "x": 72,
-              "y": 405.84000000000003,
+              "y": 284.49582399999997,
               "w": 860,
-              "backing": "dymo",
-              "rot": 0.7
+              "backing": "boxed",
+              "rot": 0.5
             },
             {
-              "id": "i2t",
+              "id": "i3b",
               "type": "text",
-              "style": "stamp",
-              "html": "Jun – Dec 2025",
-              "x": 540,
-              "y": 487.84000000000003,
-              "w": 400,
-              "ink": "red",
-              "rot": 5,
-              "size": 0.86,
-              "align": "center"
+              "style": "caption",
+              "html": "Shenzhen",
+              "x": 423.8196,
+              "y": 293.49582399999997,
+              "w": 504.18039999999996
             },
             {
-              "id": "i2u",
-              "type": "text",
-              "style": "body",
-              "html": "Research on the business of fishing ponds: unit economics, the size of the market and where to expand.",
-              "x": 80,
-              "y": 631.909,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": -1.2
+              "id": "i3c",
+              "type": "sticker",
+              "art": "splat",
+              "x": 266,
+              "y": 568.495824,
+              "w": 122,
+              "h": 166,
+              "card": true,
+              "on": "kraft",
+              "rot": 7
             },
             {
-              "id": "i2v",
+              "id": "i3d",
               "type": "sticker",
               "art": "fish",
-              "x": 580,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": 6,
-              "card": true
+              "x": 64,
+              "y": 376.49582399999997,
+              "w": 320,
+              "h": 320,
+              "card": true,
+              "rot": -1.4
             },
             {
-              "id": "i2w",
+              "id": "i3e",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 140,
+              "y": 352.49582399999997,
+              "w": 168,
+              "h": 44,
+              "rot": -3.9
+            },
+            {
+              "id": "i3f",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 414,
+              "y": 390.49582399999997,
+              "w": 26,
+              "h": 86.8828,
+              "rot": 0
+            },
+            {
+              "id": "i3g",
               "type": "text",
               "style": "note",
-              "html": "yes, the fish is for the fishing ponds",
-              "x": 96,
-              "y": 1000,
-              "w": 400,
-              "rot": -3
+              "html": "300 ponds in the survey. this is the only fish I drew.",
+              "x": 458,
+              "y": 388.49582399999997,
+              "w": 472,
+              "ink": "blue",
+              "rot": 1.2,
+              "size": 0.92
             },
             {
-              "id": "i2x",
+              "id": "i3h",
+              "type": "text",
+              "style": "note",
+              "html": "a number needs its unit, its year and its limits.",
+              "x": 458,
+              "y": 579.414824,
+              "w": 472,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": -1.4
+            },
+            {
+              "id": "i3i",
+              "type": "text",
+              "style": "heading",
+              "html": "what I took away",
+              "x": 72,
+              "y": 746.495824,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i3j",
               "type": "sticker",
-              "art": "arrow",
-              "x": 370,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -8
+              "art": "underline",
+              "x": 72,
+              "y": 796.495824,
+              "w": 344.427088,
+              "h": 22,
+              "rot": -0.6
             },
             {
-              "id": "i2y",
+              "id": "i3k",
+              "type": "text",
+              "style": "body",
+              "html": "<p>Entertainment fishing ponds: people pay to spend an afternoon fishing in them. My job was to work out how big that business is.</p><p>I built the number from the ground up. Surveys covering 300 ponds first, then province by province. It came out near $15M a year.</p><p>What stuck: it’s easy to make a number sound bigger than it is. Mine is one segment, one year, an estimate. Leave any of that off and it’s a different claim.</p>",
+              "x": 72,
+              "y": 828.495824,
+              "w": 856
+            },
+            {
+              "id": "i3l",
               "type": "text",
               "style": "caption",
               "html": "← back to the list",
               "x": 72,
-              "y": 1262,
+              "y": 1276,
               "w": 420,
               "goto": "experience"
             }
@@ -1256,121 +1508,149 @@
         },
         {
           "id": "odun-2",
-          "name": "Odun Technology, what I did",
+          "name": "Odun Technology: the TL;DR",
           "items": [
             {
-              "id": "i32",
+              "id": "i3m",
               "type": "text",
               "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
-            },
-            {
-              "id": "i33",
-              "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 178.714528,
-              "w": 210,
-              "h": 50,
-              "rot": 3
-            },
-            {
-              "id": "i34",
-              "type": "text",
-              "style": "body",
-              "html": "<ul><li>Analyzed gross margin, operating margin and inventory turnover to assess unit economics for due diligence.</li><li>Built a bottom-up market model from operational drivers, for go-to-market planning and investment discussions.</li><li>Made regional penetration analyses and heat maps to compare expansion markets.</li><li>Combined public sources, surveys and interviews to find what drives adoption and pricing.</li></ul>",
-              "x": 66,
-              "y": 200.714528,
-              "w": 868,
-              "backing": "torn",
-              "size": 0.94,
-              "rot": 0.6
-            },
-            {
-              "id": "i2z",
-              "type": "text",
-              "style": "label",
-              "html": "Unit economics",
-              "x": 78,
-              "y": 852.5709439999999,
-              "w": 369,
-              "backing": "dymo",
-              "ink": "green",
-              "rot": -1
-            },
-            {
-              "id": "i30",
-              "type": "text",
-              "style": "label",
-              "html": "Market model",
-              "x": 433,
-              "y": 852.5709439999999,
-              "w": 328,
-              "backing": "dymo",
-              "ink": "ink",
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
               "rot": -1.6
             },
             {
-              "id": "i31",
-              "type": "text",
-              "style": "label",
-              "html": "Heat maps",
-              "x": 104,
-              "y": 934.5709439999999,
-              "w": 267,
-              "backing": "dymo",
-              "ink": "blue",
-              "rot": -2
+              "id": "i3n",
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 138,
+              "w": 210,
+              "h": 26,
+              "ink": "red",
+              "rot": -1.6
             },
             {
-              "id": "i35",
+              "id": "i3o",
               "type": "text",
-              "style": "title",
-              "html": "bottom-up",
-              "x": 520,
-              "y": 1066,
-              "w": 420,
-              "size": 0.5,
-              "ink": "red",
-              "align": "center",
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
+            },
+            {
+              "id": "i3p",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i3q",
+              "type": "text",
+              "style": "body",
+              "html": "<b>ODUN TECHNOLOGY</b><br>Data Research Intern<br><small>Jun → Dec 2025 · Shenzhen</small><hr><ul><li>Estimated a US$15M annual market opportunity for the entertainment fishing pond segment, using surveys covering 300 ponds.</li><li>Compared Chinese provinces with penetration heat maps and geographic analysis to show regional differences.</li><li>Assessed business economics for due diligence through gross-margin, operating-margin and inventory-turnover analysis.</li><li>Turned the pond research into customer-adoption and pricing findings.</li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
+              "backing": "torn",
+              "size": 0.92,
+              "rot": 0.5
+            },
+            {
+              "id": "i3r",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 20,
+              "y": 176,
+              "w": 150,
+              "h": 40,
+              "rot": -38
+            },
+            {
+              "id": "i3s",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 830,
+              "y": 174,
+              "w": 150,
+              "h": 40,
+              "rot": 36
+            },
+            {
+              "id": "i3t",
+              "type": "text",
+              "style": "body",
+              "html": "<b>METHODS</b><br>Market sizing · Surveys · Heat maps · Unit economics",
+              "x": 60,
+              "y": 962.38032,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": -1.6
+            },
+            {
+              "id": "i3u",
+              "type": "sticker",
+              "art": "tape-kraft",
+              "x": 225,
+              "y": 946.38032,
+              "w": 140,
+              "h": 38,
               "rot": -4
             },
             {
-              "id": "i36",
-              "type": "sticker",
-              "art": "circle",
-              "x": 510,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
+              "id": "i3v",
+              "type": "text",
+              "style": "title",
+              "html": "$15M",
+              "x": 540,
+              "y": 996.38032,
+              "w": 400,
+              "size": 1.2,
               "ink": "red",
+              "align": "center",
               "rot": -3
             },
             {
-              "id": "i37",
+              "id": "i3w",
+              "type": "sticker",
+              "art": "circle",
+              "x": 530,
+              "y": 968.38032,
+              "w": 420,
+              "h": 188.62207999999998,
+              "ink": "red",
+              "rot": -2
+            },
+            {
+              "id": "i3x",
               "type": "text",
               "style": "caption",
-              "html": "a market model built from operational drivers",
-              "x": 510,
-              "y": 1232,
-              "w": 440,
+              "html": "a year, for one segment. an estimate.",
+              "x": 540,
+              "y": 1171.0024,
+              "w": 400,
               "align": "center"
             },
             {
-              "id": "i38",
+              "id": "i3y",
               "type": "text",
               "style": "note",
-              "html": "public sources + surveys + interviews",
+              "html": "province by province, on a heat map.",
               "x": 76,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": -3,
-              "size": 0.86
+              "y": 1219.5148800000002,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": -2
             }
           ]
         },
@@ -1379,110 +1659,179 @@
           "name": "Kalodata",
           "items": [
             {
-              "id": "i39",
+              "id": "i3z",
               "type": "text",
               "style": "label",
               "html": "Work · 04",
               "x": 72,
-              "y": 78,
-              "w": 600
+              "y": 58,
+              "w": 380
             },
             {
-              "id": "i3a",
+              "id": "i40",
+              "type": "text",
+              "style": "caption",
+              "html": "Jun → Aug 2024",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
+            },
+            {
+              "id": "i41",
               "type": "text",
               "style": "title",
               "html": "Kalodata",
-              "x": 68,
-              "y": 132,
-              "w": 864,
-              "size": 1.2,
-              "rot": -1.2
+              "x": 66,
+              "y": 98,
+              "w": 868,
+              "size": 1.35,
+              "rot": -0.8
             },
             {
-              "id": "i3b",
+              "id": "i42",
               "type": "sticker",
               "art": "underline",
-              "x": 70,
-              "y": 264.304,
-              "w": 500,
-              "h": 34,
+              "x": 68,
+              "y": 248.44984,
+              "w": 563.1017184,
+              "h": 30,
               "ink": "red",
-              "rot": -1
+              "rot": -0.8
             },
             {
-              "id": "i3c",
+              "id": "i43",
+              "type": "text",
+              "style": "caption",
+              "html": "one product, two countries, two very different first days",
+              "x": 72,
+              "y": 286.44984,
+              "w": 856
+            },
+            {
+              "id": "i44",
               "type": "text",
               "style": "label",
               "html": "Data Science Intern",
               "x": 72,
-              "y": 324.304,
+              "y": 336.19984,
               "w": 860,
-              "backing": "dymo",
-              "rot": 0.4
+              "backing": "boxed",
+              "rot": 0.2
             },
             {
-              "id": "i3d",
+              "id": "i45",
               "type": "text",
-              "style": "stamp",
-              "html": "Jun – Aug 2024",
-              "x": 60,
-              "y": 406.304,
-              "w": 400,
-              "ink": "red",
-              "rot": -5,
-              "size": 0.86,
-              "align": "center"
+              "style": "caption",
+              "html": "Shenzhen",
+              "x": 398.1192,
+              "y": 345.19984,
+              "w": 529.8808
             },
             {
-              "id": "i3e",
-              "type": "text",
-              "style": "body",
-              "html": "Retention analysis across two markets: why adoption looked different in the US and China, and what to improve in onboarding.",
-              "x": 220,
-              "y": 569.1632,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": 1.2
-            },
-            {
-              "id": "i3f",
+              "id": "i46",
               "type": "sticker",
-              "art": "chart",
-              "x": 80,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": -6,
-              "card": true
+              "art": "bars-ret",
+              "x": 536,
+              "y": 428.19984,
+              "w": 400,
+              "h": 300,
+              "card": true,
+              "on": "graph",
+              "rot": 1.4
             },
             {
-              "id": "i3g",
+              "id": "i47",
+              "type": "sticker",
+              "art": "tape-red",
+              "x": 652,
+              "y": 404.19984,
+              "w": 168,
+              "h": 44,
+              "rot": -5
+            },
+            {
+              "id": "i48",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 480,
+              "y": 442.19984,
+              "w": 26,
+              "h": 128.3242,
+              "rot": 180
+            },
+            {
+              "id": "i49",
               "type": "text",
               "style": "note",
-              "html": "US and China, side by side",
-              "x": 504,
-              "y": 1000,
-              "w": 400,
-              "rot": 3
+              "html": "about 500 users. day one = did you come back tomorrow.",
+              "x": 70,
+              "y": 440.19984,
+              "w": 392,
+              "ink": "blue",
+              "rot": -1.2,
+              "size": 0.92
             },
             {
-              "id": "i3h",
+              "id": "i4a",
+              "type": "text",
+              "style": "note",
+              "html": "before blaming the user, read the labels.",
+              "x": 70,
+              "y": 611.11884,
+              "w": 392,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": 1.4
+            },
+            {
+              "id": "i4b",
               "type": "sticker",
-              "art": "arrow",
-              "x": 450,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -150
+              "art": "tape-red",
+              "x": 461,
+              "y": 554.19984,
+              "w": 150,
+              "h": 34,
+              "rot": -90
             },
             {
-              "id": "i3i",
+              "id": "i4c",
+              "type": "text",
+              "style": "heading",
+              "html": "what I took away",
+              "x": 72,
+              "y": 778.19984,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i4d",
+              "type": "sticker",
+              "art": "underline",
+              "x": 72,
+              "y": 828.19984,
+              "w": 344.427088,
+              "h": 22,
+              "rot": -0.6
+            },
+            {
+              "id": "i4e",
+              "type": "text",
+              "style": "body",
+              "html": "<p>Same product, two countries. In the US, 72 of every 100 new users came back the next day. In China, 32.</p><p>The useful question wasn’t how big the gap was. It was where it lived. It kept showing up around one feature, the advanced filters, so that’s what I took to the product team.</p><p>I also learnt to say “goes along with” and not “causes”. I had cohorts, not an experiment.</p>",
+              "x": 72,
+              "y": 860.19984,
+              "w": 856
+            },
+            {
+              "id": "i4f",
               "type": "text",
               "style": "caption",
               "html": "← back to the list",
               "x": 72,
-              "y": 1262,
+              "y": 1276,
               "w": 420,
               "goto": "experience"
             }
@@ -1490,121 +1839,785 @@
         },
         {
           "id": "kalodata-2",
-          "name": "Kalodata, what I did",
+          "name": "Kalodata: the TL;DR",
           "items": [
             {
-              "id": "i3m",
+              "id": "i4g",
               "type": "text",
               "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
+              "rot": -1.6
             },
             {
-              "id": "i3n",
+              "id": "i4h",
               "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 178.714528,
+              "art": "underline",
+              "x": 76,
+              "y": 138,
               "w": 210,
-              "h": 50,
-              "rot": 3
+              "h": 26,
+              "ink": "red",
+              "rot": -1.6
             },
             {
-              "id": "i3o",
+              "id": "i4i",
+              "type": "text",
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
+            },
+            {
+              "id": "i4j",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i4k",
               "type": "text",
               "style": "body",
-              "html": "<ul><li>Analyzed US and China retention cohorts and found a D1 retention gap.</li><li>Segmented cohorts by persona and workflow to study advanced-filter adoption and churn in China.</li><li>Worked with Product to clarify advanced-filter labels after the analysis surfaced the difference.</li><li>Kept a cohort dashboard of D1/D7 retention and feature adoption by geography and persona.</li></ul>",
-              "x": 66,
-              "y": 200.714528,
-              "w": 868,
+              "html": "<b>KALODATA</b><br>Data Science Intern<br><small>Jun → Aug 2024 · Shenzhen</small><hr><ul><li>Found day-one retention of 32% in China vs. 72% in the US through SQL cohort analysis of ~500 users.</li><li>Identified lower advanced-filter adoption in China, with differences by persona and workflow.</li><li>Recommended clearer advanced-filter labels and onboarding to Product.</li><li>Maintained a cohort dashboard of D1/D7 retention and feature adoption by geography and persona.</li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
               "backing": "torn",
-              "size": 0.94,
-              "rot": 0.6
+              "size": 0.92,
+              "rot": -0.5
             },
             {
-              "id": "i3j",
-              "type": "text",
-              "style": "label",
-              "html": "Cohort analysis",
-              "x": 78,
-              "y": 852.5709439999999,
-              "w": 390,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -1.5
+              "id": "i4l",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 400,
+              "y": 152,
+              "w": 190,
+              "h": 46,
+              "rot": 2.5
             },
             {
-              "id": "i3k",
+              "id": "i4m",
               "type": "text",
-              "style": "label",
-              "html": "Retention",
-              "x": 454,
-              "y": 852.5709439999999,
-              "w": 267,
-              "backing": "dymo",
-              "ink": "blue",
-              "rot": 0.1
+              "style": "body",
+              "html": "<b>TOOLS</b><br>SQL · Cohort analysis · Dashboards",
+              "x": 470,
+              "y": 952.7430400000001,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": 1.6
             },
             {
-              "id": "i3l",
-              "type": "text",
-              "style": "label",
-              "html": "Dashboards",
-              "x": 104,
-              "y": 934.5709439999999,
-              "w": 287,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -0.4
-            },
-            {
-              "id": "i3p",
-              "type": "text",
-              "style": "title",
-              "html": "D1 / D7",
-              "x": 60,
-              "y": 1066,
-              "w": 420,
-              "size": 0.72,
-              "ink": "red",
-              "align": "center",
+              "id": "i4n",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 635,
+              "y": 936.7430400000001,
+              "w": 140,
+              "h": 38,
               "rot": 4
             },
             {
-              "id": "i3q",
-              "type": "sticker",
-              "art": "circle",
-              "x": 50,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
+              "id": "i4o",
+              "type": "text",
+              "style": "title",
+              "html": "40 pts",
+              "x": 60,
+              "y": 986.7430400000001,
+              "w": 400,
+              "size": 1.0008972749688545,
               "ink": "red",
+              "align": "center",
               "rot": 3
             },
             {
-              "id": "i3r",
+              "id": "i4p",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 958.7430400000001,
+              "w": 420,
+              "h": 167.61307901907355,
+              "ink": "red",
+              "rot": 2
+            },
+            {
+              "id": "i4q",
               "type": "text",
               "style": "caption",
-              "html": "retention, tracked by geography and persona",
-              "x": 50,
-              "y": 1232,
-              "w": 440,
+              "html": "the day-one retention gap between the US and China",
+              "x": 60,
+              "y": 1140.3561190190737,
+              "w": 400,
               "align": "center"
             },
             {
-              "id": "i3s",
+              "id": "i4r",
               "type": "text",
               "style": "note",
-              "html": "clearer filter labels came out of this",
-              "x": 544,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": 3,
-              "size": 0.86
+              "html": "honest note: a recommendation, not a measured lift.",
+              "x": 484,
+              "y": 1190.9353600000002,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": 2
+            }
+          ]
+        },
+        {
+          "id": "cardiac-rehab",
+          "name": "Home Cardiac Rehab",
+          "items": [
+            {
+              "id": "i4s",
+              "type": "text",
+              "style": "label",
+              "html": "Project · 05",
+              "x": 72,
+              "y": 58,
+              "w": 380
+            },
+            {
+              "id": "i4t",
+              "type": "text",
+              "style": "caption",
+              "html": "Spring 2026",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
+            },
+            {
+              "id": "i4u",
+              "type": "text",
+              "style": "title",
+              "html": "Home Cardiac Rehab",
+              "x": 66,
+              "y": 98,
+              "w": 868,
+              "size": 0.74,
+              "rot": -0.8
+            },
+            {
+              "id": "i4v",
+              "type": "sticker",
+              "art": "underline",
+              "x": 68,
+              "y": 184.083616,
+              "w": 600,
+              "h": 30,
+              "ink": "red",
+              "rot": -0.8
+            },
+            {
+              "id": "i4w",
+              "type": "text",
+              "style": "caption",
+              "html": "2nd place, Pulse Foundry AI Healthcare Hackathon",
+              "x": 72,
+              "y": 222.083616,
+              "w": 856
+            },
+            {
+              "id": "i4x",
+              "type": "text",
+              "style": "label",
+              "html": "Team project · patient UI",
+              "x": 72,
+              "y": 271.833616,
+              "w": 860,
+              "backing": "boxed",
+              "rot": -0.2
+            },
+            {
+              "id": "i4y",
+              "type": "sticker",
+              "art": "splat",
+              "x": 266,
+              "y": 555.833616,
+              "w": 122,
+              "h": 166,
+              "card": true,
+              "on": "kraft",
+              "rot": 7
+            },
+            {
+              "id": "i4z",
+              "type": "sticker",
+              "art": "heart",
+              "x": 64,
+              "y": 363.833616,
+              "w": 320,
+              "h": 320,
+              "card": true,
+              "rot": -1.4
+            },
+            {
+              "id": "i50",
+              "type": "sticker",
+              "art": "tape-kraft",
+              "x": 140,
+              "y": 339.833616,
+              "w": 168,
+              "h": 44,
+              "rot": 1.9
+            },
+            {
+              "id": "i51",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 414,
+              "y": 377.833616,
+              "w": 26,
+              "h": 86.8828,
+              "rot": 0
+            },
+            {
+              "id": "i52",
+              "type": "text",
+              "style": "note",
+              "html": "sign up → tell us about you → the rest of the app.",
+              "x": 458,
+              "y": 375.833616,
+              "w": 472,
+              "ink": "blue",
+              "rot": 1.2,
+              "size": 0.92
+            },
+            {
+              "id": "i53",
+              "type": "text",
+              "style": "note",
+              "html": "the first screen decides if there’s a second.",
+              "x": 458,
+              "y": 566.752616,
+              "w": 472,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": -1.4
+            },
+            {
+              "id": "i54",
+              "type": "text",
+              "style": "heading",
+              "html": "why we built it",
+              "x": 72,
+              "y": 733.833616,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i55",
+              "type": "sticker",
+              "art": "underline",
+              "x": 72,
+              "y": 783.833616,
+              "w": 304.22543200000007,
+              "h": 22,
+              "rot": -0.6
+            },
+            {
+              "id": "i56",
+              "type": "text",
+              "style": "body",
+              "html": "<p>Cardiac rehab is the weeks of supervised exercise after a heart problem. Our team’s bet for the hackathon was that a lot of it could happen at home.</p><p>I took the first thing a patient touches: signing up. Step by step, one small question at a time, so the form is never the hard part of getting better.</p><p>Then I helped present it. We came second.</p>",
+              "x": 72,
+              "y": 815.833616,
+              "w": 856
+            },
+            {
+              "id": "i57",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1276,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "cardiac-rehab-2",
+          "name": "Home Cardiac Rehab: the TL;DR",
+          "items": [
+            {
+              "id": "i58",
+              "type": "text",
+              "style": "heading",
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
+              "rot": -1.6
+            },
+            {
+              "id": "i59",
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 138,
+              "w": 210,
+              "h": 26,
+              "ink": "red",
+              "rot": -1.6
+            },
+            {
+              "id": "i5a",
+              "type": "text",
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
+            },
+            {
+              "id": "i5b",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i5c",
+              "type": "text",
+              "style": "body",
+              "html": "<b>HOME CARDIAC REHAB</b><br>Team project · patient UI<br><small>Spring 2026</small><hr><ul><li>Designed and built the patient onboarding UI and step-by-step registration/intake for a home cardiac-rehab MVP.</li><li>Team placed 2nd at the Pulse Foundry AI Healthcare Hackathon; co-presented the demo.</li><li>Team MVP spans onboarding, activity tracking, care-team dashboards and voice-enabled workflows.</li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
+              "backing": "torn",
+              "size": 0.92,
+              "rot": 0.5
+            },
+            {
+              "id": "i5d",
+              "type": "sticker",
+              "art": "clip",
+              "x": 820,
+              "y": 118,
+              "w": 50,
+              "h": 110,
+              "rot": 8
+            },
+            {
+              "id": "i5e",
+              "type": "sticker",
+              "art": "tape-red",
+              "x": 30,
+              "y": 182,
+              "w": 140,
+              "h": 36,
+              "rot": -40
+            },
+            {
+              "id": "i5f",
+              "type": "text",
+              "style": "body",
+              "html": "<b>STACK</b><br>React · Next.js · TypeScript",
+              "x": 60,
+              "y": 876.7657600000001,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": -1.6
+            },
+            {
+              "id": "i5g",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 225,
+              "y": 860.7657600000001,
+              "w": 140,
+              "h": 38,
+              "rot": -4
+            },
+            {
+              "id": "i5h",
+              "type": "text",
+              "style": "title",
+              "html": "2nd",
+              "x": 540,
+              "y": 910.7657600000001,
+              "w": 400,
+              "size": 1.2,
+              "ink": "red",
+              "align": "center",
+              "rot": -3
+            },
+            {
+              "id": "i5i",
+              "type": "sticker",
+              "art": "circle",
+              "x": 530,
+              "y": 882.7657600000001,
+              "w": 420,
+              "h": 188.62207999999998,
+              "ink": "red",
+              "rot": -2
+            },
+            {
+              "id": "i5j",
+              "type": "text",
+              "style": "caption",
+              "html": "place, as a team",
+              "x": 540,
+              "y": 1085.38784,
+              "w": 400,
+              "align": "center"
+            },
+            {
+              "id": "i5k",
+              "type": "text",
+              "style": "note",
+              "html": "a demo with demo data. no real patients.",
+              "x": 76,
+              "y": 1140.28384,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": -2
+            }
+          ]
+        },
+        {
+          "id": "carecall",
+          "name": "CareCall",
+          "items": [
+            {
+              "id": "i5l",
+              "type": "text",
+              "style": "label",
+              "html": "Project · 06",
+              "x": 72,
+              "y": 58,
+              "w": 380
+            },
+            {
+              "id": "i5m",
+              "type": "text",
+              "style": "caption",
+              "html": "Fall 2026",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
+            },
+            {
+              "id": "i5n",
+              "type": "text",
+              "style": "title",
+              "html": "CareCall",
+              "x": 66,
+              "y": 98,
+              "w": 868,
+              "size": 1.35,
+              "rot": -0.8
+            },
+            {
+              "id": "i5o",
+              "type": "sticker",
+              "art": "underline",
+              "x": 68,
+              "y": 248.44984,
+              "w": 586.7433936000001,
+              "h": 30,
+              "ink": "red",
+              "rot": -0.8
+            },
+            {
+              "id": "i5p",
+              "type": "text",
+              "style": "caption",
+              "html": "say it to Siri, and an AI agent makes the phone call",
+              "x": 72,
+              "y": 286.44984,
+              "w": 856
+            },
+            {
+              "id": "i5q",
+              "type": "text",
+              "style": "label",
+              "html": "Team project · the Siri end",
+              "x": 72,
+              "y": 336.19984,
+              "w": 860,
+              "backing": "boxed",
+              "rot": -0.6
+            },
+            {
+              "id": "i5r",
+              "type": "sticker",
+              "art": "splat",
+              "x": 512,
+              "y": 570.19984,
+              "w": 122,
+              "h": 166,
+              "card": true,
+              "on": "kraft",
+              "rot": -7
+            },
+            {
+              "id": "i5s",
+              "type": "sticker",
+              "art": "siri",
+              "x": 516,
+              "y": 428.19984,
+              "w": 420,
+              "h": 270,
+              "card": true,
+              "rot": 1.4
+            },
+            {
+              "id": "i5t",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 642,
+              "y": 404.19984,
+              "w": 168,
+              "h": 44,
+              "rot": -2.7
+            },
+            {
+              "id": "i5u",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 460,
+              "y": 442.19984,
+              "w": 26,
+              "h": 128.3242,
+              "rot": 180
+            },
+            {
+              "id": "i5v",
+              "type": "text",
+              "style": "note",
+              "html": "you hear “got it” first. the answer comes later.",
+              "x": 70,
+              "y": 440.19984,
+              "w": 372,
+              "ink": "blue",
+              "rot": -1.2,
+              "size": 0.92
+            },
+            {
+              "id": "i5w",
+              "type": "text",
+              "style": "note",
+              "html": "asking twice should never book twice.",
+              "x": 70,
+              "y": 590.5240399999999,
+              "w": 372,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": 1.4
+            },
+            {
+              "id": "i5x",
+              "type": "text",
+              "style": "heading",
+              "html": "why we built it",
+              "x": 72,
+              "y": 757.6050399999999,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i5y",
+              "type": "sticker",
+              "art": "underline",
+              "x": 72,
+              "y": 807.6050399999999,
+              "w": 304.22543200000007,
+              "h": 22,
+              "rot": -0.6
+            },
+            {
+              "id": "i5z",
+              "type": "text",
+              "style": "body",
+              "html": "<p>Booking a doctor’s appointment still mostly means a phone call and a hold queue. The idea: say it to Siri once, and an AI agent makes the call for you.</p><p>I built the Siri end. The part I worried about most was the boring one: what if the request goes out twice? Nobody wants two appointments.</p><p>So every request keeps its own ID, and asking again gets you the first one back.</p>",
+              "x": 72,
+              "y": 839.6050399999999,
+              "w": 856
+            },
+            {
+              "id": "i60",
+              "type": "text",
+              "style": "caption",
+              "html": "← back to the list",
+              "x": 72,
+              "y": 1276,
+              "w": 420,
+              "goto": "experience"
+            }
+          ]
+        },
+        {
+          "id": "carecall-2",
+          "name": "CareCall: the TL;DR",
+          "items": [
+            {
+              "id": "i61",
+              "type": "text",
+              "style": "heading",
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
+              "rot": -1.6
+            },
+            {
+              "id": "i62",
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 138,
+              "w": 210,
+              "h": 26,
+              "ink": "red",
+              "rot": -1.6
+            },
+            {
+              "id": "i63",
+              "type": "text",
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
+            },
+            {
+              "id": "i64",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i65",
+              "type": "text",
+              "style": "body",
+              "html": "<b>CARECALL</b><br>Team project · the Siri end<br><small>Fall 2026</small><hr><ul><li>Built CareCall’s Siri entry point, routing spoken requests to an AI phone agent for medical-appointment booking.</li><li>Made appointment requests safe to retry after connection failures, recovering the original submission instead of creating another.</li><li>Verified validation, authorization, concurrent submissions and recovery with 45 automated mock tests.</li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
+              "backing": "torn",
+              "size": 0.92,
+              "rot": -0.5
+            },
+            {
+              "id": "i66",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 20,
+              "y": 176,
+              "w": 150,
+              "h": 40,
+              "rot": -38
+            },
+            {
+              "id": "i67",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 830,
+              "y": 174,
+              "w": 150,
+              "h": 40,
+              "rot": 36
+            },
+            {
+              "id": "i68",
+              "type": "text",
+              "style": "body",
+              "html": "<b>STACK</b><br>Python · SQLite · Apple Shortcuts · LiveKit",
+              "x": 470,
+              "y": 908.21152,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": 1.6
+            },
+            {
+              "id": "i69",
+              "type": "sticker",
+              "art": "tape-kraft",
+              "x": 635,
+              "y": 892.21152,
+              "w": 140,
+              "h": 38,
+              "rot": 4
+            },
+            {
+              "id": "i6a",
+              "type": "text",
+              "style": "title",
+              "html": "45",
+              "x": 60,
+              "y": 942.21152,
+              "w": 400,
+              "size": 1.2,
+              "ink": "red",
+              "align": "center",
+              "rot": 3
+            },
+            {
+              "id": "i6b",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 914.21152,
+              "w": 420,
+              "h": 188.62207999999998,
+              "ink": "red",
+              "rot": 2
+            },
+            {
+              "id": "i6c",
+              "type": "text",
+              "style": "caption",
+              "html": "mock tests: validation, access, retries, recovery",
+              "x": 60,
+              "y": 1116.8336,
+              "w": 400,
+              "align": "center"
+            },
+            {
+              "id": "i6d",
+              "type": "text",
+              "style": "note",
+              "html": "a prototype, tested with mock calls. no real clinic was phoned.",
+              "x": 484,
+              "y": 1149.23568,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": 2
             }
           ]
         },
@@ -1613,110 +2626,169 @@
           "name": "SafeLease NYC",
           "items": [
             {
-              "id": "i3t",
+              "id": "i6e",
               "type": "text",
               "style": "label",
-              "html": "Project · 05",
+              "html": "Project · 07",
               "x": 72,
-              "y": 78,
-              "w": 600
+              "y": 58,
+              "w": 380
             },
             {
-              "id": "i3u",
+              "id": "i6f",
+              "type": "text",
+              "style": "caption",
+              "html": "NVIDIA Spark Hackathon",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
+            },
+            {
+              "id": "i6g",
               "type": "text",
               "style": "title",
               "html": "SafeLease NYC",
-              "x": 68,
-              "y": 132,
-              "w": 864,
+              "x": 66,
+              "y": 98,
+              "w": 868,
               "size": 1,
-              "rot": -1.2
+              "rot": -0.8
             },
             {
-              "id": "i3v",
+              "id": "i6h",
               "type": "sticker",
               "art": "underline",
-              "x": 70,
-              "y": 243.92000000000002,
-              "w": 500,
-              "h": 34,
+              "x": 68,
+              "y": 211.51839999999999,
+              "w": 600,
+              "h": 30,
               "ink": "red",
-              "rot": -1
+              "rot": -0.8
             },
             {
-              "id": "i3w",
+              "id": "i6i",
+              "type": "text",
+              "style": "caption",
+              "html": "a housing-risk map for people renting with a voucher",
+              "x": 72,
+              "y": 249.51839999999999,
+              "w": 856
+            },
+            {
+              "id": "i6j",
               "type": "text",
               "style": "label",
-              "html": "NVIDIA Spark Hackathon prototype",
+              "html": "Team project · frontend & map",
               "x": 72,
-              "y": 303.92,
+              "y": 299.2684,
               "w": 860,
-              "backing": "dymo",
-              "rot": -0.3
+              "backing": "boxed",
+              "rot": 0.8
             },
             {
-              "id": "i3x",
-              "type": "text",
-              "style": "stamp",
-              "html": "Team project",
-              "x": 540,
-              "y": 385.92,
-              "w": 400,
-              "ink": "red",
-              "rot": 5,
-              "size": 0.86,
-              "align": "center"
-            },
-            {
-              "id": "i3y",
-              "type": "text",
-              "style": "body",
-              "html": "A housing-risk explorer built with a team: search an address, see it on the map, read the building’s profile.",
-              "x": 80,
-              "y": 557.952,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": -1.2
-            },
-            {
-              "id": "i3z",
+              "id": "i6k",
               "type": "sticker",
-              "art": "building",
-              "x": 580,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": 6,
-              "card": true
+              "art": "blocks",
+              "x": 64,
+              "y": 391.2684,
+              "w": 400,
+              "h": 300,
+              "card": true,
+              "rot": -1.4
             },
             {
-              "id": "i40",
+              "id": "i6l",
+              "type": "sticker",
+              "art": "tape-red",
+              "x": 180,
+              "y": 367.2684,
+              "w": 168,
+              "h": 44,
+              "rot": -2
+            },
+            {
+              "id": "i6m",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 494,
+              "y": 405.2684,
+              "w": 26,
+              "h": 86.8828,
+              "rot": 0
+            },
+            {
+              "id": "i6n",
               "type": "text",
               "style": "note",
-              "html": "address → map → building profile",
-              "x": 96,
-              "y": 1000,
-              "w": 400,
-              "rot": -3
+              "html": "red = higher risk. real footprints, demo scores.",
+              "x": 538,
+              "y": 403.2684,
+              "w": 392,
+              "ink": "blue",
+              "rot": 1.2,
+              "size": 0.92
             },
             {
-              "id": "i41",
+              "id": "i6o",
+              "type": "text",
+              "style": "note",
+              "html": "a map is only as honest as the data under it.",
+              "x": 538,
+              "y": 533.6469,
+              "w": 392,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": -1.4
+            },
+            {
+              "id": "i6p",
               "type": "sticker",
-              "art": "arrow",
-              "x": 370,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -8
+              "art": "tape-red",
+              "x": 389,
+              "y": 517.2683999999999,
+              "w": 150,
+              "h": 34,
+              "rot": 90
             },
             {
-              "id": "i42",
+              "id": "i6q",
+              "type": "text",
+              "style": "heading",
+              "html": "why we built it",
+              "x": 72,
+              "y": 741.2683999999999,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i6r",
+              "type": "sticker",
+              "art": "underline",
+              "x": 72,
+              "y": 791.2683999999999,
+              "w": 304.22543200000007,
+              "h": 22,
+              "rot": -0.6
+            },
+            {
+              "id": "i6s",
+              "type": "text",
+              "style": "body",
+              "html": "<p>If you rent with a housing voucher, a listing tells you the price and not much else. We wanted the building to tell on itself before anyone signs.</p><p>My part was the thing you actually look at: a 3D map of 2,556 buildings, each coloured by its risk score, with a card that opens when you pick one.</p><p>Honest footnote: it’s a hackathon prototype. The scores were demo data, and we didn’t win anything.</p>",
+              "x": 72,
+              "y": 823.2683999999999,
+              "w": 856
+            },
+            {
+              "id": "i6t",
               "type": "text",
               "style": "caption",
               "html": "← back to the list",
               "x": 72,
-              "y": 1262,
+              "y": 1276,
               "w": 420,
               "goto": "experience"
             }
@@ -1724,713 +2796,313 @@
         },
         {
           "id": "safelease-2",
-          "name": "SafeLease NYC, what I did",
+          "name": "SafeLease NYC: the TL;DR",
           "items": [
             {
-              "id": "i47",
+              "id": "i6u",
               "type": "text",
               "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
-            },
-            {
-              "id": "i48",
-              "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 205.895088,
-              "w": 210,
-              "h": 50,
-              "rot": 3
-            },
-            {
-              "id": "i49",
-              "type": "text",
-              "style": "body",
-              "html": "<ul><li>Co-developed it with React, Python, FastAPI and Mapbox GL.</li><li>Normalized property identifiers and joined housing records to building footprints with Python-generated GeoJSON.</li><li>Kept unmatched scores as null and reported the join coverage.</li><li>The prototype has cached lookups, fallback sources and mock tests for malformed property IDs.</li></ul>",
-              "x": 66,
-              "y": 227.895088,
-              "w": 868,
-              "backing": "torn",
-              "size": 0.94,
-              "rot": 0.6
-            },
-            {
-              "id": "i43",
-              "type": "text",
-              "style": "label",
-              "html": "React",
-              "x": 78,
-              "y": 880.209824,
-              "w": 185,
-              "backing": "dymo",
-              "ink": "blue",
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
               "rot": -1.6
             },
             {
-              "id": "i44",
-              "type": "text",
-              "style": "label",
-              "html": "Python",
-              "x": 249,
-              "y": 880.209824,
-              "w": 205,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -0.6
-            },
-            {
-              "id": "i45",
-              "type": "text",
-              "style": "label",
-              "html": "FastAPI",
-              "x": 440,
-              "y": 880.209824,
-              "w": 226,
-              "backing": "dymo",
+              "id": "i6v",
+              "type": "sticker",
+              "art": "underline",
+              "x": 76,
+              "y": 138,
+              "w": 210,
+              "h": 26,
               "ink": "red",
-              "rot": 0
+              "rot": -1.6
             },
             {
-              "id": "i46",
+              "id": "i6w",
               "type": "text",
-              "style": "label",
-              "html": "Mapbox GL",
-              "x": 652,
-              "y": 880.209824,
-              "w": 267,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": 2.2
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
             },
             {
-              "id": "i4a",
+              "id": "i6x",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i6y",
               "type": "text",
-              "style": "title",
-              "html": "null",
-              "x": 520,
-              "y": 1066,
-              "w": 420,
-              "size": 0.95,
-              "ink": "red",
-              "align": "center",
+              "style": "body",
+              "html": "<b>SAFELEASE NYC</b><br>Team project · frontend & map<br><small>NVIDIA Spark Hackathon</small><hr><ul><li>Developed the frontend and 3D map of a prototype for housing-voucher holders to explore risk scores across 2,556 NYC building footprints.</li><li>Implemented the housing-search UI with risk-colored buildings and property-detail cards.</li><li>Integrated backend property records and team risk scores so map colors and cards match the underlying data.</li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
+              "backing": "torn",
+              "size": 0.92,
+              "rot": 0.5
+            },
+            {
+              "id": "i6z",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 400,
+              "y": 152,
+              "w": 190,
+              "h": 46,
+              "rot": 2.5
+            },
+            {
+              "id": "i70",
+              "type": "text",
+              "style": "body",
+              "html": "<b>STACK</b><br>React · JavaScript · Mapbox GL · Vite",
+              "x": 60,
+              "y": 922.62592,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": -1.6
+            },
+            {
+              "id": "i71",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 225,
+              "y": 906.62592,
+              "w": 140,
+              "h": 38,
               "rot": -4
             },
             {
-              "id": "i4b",
-              "type": "sticker",
-              "art": "circle",
-              "x": 510,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
-              "ink": "red",
-              "rot": -3
-            },
-            {
-              "id": "i4c",
-              "type": "text",
-              "style": "caption",
-              "html": "what an unmatched score stays, with coverage reported",
-              "x": 510,
-              "y": 1232,
-              "w": 440,
-              "align": "center"
-            },
-            {
-              "id": "i4d",
-              "type": "text",
-              "style": "note",
-              "html": "built with a team at the NVIDIA Spark Hackathon",
-              "x": 76,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": -3,
-              "size": 0.86
-            }
-          ]
-        },
-        {
-          "id": "cardiac-rehab",
-          "name": "Home Cardiac Rehab MVP",
-          "items": [
-            {
-              "id": "i4e",
-              "type": "text",
-              "style": "label",
-              "html": "Award · 06",
-              "x": 72,
-              "y": 78,
-              "w": 600
-            },
-            {
-              "id": "i4f",
+              "id": "i72",
               "type": "text",
               "style": "title",
-              "html": "Home Cardiac Rehab MVP",
-              "x": 68,
-              "y": 132,
-              "w": 864,
-              "size": 0.82,
-              "rot": -1.2
-            },
-            {
-              "id": "i4g",
-              "type": "sticker",
-              "art": "underline",
-              "x": 70,
-              "y": 309.1488,
-              "w": 500,
-              "h": 34,
-              "ink": "red",
-              "rot": -1
-            },
-            {
-              "id": "i4h",
-              "type": "text",
-              "style": "label",
-              "html": "2nd place · Pulse Foundry AI Healthcare Hackathon",
-              "x": 72,
-              "y": 369.1488,
-              "w": 860,
-              "backing": "dymo",
-              "rot": -0.9
-            },
-            {
-              "id": "i4i",
-              "type": "text",
-              "style": "stamp",
-              "html": "Spring 2026",
-              "x": 60,
-              "y": 499.1488,
-              "w": 400,
-              "ink": "red",
-              "rot": -5,
-              "size": 0.86,
-              "align": "center"
-            },
-            {
-              "id": "i4j",
-              "type": "text",
-              "style": "body",
-              "html": "A home cardiac-rehab MVP built at a hackathon: onboarding, activity tracking, care-team dashboards and voice-enabled safety workflows.",
-              "x": 220,
-              "y": 620.22784,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": 1.2
-            },
-            {
-              "id": "i4k",
-              "type": "sticker",
-              "art": "heart",
-              "x": 80,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": -6,
-              "card": true
-            },
-            {
-              "id": "i4l",
-              "type": "text",
-              "style": "note",
-              "html": "spring 2026",
-              "x": 504,
-              "y": 1000,
-              "w": 400,
-              "rot": 3
-            },
-            {
-              "id": "i4m",
-              "type": "sticker",
-              "art": "arrow",
-              "x": 450,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -150
-            },
-            {
-              "id": "i4n",
-              "type": "text",
-              "style": "caption",
-              "html": "← back to the list",
-              "x": 72,
-              "y": 1262,
-              "w": 420,
-              "goto": "experience"
-            }
-          ]
-        },
-        {
-          "id": "cardiac-rehab-2",
-          "name": "Home Cardiac Rehab MVP, what I did",
-          "items": [
-            {
-              "id": "i4q",
-              "type": "text",
-              "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
-            },
-            {
-              "id": "i4r",
-              "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 228.834752,
-              "w": 210,
-              "h": 50,
-              "rot": 3
-            },
-            {
-              "id": "i4s",
-              "type": "text",
-              "style": "body",
-              "html": "<ul><li>Contributed to the Next.js and TypeScript app.</li><li>Modeled demo data for OCR intake, rehabilitation sessions, wearable metrics and care-team alerts.</li><li>Set those workflows up so the whole thing could be tested end to end.</li></ul>",
-              "x": 66,
-              "y": 250.834752,
-              "w": 868,
-              "backing": "torn",
-              "size": 1.04,
-              "rot": 0.6
-            },
-            {
-              "id": "i4o",
-              "type": "text",
-              "style": "label",
-              "html": "Next.js",
-              "x": 78,
-              "y": 834.330496,
-              "w": 226,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -1.7
-            },
-            {
-              "id": "i4p",
-              "type": "text",
-              "style": "label",
-              "html": "TypeScript",
-              "x": 290,
-              "y": 834.330496,
-              "w": 287,
-              "backing": "dymo",
-              "ink": "red",
-              "rot": -1.9
-            },
-            {
-              "id": "i4t",
-              "type": "text",
-              "style": "title",
-              "html": "2nd",
-              "x": 60,
-              "y": 1066,
-              "w": 420,
-              "size": 0.95,
-              "ink": "red",
-              "align": "center",
-              "rot": 4
-            },
-            {
-              "id": "i4u",
-              "type": "sticker",
-              "art": "circle",
-              "x": 50,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
-              "ink": "red",
-              "rot": 3
-            },
-            {
-              "id": "i4v",
-              "type": "text",
-              "style": "caption",
-              "html": "place, Pulse Foundry AI Healthcare Hackathon",
-              "x": 50,
-              "y": 1232,
-              "w": 440,
-              "align": "center"
-            },
-            {
-              "id": "i4w",
-              "type": "text",
-              "style": "note",
-              "html": "care-team dashboards + voice safety checks",
-              "x": 544,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": 3,
-              "size": 0.86
-            }
-          ]
-        },
-        {
-          "id": "tailor-agent",
-          "name": "AI Tailor Research Agent",
-          "items": [
-            {
-              "id": "i4x",
-              "type": "text",
-              "style": "label",
-              "html": "Project · 07",
-              "x": 72,
-              "y": 78,
-              "w": 600
-            },
-            {
-              "id": "i4y",
-              "type": "text",
-              "style": "title",
-              "html": "AI Tailor Research Agent",
-              "x": 68,
-              "y": 132,
-              "w": 864,
-              "size": 0.82,
-              "rot": -1.2
-            },
-            {
-              "id": "i4z",
-              "type": "sticker",
-              "art": "underline",
-              "x": 70,
-              "y": 309.1488,
-              "w": 500,
-              "h": 34,
-              "ink": "red",
-              "rot": -1
-            },
-            {
-              "id": "i50",
-              "type": "text",
-              "style": "label",
-              "html": "Supervised prototype",
-              "x": 72,
-              "y": 369.1488,
-              "w": 860,
-              "backing": "dymo",
-              "rot": 1.2
-            },
-            {
-              "id": "i51",
-              "type": "text",
-              "style": "stamp",
-              "html": "Prototype",
+              "html": "2,556",
               "x": 540,
-              "y": 451.1488,
+              "y": 956.62592,
               "w": 400,
-              "ink": "red",
-              "rot": 5,
-              "size": 0.86,
-              "align": "center"
-            },
-            {
-              "id": "i52",
-              "type": "text",
-              "style": "body",
-              "html": "A supervised voice-research prototype. It gathers prices, turnaround ranges and rush availability, and keeps the original wording for an operator to review.",
-              "x": 80,
-              "y": 575.92684,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": -1.2
-            },
-            {
-              "id": "i53",
-              "type": "sticker",
-              "art": "phone",
-              "x": 580,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": 6,
-              "card": true
-            },
-            {
-              "id": "i54",
-              "type": "text",
-              "style": "note",
-              "html": "a prototype: not yet proven in real use",
-              "x": 96,
-              "y": 1000,
-              "w": 400,
-              "rot": -3
-            },
-            {
-              "id": "i55",
-              "type": "sticker",
-              "art": "arrow",
-              "x": 370,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -8
-            },
-            {
-              "id": "i56",
-              "type": "text",
-              "style": "caption",
-              "html": "← back to the list",
-              "x": 72,
-              "y": 1262,
-              "w": 420,
-              "goto": "experience"
-            }
-          ]
-        },
-        {
-          "id": "tailor-agent-2",
-          "name": "AI Tailor Research Agent, what I did",
-          "items": [
-            {
-              "id": "i5b",
-              "type": "text",
-              "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
-            },
-            {
-              "id": "i5c",
-              "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 199.94875199999998,
-              "w": 210,
-              "h": 50,
-              "rot": 3
-            },
-            {
-              "id": "i5d",
-              "type": "text",
-              "style": "body",
-              "html": "<ul><li>Connected Twilio Media Streams, OpenAI Realtime and optional ElevenLabs speech over WebSockets, in Node.js.</li><li>Extracted prices, turnaround ranges and rush availability into structured records with distinct outcome states.</li><li>Added provider-readiness checks, a bounded audio preflight and stream cleanup for debugging real-time voice.</li></ul>",
-              "x": 66,
-              "y": 221.94875199999998,
-              "w": 868,
-              "backing": "torn",
-              "size": 0.94,
-              "rot": 0.6
-            },
-            {
-              "id": "i57",
-              "type": "text",
-              "style": "label",
-              "html": "Node.js",
-              "x": 78,
-              "y": 810.1024960000001,
-              "w": 226,
-              "backing": "dymo",
-              "ink": "red",
-              "rot": 0
-            },
-            {
-              "id": "i58",
-              "type": "text",
-              "style": "label",
-              "html": "WebSockets",
-              "x": 290,
-              "y": 810.1024960000001,
-              "w": 287,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -2.5
-            },
-            {
-              "id": "i59",
-              "type": "text",
-              "style": "label",
-              "html": "Twilio",
-              "x": 563,
-              "y": 810.1024960000001,
-              "w": 205,
-              "backing": "dymo",
-              "ink": "green",
-              "rot": 2.2
-            },
-            {
-              "id": "i5a",
-              "type": "text",
-              "style": "label",
-              "html": "OpenAI Realtime",
-              "x": 104,
-              "y": 892.1024960000001,
-              "w": 390,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": 2.8
-            },
-            {
-              "id": "i5e",
-              "type": "text",
-              "style": "title",
-              "html": "supervised",
-              "x": 520,
-              "y": 1066,
-              "w": 420,
-              "size": 0.5,
+              "size": 1.2,
               "ink": "red",
               "align": "center",
-              "rot": -4
-            },
-            {
-              "id": "i5f",
-              "type": "sticker",
-              "art": "circle",
-              "x": 510,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
-              "ink": "red",
               "rot": -3
             },
             {
-              "id": "i5g",
+              "id": "i73",
+              "type": "sticker",
+              "art": "circle",
+              "x": 530,
+              "y": 928.62592,
+              "w": 420,
+              "h": 188.62207999999998,
+              "ink": "red",
+              "rot": -2
+            },
+            {
+              "id": "i74",
               "type": "text",
               "style": "caption",
-              "html": "outcomes are kept for an operator to review",
-              "x": 510,
-              "y": 1232,
-              "w": 440,
+              "html": "building footprints on the map",
+              "x": 540,
+              "y": 1131.248,
+              "w": 400,
               "align": "center"
             },
             {
-              "id": "i5h",
+              "id": "i75",
               "type": "text",
               "style": "note",
-              "html": "keeps the original wording, not just a summary",
+              "html": "team project. the map and the screens are mine.",
               "x": 76,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": -3,
-              "size": 0.86
+              "y": 1170.8572799999997,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": -2
             }
           ]
         },
         {
           "id": "kyc",
-          "name": "KYC Intake & Adjudication MVP",
+          "name": "Percy",
           "items": [
             {
-              "id": "i5i",
+              "id": "i76",
               "type": "text",
               "style": "label",
               "html": "Project · 08",
               "x": 72,
-              "y": 78,
-              "w": 600
+              "y": 58,
+              "w": 380
             },
             {
-              "id": "i5j",
+              "id": "i77",
+              "type": "text",
+              "style": "caption",
+              "html": "Fall 2025",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
+            },
+            {
+              "id": "i78",
               "type": "text",
               "style": "title",
-              "html": "KYC Intake & Adjudication MVP",
-              "x": 68,
-              "y": 132,
-              "w": 864,
-              "size": 0.68,
-              "rot": -1.2
+              "html": "Percy",
+              "x": 66,
+              "y": 98,
+              "w": 868,
+              "size": 1.35,
+              "rot": -0.8
             },
             {
-              "id": "i5k",
+              "id": "i79",
               "type": "sticker",
               "art": "underline",
-              "x": 70,
-              "y": 280.6112,
-              "w": 500,
-              "h": 34,
+              "x": 68,
+              "y": 248.44984,
+              "w": 347.1027768,
+              "h": 30,
               "ink": "red",
-              "rot": -1
+              "rot": -0.8
             },
             {
-              "id": "i5l",
+              "id": "i7a",
+              "type": "text",
+              "style": "caption",
+              "html": "a KYC intake & review MVP",
+              "x": 72,
+              "y": 286.44984,
+              "w": 856
+            },
+            {
+              "id": "i7b",
               "type": "text",
               "style": "label",
               "html": "End-to-end MVP",
               "x": 72,
-              "y": 340.6112,
+              "y": 336.19984,
               "w": 860,
-              "backing": "dymo",
-              "rot": 0.5
+              "backing": "boxed",
+              "rot": 0.3
             },
             {
-              "id": "i5m",
-              "type": "text",
-              "style": "stamp",
-              "html": "Fall 2025",
-              "x": 60,
-              "y": 422.6112,
-              "w": 400,
-              "ink": "red",
-              "rot": -5,
-              "size": 0.86,
-              "align": "center"
-            },
-            {
-              "id": "i5n",
-              "type": "text",
-              "style": "body",
-              "html": "An MVP that takes in emails and PDFs, pulls out identity fields and writes structured case notes into HubSpot.",
-              "x": 220,
-              "y": 578.13216,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": 1.2
-            },
-            {
-              "id": "i5o",
+              "id": "i7c",
               "type": "sticker",
-              "art": "doc",
-              "x": 80,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": -6,
-              "card": true
+              "art": "splat",
+              "x": 492,
+              "y": 600.19984,
+              "w": 122,
+              "h": 166,
+              "card": true,
+              "on": "kraft",
+              "rot": -7
             },
             {
-              "id": "i5p",
+              "id": "i7d",
+              "type": "sticker",
+              "art": "flow-kyc",
+              "x": 496,
+              "y": 428.19984,
+              "w": 440,
+              "h": 300,
+              "card": true,
+              "on": "graph",
+              "rot": 1.4
+            },
+            {
+              "id": "i7e",
+              "type": "sticker",
+              "art": "tape-kraft",
+              "x": 632,
+              "y": 404.19984,
+              "w": 168,
+              "h": 44,
+              "rot": 1.9
+            },
+            {
+              "id": "i7f",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 440,
+              "y": 442.19984,
+              "w": 26,
+              "h": 169.7656,
+              "rot": 180
+            },
+            {
+              "id": "i7g",
               "type": "text",
               "style": "note",
-              "html": "clear cases: rules. edge cases: LLM.",
-              "x": 504,
-              "y": 1000,
-              "w": 400,
-              "rot": 3
+              "html": "five parts: seeder, processor, matcher, agent, reviewer screen.",
+              "x": 70,
+              "y": 440.19984,
+              "w": 352,
+              "ink": "blue",
+              "rot": -1.2,
+              "size": 0.92
             },
             {
-              "id": "i5q",
+              "id": "i7h",
+              "type": "text",
+              "style": "note",
+              "html": "use the model last, not first.",
+              "x": 70,
+              "y": 631.9654400000001,
+              "w": 352,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": 1.4
+            },
+            {
+              "id": "i7i",
+              "type": "text",
+              "style": "heading",
+              "html": "why I built it",
+              "x": 72,
+              "y": 799.0464400000001,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i7j",
               "type": "sticker",
-              "art": "arrow",
-              "x": 450,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -150
+              "art": "underline",
+              "x": 72,
+              "y": 849.0464400000001,
+              "w": 256.86924400000004,
+              "h": 22,
+              "rot": -0.6
             },
             {
-              "id": "i5r",
+              "id": "i7k",
+              "type": "text",
+              "style": "body",
+              "html": "<p>KYC is the paperwork that proves a customer is who they say they are. Most cases are dull and obvious. A few are not.</p><p>I wanted to see how far plain rules could go before an LLM was needed at all. So Percy reads the emails and PDFs, matches the clear ones itself, and hands the strange ones to a person with notes already written.</p>",
+              "x": 72,
+              "y": 881.0464400000001,
+              "w": 856
+            },
+            {
+              "id": "i7l",
               "type": "text",
               "style": "caption",
               "html": "← back to the list",
               "x": 72,
-              "y": 1262,
+              "y": 1276,
               "w": 420,
               "goto": "experience"
             }
@@ -2438,233 +3110,323 @@
         },
         {
           "id": "kyc-2",
-          "name": "KYC Intake & Adjudication MVP, what I did",
+          "name": "Percy: the TL;DR",
           "items": [
             {
-              "id": "i5v",
+              "id": "i7m",
               "type": "text",
               "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
+              "rot": -1.6
             },
             {
-              "id": "i5w",
+              "id": "i7n",
               "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 218.721792,
+              "art": "underline",
+              "x": 76,
+              "y": 138,
               "w": 210,
-              "h": 50,
-              "rot": 3
+              "h": 26,
+              "ink": "red",
+              "rot": -1.6
             },
             {
-              "id": "i5x",
+              "id": "i7o",
+              "type": "text",
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
+            },
+            {
+              "id": "i7p",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i7q",
               "type": "text",
               "style": "body",
-              "html": "<ul><li>Built the flow end to end: document intake, field extraction and structured HubSpot case notes.</li><li>Designed deterministic matching for the clear cases and a review queue for the ambiguous ones.</li><li>Limited LLM use to edge-case decisions.</li></ul>",
-              "x": 66,
-              "y": 240.721792,
-              "w": 868,
+              "html": "<b>PERCY</b><br>End-to-end MVP<br><small>Fall 2025</small><hr><ul><li>Prototyped Percy, a KYC-review MVP that turns inbound emails and PDFs into structured HubSpot case notes.</li><li>Auto-matched clear cases with deterministic rules and queued ambiguous records for human review.</li><li>Limited LLM decisions to edge cases.</li><li><a href=\"https://www.loom.com/share/9e1e8cb907394b448f065ac9c29106b8\">Watch the demo (Loom)</a></li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
               "backing": "torn",
-              "size": 1.04,
-              "rot": 0.6
+              "size": 0.92,
+              "rot": -0.5
             },
             {
-              "id": "i5s",
-              "type": "text",
-              "style": "label",
-              "html": "HubSpot",
-              "x": 78,
-              "y": 854.5564160000001,
-              "w": 226,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -1.8
+              "id": "i7r",
+              "type": "sticker",
+              "art": "clip",
+              "x": 820,
+              "y": 118,
+              "w": 50,
+              "h": 110,
+              "rot": 8
             },
             {
-              "id": "i5t",
-              "type": "text",
-              "style": "label",
-              "html": "Email + PDF",
-              "x": 290,
-              "y": 854.5564160000001,
-              "w": 308,
-              "backing": "dymo",
-              "ink": "green",
-              "rot": 2.9
+              "id": "i7s",
+              "type": "sticker",
+              "art": "tape-red",
+              "x": 30,
+              "y": 182,
+              "w": 140,
+              "h": 36,
+              "rot": -40
             },
             {
-              "id": "i5u",
+              "id": "i7t",
               "type": "text",
-              "style": "label",
-              "html": "Review queue",
-              "x": 584,
-              "y": 854.5564160000001,
-              "w": 328,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": 0
+              "style": "body",
+              "html": "<b>STACK</b><br>HubSpot · Email + PDF intake · Rules · LLM",
+              "x": 470,
+              "y": 883.9528,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": 1.6
             },
             {
-              "id": "i5y",
-              "type": "text",
-              "style": "title",
-              "html": "review queue",
-              "x": 60,
-              "y": 1066,
-              "w": 420,
-              "size": 0.5,
-              "ink": "red",
-              "align": "center",
+              "id": "i7u",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 635,
+              "y": 867.9528,
+              "w": 140,
+              "h": 38,
               "rot": 4
             },
             {
-              "id": "i5z",
-              "type": "sticker",
-              "art": "circle",
-              "x": 50,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
+              "id": "i7v",
+              "type": "text",
+              "style": "title",
+              "html": "rules 1st",
+              "x": 60,
+              "y": 917.9528,
+              "w": 400,
+              "size": 0.7245153844449103,
               "ink": "red",
+              "align": "center",
               "rot": 3
             },
             {
-              "id": "i60",
+              "id": "i7w",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 889.9528,
+              "w": 420,
+              "h": 138.4497041420118,
+              "ink": "red",
+              "rot": 2
+            },
+            {
+              "id": "i7x",
               "type": "text",
               "style": "caption",
-              "html": "where ambiguous records go, for a person to decide",
-              "x": 50,
-              "y": 1232,
-              "w": 440,
+              "html": "the LLM only sees what the rules can’t settle",
+              "x": 60,
+              "y": 1042.4025041420118,
+              "w": 400,
               "align": "center"
             },
             {
-              "id": "i61",
+              "id": "i7y",
               "type": "text",
               "style": "note",
-              "html": "scope: intake, case notes, human-review routing",
-              "x": 544,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": 3,
-              "size": 0.86
+              "html": "seeded test emails, not real customers.",
+              "x": 484,
+              "y": 1145.0752,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": 2
             }
           ]
         },
         {
           "id": "revenue-funnel",
-          "name": "Revenue Funnel & Churn Analytics",
+          "name": "Revenue Funnel",
           "items": [
             {
-              "id": "i62",
+              "id": "i7z",
               "type": "text",
               "style": "label",
               "html": "Project · 09",
               "x": 72,
-              "y": 78,
-              "w": 600
+              "y": 58,
+              "w": 380
             },
             {
-              "id": "i63",
+              "id": "i80",
+              "type": "text",
+              "style": "caption",
+              "html": "Summer 2024",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
+            },
+            {
+              "id": "i81",
               "type": "text",
               "style": "title",
-              "html": "Revenue Funnel & Churn Analytics",
-              "x": 68,
-              "y": 132,
-              "w": 864,
-              "size": 0.68,
-              "rot": -1.2
+              "html": "Revenue Funnel",
+              "x": 66,
+              "y": 98,
+              "w": 868,
+              "size": 1,
+              "rot": -0.8
             },
             {
-              "id": "i64",
+              "id": "i82",
               "type": "sticker",
               "art": "underline",
-              "x": 70,
-              "y": 280.6112,
-              "w": 500,
-              "h": 34,
+              "x": 68,
+              "y": 211.51839999999999,
+              "w": 600,
+              "h": 30,
               "ink": "red",
-              "rot": -1
+              "rot": -0.8
             },
             {
-              "id": "i65",
+              "id": "i83",
+              "type": "text",
+              "style": "caption",
+              "html": "from first deal to cancelled card, in SQL",
+              "x": 72,
+              "y": 249.51839999999999,
+              "w": 856
+            },
+            {
+              "id": "i84",
               "type": "text",
               "style": "label",
-              "html": "Stripe + HubSpot",
+              "html": "Independent project",
               "x": 72,
-              "y": 340.6112,
+              "y": 299.2684,
               "w": 860,
-              "backing": "dymo",
-              "rot": 0.6
+              "backing": "boxed",
+              "rot": 0.4
             },
             {
-              "id": "i66",
-              "type": "text",
-              "style": "stamp",
-              "html": "Summer 2024",
-              "x": 540,
-              "y": 422.6112,
-              "w": 400,
-              "ink": "red",
-              "rot": 5,
-              "size": 0.86,
-              "align": "center"
+              "id": "i85",
+              "type": "sticker",
+              "art": "splat",
+              "x": 266,
+              "y": 583.2683999999999,
+              "w": 122,
+              "h": 166,
+              "card": true,
+              "on": "kraft",
+              "rot": 7
             },
             {
-              "id": "i67",
-              "type": "text",
-              "style": "body",
-              "html": "HubSpot pipeline data joined to Stripe activation and subscription records, to see where customers drop off and how long deals take to close.",
-              "x": 80,
-              "y": 560.23116,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": -1.2
-            },
-            {
-              "id": "i68",
+              "id": "i86",
               "type": "sticker",
               "art": "funnel",
-              "x": 580,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": 6,
-              "card": true
+              "x": 64,
+              "y": 391.2684,
+              "w": 320,
+              "h": 320,
+              "card": true,
+              "on": "kraft",
+              "rot": -1.4
             },
             {
-              "id": "i69",
+              "id": "i87",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 140,
+              "y": 367.2684,
+              "w": 168,
+              "h": 44,
+              "rot": 0.4
+            },
+            {
+              "id": "i88",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 414,
+              "y": 405.2684,
+              "w": 26,
+              "h": 86.8828,
+              "rot": 0
+            },
+            {
+              "id": "i89",
               "type": "text",
               "style": "note",
-              "html": "a failed payment ≠ choosing to leave",
-              "x": 96,
-              "y": 1000,
-              "w": 400,
-              "rot": -3
+              "html": "the data is synthetic. the plumbing is real.",
+              "x": 458,
+              "y": 403.2684,
+              "w": 472,
+              "ink": "blue",
+              "rot": 1.2,
+              "size": 0.92
             },
             {
-              "id": "i6a",
+              "id": "i8a",
+              "type": "text",
+              "style": "note",
+              "html": "a failed payment is not a goodbye.",
+              "x": 458,
+              "y": 594.1873999999999,
+              "w": 472,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": -1.4
+            },
+            {
+              "id": "i8b",
+              "type": "text",
+              "style": "heading",
+              "html": "why I built it",
+              "x": 72,
+              "y": 761.2683999999999,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i8c",
               "type": "sticker",
-              "art": "arrow",
-              "x": 370,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -8
+              "art": "underline",
+              "x": 72,
+              "y": 811.2683999999999,
+              "w": 256.86924400000004,
+              "h": 22,
+              "rot": -0.6
             },
             {
-              "id": "i6b",
+              "id": "i8d",
+              "type": "text",
+              "style": "body",
+              "html": "<p>A practice project with made-up data, and I’d rather say so here than let it sound bigger.</p><p>I wanted to follow one customer the whole way: from a deal in a sales pipeline, to their first payment, to the month they stop paying.</p><p>What I kept from it: a failed card and a decision to leave both look like churn on a chart. They are not the same problem.</p>",
+              "x": 72,
+              "y": 843.2683999999999,
+              "w": 856
+            },
+            {
+              "id": "i8e",
               "type": "text",
               "style": "caption",
               "html": "← back to the list",
               "x": 72,
-              "y": 1262,
+              "y": 1276,
               "w": 420,
               "goto": "experience"
             }
@@ -2672,121 +3434,149 @@
         },
         {
           "id": "revenue-funnel-2",
-          "name": "Revenue Funnel & Churn Analytics, what I did",
+          "name": "Revenue Funnel: the TL;DR",
           "items": [
             {
-              "id": "i6f",
+              "id": "i8f",
               "type": "text",
               "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
+              "rot": -1.6
             },
             {
-              "id": "i6g",
+              "id": "i8g",
               "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 217.98875199999998,
+              "art": "underline",
+              "x": 76,
+              "y": 138,
               "w": 210,
-              "h": 50,
-              "rot": 3
+              "h": 26,
+              "ink": "red",
+              "rot": -1.6
             },
             {
-              "id": "i6h",
+              "id": "i8h",
+              "type": "text",
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
+            },
+            {
+              "id": "i8i",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i8j",
               "type": "text",
               "style": "body",
-              "html": "<ul><li>Unified pipeline, activation and subscription data to analyze conversion drop-offs and time-to-close.</li><li>Compared retention and churn cohorts by plan and segment, separating payment-failure churn from voluntary churn.</li><li>Built SQL models and analysis-ready tables for consistent MRR, churn, activation and cohort-retention reporting.</li></ul>",
-              "x": 66,
-              "y": 239.98875199999998,
-              "w": 868,
+              "html": "<b>REVENUE FUNNEL</b><br>Independent project<br><small>Summer 2024</small><hr><ul><li>Built a revenue-funnel analytics project on synthetic pipeline, activation and subscription data modeled on HubSpot and Stripe.</li><li>Modeled MRR, activation, churn and cohort retention in SQL on one shared data model.</li><li>Separated failed-payment churn from voluntary cancellations by plan and customer segment.</li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
               "backing": "torn",
-              "size": 0.94,
-              "rot": 0.6
+              "size": 0.92,
+              "rot": 0.5
             },
             {
-              "id": "i6c",
-              "type": "text",
-              "style": "label",
-              "html": "SQL",
-              "x": 78,
-              "y": 856.022496,
-              "w": 144,
-              "backing": "dymo",
-              "ink": "green",
-              "rot": 2.9
+              "id": "i8k",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 20,
+              "y": 176,
+              "w": 150,
+              "h": 40,
+              "rot": -38
             },
             {
-              "id": "i6d",
-              "type": "text",
-              "style": "label",
-              "html": "Stripe",
-              "x": 208,
-              "y": 856.022496,
-              "w": 205,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -0.5
+              "id": "i8l",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 830,
+              "y": 174,
+              "w": 150,
+              "h": 40,
+              "rot": 36
             },
             {
-              "id": "i6e",
+              "id": "i8m",
               "type": "text",
-              "style": "label",
-              "html": "HubSpot",
-              "x": 399,
-              "y": 856.022496,
-              "w": 226,
-              "backing": "dymo",
-              "ink": "blue",
-              "rot": 1.6
+              "style": "body",
+              "html": "<b>TOOLS</b><br>SQL · Data modeling · KPI dashboards",
+              "x": 60,
+              "y": 899.69584,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": -1.6
             },
             {
-              "id": "i6i",
-              "type": "text",
-              "style": "title",
-              "html": "MRR",
-              "x": 520,
-              "y": 1066,
-              "w": 420,
-              "size": 0.95,
-              "ink": "red",
-              "align": "center",
+              "id": "i8n",
+              "type": "sticker",
+              "art": "tape-kraft",
+              "x": 225,
+              "y": 883.69584,
+              "w": 140,
+              "h": 38,
               "rot": -4
             },
             {
-              "id": "i6j",
-              "type": "sticker",
-              "art": "circle",
-              "x": 510,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
+              "id": "i8o",
+              "type": "text",
+              "style": "title",
+              "html": "MRR",
+              "x": 540,
+              "y": 933.69584,
+              "w": 400,
+              "size": 1.2,
               "ink": "red",
+              "align": "center",
               "rot": -3
             },
             {
-              "id": "i6k",
+              "id": "i8p",
+              "type": "sticker",
+              "art": "circle",
+              "x": 530,
+              "y": 905.69584,
+              "w": 420,
+              "h": 188.62207999999998,
+              "ink": "red",
+              "rot": -2
+            },
+            {
+              "id": "i8q",
               "type": "text",
               "style": "caption",
-              "html": "plus churn, activation and cohort retention, from one set of tables",
-              "x": 510,
-              "y": 1232,
-              "w": 440,
+              "html": "plus churn, activation and retention, from one set of tables",
+              "x": 540,
+              "y": 1108.31792,
+              "w": 400,
               "align": "center"
             },
             {
-              "id": "i6l",
+              "id": "i8r",
               "type": "text",
               "style": "note",
-              "html": "two kinds of churn, kept apart",
+              "html": "no real company’s numbers are in here.",
               "x": 76,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": -3,
-              "size": 0.86
+              "y": 1155.57056,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": -2
             }
           ]
         },
@@ -2795,110 +3585,169 @@
           "name": "CSSA",
           "items": [
             {
-              "id": "i6m",
+              "id": "i8s",
               "type": "text",
               "style": "label",
               "html": "Community · 10",
               "x": 72,
-              "y": 78,
-              "w": 600
+              "y": 58,
+              "w": 380
             },
             {
-              "id": "i6n",
+              "id": "i8t",
+              "type": "text",
+              "style": "caption",
+              "html": "Sep 2023 → now",
+              "x": 500,
+              "y": 54,
+              "w": 430,
+              "align": "right",
+              "ink": "red"
+            },
+            {
+              "id": "i8u",
               "type": "text",
               "style": "title",
               "html": "CSSA",
-              "x": 68,
-              "y": 132,
-              "w": 864,
-              "size": 1.2,
-              "rot": -1.2
+              "x": 66,
+              "y": 98,
+              "w": 868,
+              "size": 1.35,
+              "rot": -0.8
             },
             {
-              "id": "i6o",
+              "id": "i8v",
               "type": "sticker",
               "art": "underline",
-              "x": 70,
-              "y": 264.304,
-              "w": 500,
-              "h": 34,
+              "x": 68,
+              "y": 248.44984,
+              "w": 286.9239672,
+              "h": 30,
               "ink": "red",
-              "rot": -1
+              "rot": -0.8
             },
             {
-              "id": "i6p",
+              "id": "i8w",
+              "type": "text",
+              "style": "caption",
+              "html": "Chinese Students & Scholars Association",
+              "x": 72,
+              "y": 286.44984,
+              "w": 856
+            },
+            {
+              "id": "i8x",
               "type": "text",
               "style": "label",
               "html": "Head of Career & Community Development",
               "x": 72,
-              "y": 324.304,
+              "y": 336.19984,
               "w": 860,
-              "backing": "dymo",
-              "rot": -0.5
+              "backing": "boxed",
+              "rot": -0.3
             },
             {
-              "id": "i6q",
-              "type": "text",
-              "style": "stamp",
-              "html": "Since Sep 2023",
-              "x": 60,
-              "y": 406.304,
-              "w": 400,
-              "ink": "red",
-              "rot": -5,
-              "size": 0.86,
-              "align": "center"
-            },
-            {
-              "id": "i6r",
-              "type": "text",
-              "style": "body",
-              "html": "Student leadership: I led the team that runs career and networking events for the community.",
-              "x": 220,
-              "y": 587.0642,
-              "w": 700,
-              "backing": "card",
-              "size": 0.9,
-              "rot": 1.2
-            },
-            {
-              "id": "i6s",
+              "id": "i8y",
               "type": "sticker",
               "art": "megaphone",
-              "x": 80,
-              "y": 900,
-              "w": 340,
-              "h": 340,
-              "rot": -6,
-              "card": true
+              "x": 616,
+              "y": 428.19984,
+              "w": 320,
+              "h": 320,
+              "card": true,
+              "rot": 1.4
             },
             {
-              "id": "i6t",
+              "id": "i8z",
+              "type": "sticker",
+              "art": "tape-red",
+              "x": 692,
+              "y": 404.19984,
+              "w": 168,
+              "h": 44,
+              "rot": 1.4
+            },
+            {
+              "id": "i90",
+              "type": "sticker",
+              "art": "bracket",
+              "x": 560,
+              "y": 442.19984,
+              "w": 26,
+              "h": 86.8828,
+              "rot": 180
+            },
+            {
+              "id": "i91",
               "type": "text",
               "style": "note",
-              "html": "80+ students on the Amazon tour",
-              "x": 504,
-              "y": 1000,
-              "w": 400,
-              "rot": 3
+              "html": "80+ students came on the Amazon tour.",
+              "x": 70,
+              "y": 440.19984,
+              "w": 472,
+              "ink": "blue",
+              "rot": -1.2,
+              "size": 0.92
             },
             {
-              "id": "i6u",
+              "id": "i92",
+              "type": "text",
+              "style": "note",
+              "html": "ask. the worst answer is no.",
+              "x": 70,
+              "y": 631.11884,
+              "w": 472,
+              "backing": "boxed",
+              "size": 0.9,
+              "rot": 1.4
+            },
+            {
+              "id": "i93",
               "type": "sticker",
-              "art": "arrow",
-              "x": 450,
-              "y": 1130,
-              "w": 180,
-              "h": 72,
-              "rot": -150
+              "art": "tape-red",
+              "x": 541,
+              "y": 562.59984,
+              "w": 150,
+              "h": 34,
+              "rot": -90
             },
             {
-              "id": "i6v",
+              "id": "i94",
+              "type": "text",
+              "style": "heading",
+              "html": "what I took away",
+              "x": 72,
+              "y": 798.19984,
+              "w": 760,
+              "size": 0.66,
+              "rot": -0.6
+            },
+            {
+              "id": "i95",
+              "type": "sticker",
+              "art": "underline",
+              "x": 72,
+              "y": 848.19984,
+              "w": 344.427088,
+              "h": 22,
+              "rot": -0.6
+            },
+            {
+              "id": "i96",
+              "type": "text",
+              "style": "body",
+              "html": "<p>Nothing on this page is code. It’s fifteen people, a venue that has to be booked, and a speaker who hasn’t replied yet.</p><p>What I learnt is that a team doesn’t run on enthusiasm. Each sub-team got a target, and I kept track of them in a plain Excel sheet.</p><p>And most things start with asking. The Amazon tour did.</p>",
+              "x": 72,
+              "y": 880.19984,
+              "w": 856
+            },
+            {
+              "id": "i97",
               "type": "text",
               "style": "caption",
               "html": "← back to the list",
               "x": 72,
-              "y": 1262,
+              "y": 1276,
               "w": 420,
               "goto": "experience"
             }
@@ -2906,121 +3755,139 @@
         },
         {
           "id": "cssa-2",
-          "name": "CSSA, what I did",
+          "name": "CSSA: the TL;DR",
           "items": [
             {
-              "id": "i6z",
+              "id": "i98",
               "type": "text",
               "style": "heading",
-              "html": "What I did",
-              "x": 78,
-              "y": 80,
-              "w": 700,
-              "rot": -1.2
+              "html": "TL;DR",
+              "x": 72,
+              "y": 50,
+              "w": 250,
+              "size": 1.5,
+              "rot": -1.6
             },
             {
-              "id": "i70",
+              "id": "i99",
               "type": "sticker",
-              "art": "tape-cream",
-              "x": 400,
-              "y": 215.035648,
+              "art": "underline",
+              "x": 76,
+              "y": 138,
               "w": 210,
-              "h": 50,
-              "rot": 3
+              "h": 26,
+              "ink": "red",
+              "rot": -1.6
             },
             {
-              "id": "i71",
+              "id": "i9a",
+              "type": "text",
+              "style": "caption",
+              "html": "the typed-up version, for anyone in a hurry",
+              "x": 330,
+              "y": 72,
+              "w": 400,
+              "rot": -1
+            },
+            {
+              "id": "i9b",
+              "type": "sticker",
+              "art": "arrow",
+              "x": 742,
+              "y": 76,
+              "w": 118,
+              "h": 50,
+              "rot": 34
+            },
+            {
+              "id": "i9c",
               "type": "text",
               "style": "body",
-              "html": "<ul><li>Led a 15-member team delivering networking events for 200+ attendees: venues, logistics, speakers and promotion.</li><li>Negotiated partnerships that secured $8K in ticket sales and sponsorship.</li><li>Organized an Amazon company tour with employees, hosting 80+ students.</li><li>Set outreach targets and tracked sub-team performance in Excel.</li></ul>",
-              "x": 66,
-              "y": 237.035648,
-              "w": 868,
+              "html": "<b>CSSA</b><br>Head of Career & Community Development<br><small>Sep 2023 → now</small><hr><ul><li>Led a 15-member team delivering career and networking events for 200+ attendees.</li><li>Negotiated partnerships that supported $8K in combined ticket sales and sponsorship.</li><li>Organized an Amazon company tour for 80+ students with employee hosts.</li></ul>",
+              "x": 56,
+              "y": 172,
+              "w": 888,
               "backing": "torn",
-              "size": 0.94,
-              "rot": 0.6
+              "size": 0.92,
+              "rot": -0.5
             },
             {
-              "id": "i6w",
+              "id": "i9d",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 400,
+              "y": 152,
+              "w": 190,
+              "h": 46,
+              "rot": 2.5
+            },
+            {
+              "id": "i9e",
               "type": "text",
-              "style": "label",
-              "html": "Events",
-              "x": 78,
-              "y": 861.928704,
-              "w": 205,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": -2.9
+              "style": "body",
+              "html": "<b>SCOPE</b><br>Venues · Speakers · Logistics · Promotion",
+              "x": 470,
+              "y": 830.9056,
+              "w": 470,
+              "backing": "torn",
+              "size": 0.8,
+              "rot": 1.6
             },
             {
-              "id": "i6x",
-              "type": "text",
-              "style": "label",
-              "html": "Partnerships",
-              "x": 269,
-              "y": 861.928704,
-              "w": 328,
-              "backing": "dymo",
-              "ink": "blue",
-              "rot": 0.4
+              "id": "i9f",
+              "type": "sticker",
+              "art": "tape-black",
+              "x": 635,
+              "y": 814.9056,
+              "w": 140,
+              "h": 38,
+              "rot": 4
             },
             {
-              "id": "i6y",
-              "type": "text",
-              "style": "label",
-              "html": "Excel",
-              "x": 583,
-              "y": 861.928704,
-              "w": 185,
-              "backing": "dymo",
-              "ink": "ink",
-              "rot": 2
-            },
-            {
-              "id": "i72",
+              "id": "i9g",
               "type": "text",
               "style": "title",
               "html": "200+",
               "x": 60,
-              "y": 1066,
-              "w": 420,
-              "size": 0.95,
+              "y": 864.9056,
+              "w": 400,
+              "size": 1.2,
               "ink": "red",
               "align": "center",
-              "rot": 4
-            },
-            {
-              "id": "i73",
-              "type": "sticker",
-              "art": "circle",
-              "x": 50,
-              "y": 1030,
-              "w": 440,
-              "h": 190,
-              "ink": "red",
               "rot": 3
             },
             {
-              "id": "i74",
+              "id": "i9h",
+              "type": "sticker",
+              "art": "circle",
+              "x": 50,
+              "y": 836.9056,
+              "w": 420,
+              "h": 188.62207999999998,
+              "ink": "red",
+              "rot": 2
+            },
+            {
+              "id": "i9i",
               "type": "text",
               "style": "caption",
-              "html": "attendees at our networking events",
-              "x": 50,
-              "y": 1232,
-              "w": 440,
+              "html": "attendees at our career and networking events",
+              "x": 60,
+              "y": 1039.5276800000001,
+              "w": 400,
               "align": "center"
             },
             {
-              "id": "i75",
+              "id": "i9j",
               "type": "text",
               "style": "note",
-              "html": "$8K in ticket sales and sponsorship",
-              "x": 544,
-              "y": 1058,
-              "w": 380,
-              "backing": "sticky",
-              "rot": 3,
-              "size": 0.86
+              "html": "$8K = tickets + sponsors together.",
+              "x": 484,
+              "y": 1109.7104,
+              "w": 440,
+              "ink": "blue",
+              "size": 0.8,
+              "rot": 2
             }
           ]
         }
@@ -3037,7 +3904,7 @@
           "name": "My Take on Tech: the list",
           "items": [
             {
-              "id": "i7j",
+              "id": "i9x",
               "type": "text",
               "style": "title",
               "html": "My Take on Tech",
@@ -3048,7 +3915,7 @@
               "rot": -2
             },
             {
-              "id": "i7k",
+              "id": "i9y",
               "type": "sticker",
               "art": "underline",
               "x": 76,
@@ -3059,7 +3926,7 @@
               "rot": -2
             },
             {
-              "id": "i7l",
+              "id": "i9z",
               "type": "text",
               "style": "body",
               "html": "Notes on building software. New ones get taped in as I write them.",
@@ -3069,7 +3936,7 @@
               "size": 0.9
             },
             {
-              "id": "i7m",
+              "id": "ia0",
               "type": "text",
               "style": "label",
               "html": "Posts",
@@ -3079,7 +3946,7 @@
               "backing": "dymo"
             },
             {
-              "id": "i7n",
+              "id": "ia1",
               "type": "text",
               "style": "body",
               "html": "<b>Four things I keep coming back to</b><br><small>Draft · p. {{page}}</small>",
@@ -3092,7 +3959,7 @@
               "goto": "four-things"
             },
             {
-              "id": "i7o",
+              "id": "ia2",
               "type": "sticker",
               "art": "laptop",
               "x": 62,
@@ -3103,7 +3970,7 @@
               "goto": "four-things"
             },
             {
-              "id": "i7p",
+              "id": "ia3",
               "type": "text",
               "style": "stamp",
               "html": "Draft",
@@ -3122,7 +3989,7 @@
           "paper": "grid",
           "items": [
             {
-              "id": "i7q",
+              "id": "ia4",
               "type": "text",
               "style": "heading",
               "html": "more soon",
@@ -3133,7 +4000,7 @@
               "rot": -3
             },
             {
-              "id": "i7r",
+              "id": "ia5",
               "type": "sticker",
               "art": "sparkle",
               "x": 420,
@@ -3142,7 +4009,7 @@
               "h": 180
             },
             {
-              "id": "i7s",
+              "id": "ia6",
               "type": "text",
               "style": "note",
               "html": "Benny: to add a post, run “npm run edit” and pick “Blog post”.",
@@ -3161,7 +4028,7 @@
           "name": "Four things I keep coming back to",
           "items": [
             {
-              "id": "i77",
+              "id": "i9l",
               "type": "text",
               "style": "label",
               "html": "Post",
@@ -3170,28 +4037,28 @@
               "w": 400
             },
             {
-              "id": "i78",
+              "id": "i9m",
               "type": "text",
               "style": "title",
               "html": "Four things I keep coming back to",
               "x": 68,
               "y": 138,
               "w": 860,
-              "size": 0.6120000000000001,
+              "size": 0.74,
               "rot": -1
             },
             {
-              "id": "i79",
+              "id": "i9n",
               "type": "sticker",
               "art": "underline",
               "x": 70,
-              "y": 274.75008,
+              "y": 306.167232,
               "w": 460,
               "h": 34,
               "ink": "red"
             },
             {
-              "id": "i76",
+              "id": "i9k",
               "type": "text",
               "style": "caption",
               "html": "← all posts",
@@ -3201,7 +4068,7 @@
               "goto": "tech"
             },
             {
-              "id": "i7e",
+              "id": "i9s",
               "type": "text",
               "style": "stamp",
               "html": "Draft",
@@ -3213,7 +4080,7 @@
               "align": "center"
             },
             {
-              "id": "i7f",
+              "id": "i9t",
               "type": "text",
               "style": "body",
               "html": "<p><b>1. The second submit is the real test.</b> Anything works once. The interesting part is what happens on the retry, the double click and the webhook that arrives twice.</p><p><b>2. Numbers should admit what they don’t know.</b> A dashboard is more useful when it says where its data stops, and keeps test assumptions apart from what real people did.</p>",
@@ -3228,7 +4095,7 @@
           "name": "Four things I keep coming back to, continued",
           "items": [
             {
-              "id": "i7g",
+              "id": "i9u",
               "type": "text",
               "style": "body",
               "html": "<p><b>3. AI still needs a reviewer.</b> I like building with it. I also like keeping the original words, the unclear cases and a person who can check the result.</p><p><b>4. Boring choices leave room for fun ones.</b> Solid data and plain workflows are what make it possible to spend a week on a field of ASCII grass.</p>",
@@ -3237,7 +4104,7 @@
               "w": 840
             },
             {
-              "id": "i7h",
+              "id": "i9v",
               "type": "sticker",
               "art": "laptop",
               "x": 560,
@@ -3247,7 +4114,7 @@
               "rot": 6
             },
             {
-              "id": "i7i",
+              "id": "i9w",
               "type": "text",
               "style": "note",
               "html": "Benny: these four are placeholder words. Rewrite them or delete this post.",
@@ -3274,7 +4141,7 @@
           "name": "About Me",
           "items": [
             {
-              "id": "i7t",
+              "id": "ia7",
               "type": "text",
               "style": "title",
               "html": "About Me",
@@ -3285,7 +4152,7 @@
               "rot": -2
             },
             {
-              "id": "i7u",
+              "id": "ia8",
               "type": "sticker",
               "art": "underline",
               "x": 76,
@@ -3296,7 +4163,7 @@
               "rot": -2
             },
             {
-              "id": "i7v",
+              "id": "ia9",
               "type": "text",
               "style": "body",
               "html": "I’m Benny (BinHuai) Yuan. I work across full-stack engineering and data.",
@@ -3307,7 +4174,7 @@
               "rot": -1
             },
             {
-              "id": "i7w",
+              "id": "iaa",
               "type": "sticker",
               "art": "cap",
               "x": 76,
@@ -3317,7 +4184,7 @@
               "rot": -6
             },
             {
-              "id": "i7x",
+              "id": "iab",
               "type": "text",
               "style": "body",
               "html": "<b>New York University</b><br>B.A. in Data Science, minor in Business Studies.<br><small>May 2026 · GPA 3.7</small>",
@@ -3327,7 +4194,7 @@
               "size": 0.9
             },
             {
-              "id": "i7y",
+              "id": "iac",
               "type": "text",
               "style": "caption",
               "html": "data management, causal inference, machine learning",
@@ -3337,7 +4204,7 @@
               "rot": -1.5
             },
             {
-              "id": "i7z",
+              "id": "iad",
               "type": "sticker",
               "art": "gelato",
               "x": 740,
@@ -3347,7 +4214,7 @@
               "rot": 8
             },
             {
-              "id": "i80",
+              "id": "iae",
               "type": "text",
               "style": "body",
               "html": "<b>NYU Florence</b><br>Exchange semester, fall 2023.<br><small>Italian, art history and philosophy.</small>",
@@ -3357,7 +4224,7 @@
               "size": 0.9
             },
             {
-              "id": "i81",
+              "id": "iaf",
               "type": "sticker",
               "art": "tape-cream",
               "x": 320,
@@ -3373,7 +4240,7 @@
           "name": "About Me: tools and where to find me",
           "items": [
             {
-              "id": "i82",
+              "id": "iag",
               "type": "text",
               "style": "heading",
               "html": "Tools I reach for",
@@ -3383,7 +4250,7 @@
               "rot": -1.2
             },
             {
-              "id": "i83",
+              "id": "iah",
               "type": "text",
               "style": "label",
               "html": "TypeScript",
@@ -3395,7 +4262,7 @@
               "rot": 1.4
             },
             {
-              "id": "i84",
+              "id": "iai",
               "type": "text",
               "style": "label",
               "html": "Next.js",
@@ -3407,7 +4274,7 @@
               "rot": 2.6
             },
             {
-              "id": "i85",
+              "id": "iaj",
               "type": "text",
               "style": "label",
               "html": "Node.js",
@@ -3419,7 +4286,7 @@
               "rot": -1.7
             },
             {
-              "id": "i86",
+              "id": "iak",
               "type": "text",
               "style": "label",
               "html": "PostgreSQL",
@@ -3431,7 +4298,7 @@
               "rot": -1.9
             },
             {
-              "id": "i87",
+              "id": "ial",
               "type": "text",
               "style": "label",
               "html": "Prisma",
@@ -3443,7 +4310,7 @@
               "rot": -0.6
             },
             {
-              "id": "i88",
+              "id": "iam",
               "type": "text",
               "style": "label",
               "html": "Python",
@@ -3455,7 +4322,7 @@
               "rot": 1.6
             },
             {
-              "id": "i89",
+              "id": "ian",
               "type": "text",
               "style": "label",
               "html": "SQL",
@@ -3467,7 +4334,7 @@
               "rot": 2.5
             },
             {
-              "id": "i8a",
+              "id": "iao",
               "type": "text",
               "style": "label",
               "html": "FastAPI",
@@ -3479,7 +4346,7 @@
               "rot": -2
             },
             {
-              "id": "i8b",
+              "id": "iap",
               "type": "text",
               "style": "label",
               "html": "Excel",
@@ -3491,7 +4358,7 @@
               "rot": 1.7
             },
             {
-              "id": "i8c",
+              "id": "iaq",
               "type": "text",
               "style": "label",
               "html": "Git",
@@ -3503,7 +4370,7 @@
               "rot": 0
             },
             {
-              "id": "i8d",
+              "id": "iar",
               "type": "text",
               "style": "heading",
               "html": "Languages",
@@ -3513,7 +4380,7 @@
               "rot": -1
             },
             {
-              "id": "i8e",
+              "id": "ias",
               "type": "text",
               "style": "body",
               "html": "English and Mandarin, both native.<br>Italian, basic.",
@@ -3522,7 +4389,7 @@
               "w": 800
             },
             {
-              "id": "i8f",
+              "id": "iat",
               "type": "text",
               "style": "heading",
               "html": "Find me",
@@ -3532,7 +4399,7 @@
               "rot": -1.4
             },
             {
-              "id": "i8g",
+              "id": "iau",
               "type": "text",
               "style": "body",
               "html": "<a href=\"https://github.com/bennyyuan12\">github.com/bennyyuan12</a>",
@@ -3541,7 +4408,7 @@
               "w": 800
             },
             {
-              "id": "i8h",
+              "id": "iav",
               "type": "text",
               "style": "note",
               "html": "or in the grass, asleep",
@@ -3552,7 +4419,7 @@
               "rot": 4
             },
             {
-              "id": "i8i",
+              "id": "iaw",
               "type": "sticker",
               "art": "nap",
               "x": 110,
@@ -3576,7 +4443,7 @@
           "name": "Ya Like Jazz?",
           "items": [
             {
-              "id": "i8j",
+              "id": "iax",
               "type": "text",
               "style": "title",
               "html": "Ya Like Jazz?",
@@ -3587,7 +4454,7 @@
               "rot": -2
             },
             {
-              "id": "i8k",
+              "id": "iay",
               "type": "sticker",
               "art": "underline",
               "x": 76,
@@ -3598,7 +4465,7 @@
               "rot": -2
             },
             {
-              "id": "i8l",
+              "id": "iaz",
               "type": "text",
               "style": "body",
               "html": "The things I like that don’t fit on a resume.",
@@ -3608,7 +4475,7 @@
               "size": 0.9
             },
             {
-              "id": "i8m",
+              "id": "ib0",
               "type": "sticker",
               "art": "bee",
               "x": 330,
@@ -3618,7 +4485,7 @@
               "rot": -8
             },
             {
-              "id": "i8n",
+              "id": "ib1",
               "type": "text",
               "style": "stamp",
               "html": "Draft",
@@ -3630,7 +4497,7 @@
               "align": "center"
             },
             {
-              "id": "i8o",
+              "id": "ib2",
               "type": "text",
               "style": "note",
               "html": "Benny: what goes here? Records, shows, a favorite solo?",
@@ -3650,7 +4517,7 @@
           "paper": "lined",
           "items": [
             {
-              "id": "i8p",
+              "id": "ib3",
               "type": "text",
               "style": "heading",
               "html": "On repeat",
@@ -3660,7 +4527,7 @@
               "rot": -1
             },
             {
-              "id": "i8q",
+              "id": "ib4",
               "type": "text",
               "style": "note",
               "html": "1.<br>2.<br>3.",
@@ -3671,7 +4538,7 @@
               "ink": "blue"
             },
             {
-              "id": "i8r",
+              "id": "ib5",
               "type": "text",
               "style": "heading",
               "html": "Best show I’ve seen",
@@ -3681,7 +4548,7 @@
               "rot": -1
             },
             {
-              "id": "i8s",
+              "id": "ib6",
               "type": "text",
               "style": "heading",
               "html": "Would rather be doing",
@@ -3691,7 +4558,7 @@
               "rot": -1
             },
             {
-              "id": "i8t",
+              "id": "ib7",
               "type": "text",
               "style": "note",
               "html": "napping in long grass",
@@ -3702,7 +4569,7 @@
               "rot": -1
             },
             {
-              "id": "i8u",
+              "id": "ib8",
               "type": "sticker",
               "art": "sax",
               "x": 600,
